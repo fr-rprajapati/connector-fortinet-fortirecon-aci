@@ -138,6 +138,17 @@
           "placeholder": "Must be greater 0 and less than or equal to 500.",
           "tooltip": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page.",
           "description": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page. Must be greater 0 and less than or equal to 500."
+        },
+        {
+          "name": "get_all_records",
+          "title": "Get All Records",
+          "type": "checkbox",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "value": true,
+          "tooltip": "Select to retrieve all records present and ignore the parameters Page and Size. By default, this is selected, i.e. set to true.",
+          "description": "Select to retrieve all records present and ignore the parameters Page and Size. By default, this is selected, i.e. set to true."
         }
       ],
       "output_schema": {

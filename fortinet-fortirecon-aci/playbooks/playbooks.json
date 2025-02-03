@@ -19,22 +19,26 @@
         {
           "@type": "Workflow",
           "triggerLimit": null,
-          "name": "Fetch FortiRecon ACI Threat Intel Report > Create",
+          "name": "FortiSOAR Threat Intel Feeds Using Threat Intel Report > Create",
           "aliasName": null,
           "tag": null,
-          "description": "Create threat intel reports.",
+          "description": "Create threat intel reports and it's associated ioc as FortiSOAR threat intel feeds",
           "isActive": false,
           "debug": false,
           "singleRecordExecution": false,
           "remoteExecutableFlag": false,
           "parameters": [
-            "report_details"
+            "report_iocs",
+            "report_details",
+            "confidence",
+            "reputation",
+            "expiry"
           ],
           "synchronous": false,
-          "lastModifyDate": 1735050969,
+          "lastModifyDate": 1738306332,
           "collection": "/api/3/workflow_collections/550fbd66-d52e-41b6-bcf5-0cf0e96bc966",
           "versions": [],
-          "triggerStep": "/api/3/workflow_steps/7adc8ee5-a0cc-4e32-ab6a-21a13cf9f00d",
+          "triggerStep": "/api/3/workflow_steps/f9f34d4c-d7a8-4e05-b80e-4175042775f2",
           "steps": [
             {
               "@type": "WorkflowStep",
@@ -78,10 +82,59 @@
               },
               "status": null,
               "top": "435",
-              "left": "475",
+              "left": "125",
               "stepType": "/api/3/workflow_step_types/2597053c-e718-44b4-8394-4d40fe26d357",
               "group": null,
-              "uuid": "5025e435-1222-4e9b-a8a9-e67abd643bbe"
+              "uuid": "862dacc5-3d87-44d1-afbe-c66339e408af"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Create Threat Intel Feed",
+              "description": null,
+              "arguments": {
+                "for_each": {
+                  "item": "{{vars.input.params['report_iocs']}}",
+                  "__bulk": true,
+                  "parallel": false,
+                  "condition": "{{vars.item.ioc_type not in [\"adversary\", \"cve\"]}}",
+                  "batch_size": 100
+                },
+                "resource": {
+                  "tLP": "{{vars.report_details.tlp | resolveRange(vars.tlp_type_map)}}",
+                  "value": "{{vars.item.ioc}}",
+                  "__link": {
+                    "recordTags": "{{vars.threat_tags}}",
+                    "threatIntelReports": "[\"{{vars.steps.Create_Record['@id']}}\"]"
+                  },
+                  "source": "FortiRecon ACI Report",
+                  "sourceId": "{{vars.report_details.report_id}}",
+                  "__replace": "true",
+                  "expiresOn": "{{ arrow.now().int_timestamp + (vars.input.params['expiry'] | int) * 24 * 60 * 60 }}",
+                  "confidence": "{{vars.input.params.confidence}}",
+                  "reputation": "{{vars.input.params.reputation | resolveRange(vars.reputation_map)}}",
+                  "sourceData": "{{vars.item}}",
+                  "typeOfFeed": "{{vars.item.ioc_type | resolveRange(vars.threat_intel_feed_type_map)}}",
+                  "description": "<p>{{vars.report_details.report_title}}</p>",
+                  "patternType": "STIX",
+                  "patternVersion": "2.1"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "/api/3/upsert/threat_intel_feeds",
+                "__recommend": [],
+                "fieldOperation": {
+                  "recordTags": "Append",
+                  "threatTypes": "Overwrite",
+                  "killChainPhases": "Overwrite"
+                },
+                "step_variables": []
+              },
+              "status": null,
+              "top": "570",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/2597053c-e718-44b4-8394-4d40fe26d357",
+              "group": null,
+              "uuid": "df5c23a3-c0c7-4fec-a8af-b49bea961002"
             },
             {
               "@type": "WorkflowStep",
@@ -90,6 +143,7 @@
               "arguments": {
                 "threat_tags": "[]",
                 "tlp_type_map": "{\n  \t\"White\": \"{{\"TrafficLightProtocol\" | picklist(\"White\")}}\",\n  \t\"Green\": \"{{\"TrafficLightProtocol\" | picklist(\"Green\")}}\",\n  \t\"Amber\": \"{{\"TrafficLightProtocol\" | picklist(\"Amber\")}}\",\n  \t\"Red\": \"{{\"TrafficLightProtocol\" | picklist(\"Red\")}}\"\n}",
+                "reputation_map": "{'Good': \"{{'IndicatorReputation' | picklist('Good', 'uuid')}}\",'Suspicious': \"{{'IndicatorReputation' | picklist('Suspicious', 'uuid')}}\",'Malicious': \"{{'IndicatorReputation' | picklist('Malicious', 'uuid')}}\",'No Reputation Available': \"{{'IndicatorReputation' | picklist('No Reputation Available', 'uuid')}}\",'TBD': \"{{'IndicatorReputation' | picklist('TBD', 'uuid')}}\"}",
                 "report_type_map": "{\n\"Flash Report\": \"{{\"Report Type\" | picklist(\"Flash Report\")}}\",\n\"Flash Alert\": \"{{\"Report Type\" | picklist(\"Flash Alert\")}}\",\n\"Threat Report\": \"{{\"Report Type\" | picklist(\"Threat Report\")}}\",\n\"Threat Alert\": \"{{\"Report Type\" | picklist(\"Threat Alert\")}}\"\n}",
                 "source_category_type_map": "{\n\t\"Media Trends\": \"{{\"Source Category\" | picklist(\"Media Trends\")}}\",\n\t\"Darknet\": \"{{\"Source Category\" | picklist(\"Darknet\")}}\",\n\t\"Humint\": \"{{\"Source Category\" | picklist(\"Humint\")}}\",\n\t\"OSINT\": \"{{\"Source Category\" | picklist(\"OSINT\")}}\",\n\t\"Fraudulent Domains\": \"{{\"Source Category\" | picklist(\"Fraudulent Domains\")}}\",\n\t\"Technical Intelligence\": \"{{\"Source Category\" | picklist(\"Technical Intelligence\")}}\",\n\t\"Executive Summary\": \"{{\"Source Category\" | picklist(\"Executive Summary\")}}\"\n}",
                 "relevance_rating_type_map": "{\n\t\"High\": \"{{\"Relevance Rating\" | picklist(\"High\")}}\",\n\t\"Medium\": \"{{\"Relevance Rating\" | picklist(\"Medium\")}}\",\n\t\"Low\": \"{{\"Relevance Rating\" | picklist(\"Low\")}}\"\n}",
@@ -99,10 +153,10 @@
               },
               "status": null,
               "top": "165",
-              "left": "475",
+              "left": "125",
               "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
               "group": null,
-              "uuid": "80655720-85a8-4303-a551-35d0fab1362e"
+              "uuid": "1895ef15-145d-4e9d-9834-e0e4fa6e1e04"
             },
             {
               "@type": "WorkflowStep",
@@ -113,10 +167,10 @@
               },
               "status": null,
               "top": "300",
-              "left": "475",
+              "left": "125",
               "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
               "group": null,
-              "uuid": "df0e1c07-4a26-4541-b28a-195f32e17e87"
+              "uuid": "84f37e22-97e3-46ea-b514-e592b5346622"
             },
             {
               "@type": "WorkflowStep",
@@ -131,50 +185,58 @@
               },
               "status": null,
               "top": "30",
-              "left": "475",
+              "left": "125",
               "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
               "group": null,
-              "uuid": "7adc8ee5-a0cc-4e32-ab6a-21a13cf9f00d"
+              "uuid": "f9f34d4c-d7a8-4e05-b80e-4175042775f2"
             }
           ],
           "routes": [
             {
               "@type": "WorkflowRoute",
-              "name": "Field Mapping -> Get Miter Group and Threat Tags",
-              "targetStep": "/api/3/workflow_steps/df0e1c07-4a26-4541-b28a-195f32e17e87",
-              "sourceStep": "/api/3/workflow_steps/80655720-85a8-4303-a551-35d0fab1362e",
+              "name": "Create ACI Report -> Create Threat Intel Feeds",
+              "targetStep": "/api/3/workflow_steps/df5c23a3-c0c7-4fec-a8af-b49bea961002",
+              "sourceStep": "/api/3/workflow_steps/862dacc5-3d87-44d1-afbe-c66339e408af",
               "label": null,
               "isExecuted": false,
               "group": null,
-              "uuid": "f23fe558-498b-474c-8afc-3951f5e11ee6"
+              "uuid": "e9f04cf2-740c-49bc-b9e2-686f2d9c1cc5"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Field Mapping -> Get Miter Group and Threat Tags",
+              "targetStep": "/api/3/workflow_steps/84f37e22-97e3-46ea-b514-e592b5346622",
+              "sourceStep": "/api/3/workflow_steps/1895ef15-145d-4e9d-9834-e0e4fa6e1e04",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "722ad193-9665-419d-9277-13c74bd950fc"
             },
             {
               "@type": "WorkflowRoute",
               "name": "Get Miter Group and Threat Tags -> Create Record",
-              "targetStep": "/api/3/workflow_steps/5025e435-1222-4e9b-a8a9-e67abd643bbe",
-              "sourceStep": "/api/3/workflow_steps/df0e1c07-4a26-4541-b28a-195f32e17e87",
+              "targetStep": "/api/3/workflow_steps/862dacc5-3d87-44d1-afbe-c66339e408af",
+              "sourceStep": "/api/3/workflow_steps/84f37e22-97e3-46ea-b514-e592b5346622",
               "label": null,
               "isExecuted": false,
               "group": null,
-              "uuid": "eff5024f-47d3-430a-b78b-2c9ef1f70c6c"
+              "uuid": "53219092-eba9-479b-829e-cf48df38c3a3"
             },
             {
               "@type": "WorkflowRoute",
               "name": "Start -> Field Mapping",
-              "targetStep": "/api/3/workflow_steps/80655720-85a8-4303-a551-35d0fab1362e",
-              "sourceStep": "/api/3/workflow_steps/7adc8ee5-a0cc-4e32-ab6a-21a13cf9f00d",
+              "targetStep": "/api/3/workflow_steps/1895ef15-145d-4e9d-9834-e0e4fa6e1e04",
+              "sourceStep": "/api/3/workflow_steps/f9f34d4c-d7a8-4e05-b80e-4175042775f2",
               "label": null,
               "isExecuted": false,
               "group": null,
-              "uuid": "4622c5d1-da34-4dd0-b475-3ebb77eea850"
+              "uuid": "76338f50-ccdb-4515-b0fe-261d5aa177a5"
             }
           ],
           "groups": [],
           "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
-          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
-          "isEditable": true,
-          "uuid": "161ff10c-9bd4-4e13-8ace-7f3a1b3bb6a7",
-          "id": 576,
+          "uuid": "9c3f9a01-c723-455c-a1c1-288db3b0408b",
+          "id": 1238,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -188,27 +250,175 @@
         {
           "@type": "Workflow",
           "triggerLimit": null,
-          "name": "FortiRecon ACI Threat Intel Report > Fetch",
+          "name": "Get FortiRecon ACI Threat Intel Report IOC",
           "aliasName": null,
           "tag": null,
-          "description": "Fetch FortiRecon ACI Threat Intel Reports",
+          "description": "Fetch the associated ioc for specified FortiRecon ACI threat intel report",
           "isActive": false,
           "debug": false,
           "singleRecordExecution": false,
           "remoteExecutableFlag": false,
-          "parameters": [],
+          "parameters": [
+            "report_details"
+          ],
           "synchronous": false,
-          "lastModifyDate": 1735050533,
+          "lastModifyDate": 1738305834,
           "collection": "/api/3/workflow_collections/550fbd66-d52e-41b6-bcf5-0cf0e96bc966",
           "versions": [],
-          "triggerStep": "/api/3/workflow_steps/27abe2ef-0afa-47b0-bfb2-a420b33056ca",
+          "triggerStep": "/api/3/workflow_steps/4eada278-ae2b-46b9-853e-2da3fca18de4",
           "steps": [
             {
               "@type": "WorkflowStep",
               "name": "Configuration",
               "description": null,
               "arguments": {
+                "technical_intelligence_report_iocs": "[]"
+              },
+              "status": null,
+              "top": "160",
+              "left": "120",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "ff36762f-c055-4bca-9227-d06c5a8b560b"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get IOC",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiRecon ACI",
+                "config": "27995b8a-48dd-44de-9052-6d5cde17536d",
+                "params": {
+                  "page": "",
+                  "size": 500,
+                  "end_date": "",
+                  "ioc_type": "",
+                  "report_id": "{{vars.input.params['report_details'].report_id}}",
+                  "start_date": "",
+                  "get_all_records": true
+                },
+                "version": "2.0.0",
+                "connector": "fortinet-fortirecon-aci",
+                "operation": "get_iocs",
+                "operationTitle": "Get IOCs",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "300",
+              "left": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "cbf01202-35a8-4513-8c5d-31970adbc501"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Return Report and Associated IOCs",
+              "description": null,
+              "arguments": {
+                "report_iocs": "{{vars.steps.Get_IOC.data.hits}}",
+                "report_details": "{{vars.input.params['report_details']}}"
+              },
+              "status": null,
+              "top": "460",
+              "left": "100",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "02484d97-4f42-46be-8027-28c9c32c1b16"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "120",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "4eada278-ae2b-46b9-853e-2da3fca18de4"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Configuration -> Get IOCs",
+              "targetStep": "/api/3/workflow_steps/cbf01202-35a8-4513-8c5d-31970adbc501",
+              "sourceStep": "/api/3/workflow_steps/ff36762f-c055-4bca-9227-d06c5a8b560b",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "d45d60ad-bf76-4016-b8ce-d3e7865466b2"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Get IOC -> Return Report and Associated IOCs",
+              "targetStep": "/api/3/workflow_steps/02484d97-4f42-46be-8027-28c9c32c1b16",
+              "sourceStep": "/api/3/workflow_steps/cbf01202-35a8-4513-8c5d-31970adbc501",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "7c64826b-8a54-459c-abf7-0542f4b4dca4"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Configuration",
+              "targetStep": "/api/3/workflow_steps/ff36762f-c055-4bca-9227-d06c5a8b560b",
+              "sourceStep": "/api/3/workflow_steps/4eada278-ae2b-46b9-853e-2da3fca18de4",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "fb94e898-f63d-49c7-9d20-a9710faa05be"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "a07c76cd-5244-42a9-a1c2-eb55f29d3405",
+          "id": 1237,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "dataingestion",
+            "fortinet-fortirecon-aci"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "FortiRecon ACI Threat Intel Report > Fetch",
+          "aliasName": null,
+          "tag": null,
+          "description": "Fetch FortiRecon ACI Threat Intel Report and associated iocs",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1738305798,
+          "collection": "/api/3/workflow_collections/550fbd66-d52e-41b6-bcf5-0cf0e96bc966",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/d5af444a-b6e2-4189-8cb6-88c5ed76213a",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Configuration",
+              "description": null,
+              "arguments": {
+                "tlp": "White",
+                "expiry": "7",
                 "fetchTime": "{{arrow.utcnow().format('YYYY-MM-DDTHH:mm:ss.ssss')+\"Z\"}}",
+                "page_size": 500,
+                "confidence": "50",
+                "reputation": "Suspicious",
                 "pullTimeMacro": "FortiReconACILastPullTime__{{vars['audit_info']['cyops_playbook_iri'].split('/')[-1].replace('-','_')}}",
                 "source_category": "Technical Intelligence",
                 "last_sample_pull_time": "",
@@ -216,10 +426,10 @@
               },
               "status": null,
               "top": "165",
-              "left": "475",
+              "left": "300",
               "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
               "group": null,
-              "uuid": "ecc4d235-070e-4c5c-aea0-c47ecdff0ec5"
+              "uuid": "ca6369cf-5e42-4e98-a595-22c4fed02423"
             },
             {
               "@type": "WorkflowStep",
@@ -227,25 +437,30 @@
               "description": null,
               "arguments": {
                 "for_each": {
-                  "item": "{{vars.technical_intelligence_reports}}",
+                  "item": "{{vars.steps.Get_Report_IOCs}}",
                   "parallel": false,
                   "condition": ""
                 },
                 "arguments": {
-                  "report_details": "{{vars.item}}"
+                  "tlp": "",
+                  "expiry": "{{vars.expiry}}",
+                  "confidence": "{{vars.confidence}}",
+                  "reputation": "{{vars.reputation}}",
+                  "report_iocs": "{{vars.item.report_iocs}}",
+                  "report_details": "{{vars.item.report_details}}"
                 },
                 "apply_async": false,
                 "step_variables": [],
                 "pass_parent_env": false,
                 "pass_input_record": true,
-                "workflowReference": "/api/3/workflows/161ff10c-9bd4-4e13-8ace-7f3a1b3bb6a7"
+                "workflowReference": "/api/3/workflows/9c3f9a01-c723-455c-a1c1-288db3b0408b"
               },
               "status": null,
-              "top": "1240",
-              "left": "300",
+              "top": "1380",
+              "left": "125",
               "stepType": "/api/3/workflow_step_types/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
               "group": null,
-              "uuid": "110e8bb2-962b-42bc-9ab7-ddc34fd3c0d7"
+              "uuid": "184eceeb-82c8-4489-b387-a59b2d611c85"
             },
             {
               "@type": "WorkflowStep",
@@ -256,10 +471,10 @@
               },
               "status": null,
               "top": "435",
-              "left": "475",
+              "left": "300",
               "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
               "group": null,
-              "uuid": "19edd398-a96e-431b-a21c-d0f2341b1c73"
+              "uuid": "865ac45d-39bc-4fc5-9c67-7f76a20075e2"
             },
             {
               "@type": "WorkflowStep",
@@ -267,7 +482,7 @@
               "description": null,
               "arguments": {
                 "name": "Fortinet FortiRecon ACI",
-                "config": "0739e555-96c6-46f6-8a39-25066be858c5",
+                "config": "27995b8a-48dd-44de-9052-6d5cde17536d",
                 "params": {
                   "page": "",
                   "size": 5,
@@ -292,10 +507,10 @@
               },
               "status": null,
               "top": "705",
-              "left": "650",
+              "left": "475",
               "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
               "group": null,
-              "uuid": "030c0080-909f-443b-89a6-2bbe689886b1"
+              "uuid": "38d26d88-420d-42cb-a58f-ddd0db901275"
             },
             {
               "@type": "WorkflowStep",
@@ -303,10 +518,10 @@
               "description": null,
               "arguments": {
                 "name": "Fortinet FortiRecon ACI",
-                "config": "0739e555-96c6-46f6-8a39-25066be858c5",
+                "config": "27995b8a-48dd-44de-9052-6d5cde17536d",
                 "params": {
                   "page": "{{vars.item}}",
-                  "size": "500",
+                  "size": 500,
                   "tags": "",
                   "keyword": "",
                   "end_date": "{{vars.fetchTime}}",
@@ -333,10 +548,10 @@
               },
               "status": null,
               "top": "975",
-              "left": "300",
+              "left": "125",
               "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
               "group": null,
-              "uuid": "b687d2d4-f1b0-491d-8bf9-704f43a83873"
+              "uuid": "a6f19a76-f975-42fe-af7c-2bf08510024c"
             },
             {
               "@type": "WorkflowStep",
@@ -347,10 +562,10 @@
               },
               "status": null,
               "top": "1110",
-              "left": "300",
+              "left": "125",
               "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
               "group": null,
-              "uuid": "7fe509fc-d3cd-4566-ac38-79ecc119746a"
+              "uuid": "af0e6fe4-5087-4200-bfaf-ad7b4d90535d"
             },
             {
               "@type": "WorkflowStep",
@@ -370,10 +585,37 @@
               },
               "status": null,
               "top": "300",
-              "left": "475",
+              "left": "300",
               "stepType": "/api/3/workflow_step_types/0109f35d-090b-4a2b-bd8a-94cbc3508562",
               "group": null,
-              "uuid": "66997a35-8f25-4f97-8700-84c127639ac2"
+              "uuid": "9e8921e9-c6e6-46d7-b1ab-c9c75e0e583f"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Report IOCs",
+              "description": null,
+              "arguments": {
+                "for_each": {
+                  "item": "{{vars.technical_intelligence_reports}}",
+                  "parallel": false,
+                  "condition": ""
+                },
+                "arguments": {
+                  "page_size": "{{vars.page_size}}",
+                  "report_details": "{{vars.item}}"
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "pass_parent_env": false,
+                "pass_input_record": true,
+                "workflowReference": "/api/3/workflows/a07c76cd-5244-42a9-a1c2-eb55f29d3405"
+              },
+              "status": null,
+              "top": "1245",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+              "group": null,
+              "uuid": "627221c9-6a85-4c43-97d6-91c63e90369a"
             },
             {
               "@type": "WorkflowStep",
@@ -381,10 +623,10 @@
               "description": null,
               "arguments": {
                 "name": "Fortinet FortiRecon ACI",
-                "config": "0739e555-96c6-46f6-8a39-25066be858c5",
+                "config": "27995b8a-48dd-44de-9052-6d5cde17536d",
                 "params": {
                   "page": "",
-                  "size": "500",
+                  "size": 500,
                   "tags": "",
                   "keyword": "",
                   "end_date": "{{vars.fetchTime}}",
@@ -406,10 +648,10 @@
               },
               "status": null,
               "top": "705",
-              "left": "300",
+              "left": "125",
               "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
               "group": null,
-              "uuid": "02c6477c-f459-447b-ae91-c690b9d0ccb6"
+              "uuid": "b5ab6986-94a3-47d6-bf1b-cdb0b6d0183d"
             },
             {
               "@type": "WorkflowStep",
@@ -420,10 +662,10 @@
               },
               "status": null,
               "top": "840",
-              "left": "300",
+              "left": "125",
               "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
               "group": null,
-              "uuid": "ab2729e8-aeca-456b-a585-25704674ab38"
+              "uuid": "15532607-c27e-4a5b-a2cb-eacdf5eb3b6c"
             },
             {
               "@type": "WorkflowStep",
@@ -433,24 +675,24 @@
                 "conditions": [
                   {
                     "option": "Yes, For Mapping",
-                    "step_iri": "/api/3/workflow_steps/030c0080-909f-443b-89a6-2bbe689886b1",
+                    "step_iri": "/api/3/workflow_steps/38d26d88-420d-42cb-a58f-ddd0db901275",
                     "condition": "{{ vars.request.env_setup == true }}",
                     "step_name": "Copy of Get Technical Intelligence Reports"
                   },
                   {
                     "option": "No, For Ingestion",
                     "default": true,
-                    "step_iri": "/api/3/workflow_steps/02c6477c-f459-447b-ae91-c690b9d0ccb6",
+                    "step_iri": "/api/3/workflow_steps/b5ab6986-94a3-47d6-bf1b-cdb0b6d0183d",
                     "step_name": "Get Technical Intelligence Reports"
                   }
                 ]
               },
               "status": null,
               "top": "570",
-              "left": "475",
+              "left": "300",
               "stepType": "/api/3/workflow_step_types/12254cf5-5db7-4b1a-8cb1-3af081924b28",
               "group": null,
-              "uuid": "9a9eb605-cd8e-405b-83c7-1ebc4b94dfc1"
+              "uuid": "9a594d6c-2576-4712-96ee-1b75d45eb90d"
             },
             {
               "@type": "WorkflowStep",
@@ -461,10 +703,10 @@
               },
               "status": null,
               "top": "840",
-              "left": "650",
+              "left": "475",
               "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
               "group": null,
-              "uuid": "ee5f878a-f352-4531-b58b-7e219550fc5a"
+              "uuid": "c688b31b-f4f9-4056-ac87-0d38ec9dfa98"
             },
             {
               "@type": "WorkflowStep",
@@ -476,17 +718,17 @@
                   "input": {
                     "params": []
                   },
-                  "_configuration_schema": "[\n  {\n    \"title\": \"Fetch Reports Since\",\n    \"required\": true,\n    \"editable\": true,\n    \"visible\": true,\n    \"type\": \"datetime\",\n    \"name\": \"last_sample_pull_time\",\n    \"tooltip\": \"Select a date and time to retrieve reports after the specified time.\"\n  },\n  {\n    \"name\": \"source_category\",\n    \"title\": \"Source Category\",\n    \"type\": \"text\",\n    \"editable\": true,\n    \"visible\": true,\n    \"required\": false,\n    \"value\": \"Technical Intelligence\",\n    \"placeholder\": \"Only \\\"Technical Intelligence\\\" type \\\"Source Category\\\" is supported\",\n    \"tooltip\": \"Only \\\"Technical Intelligence\\\" type \\\"Source Category\\\" is supported\"\n  }\n]"
+                  "_configuration_schema": "[\n  {\n    \"title\": \"Fetch Reports Since\",\n    \"required\": true,\n    \"editable\": true,\n    \"visible\": true,\n    \"type\": \"date\",\n    \"name\": \"last_sample_pull_time\",\n    \"tooltip\": \"Select a date and time to retrieve reports after the specified time.\"\n  },\n  {\n    \"name\": \"source_category\",\n    \"title\": \"Source Category\",\n    \"type\": \"text\",\n    \"editable\": true,\n    \"visible\": true,\n    \"required\": false,\n    \"value\": \"Technical Intelligence\",\n    \"placeholder\": \"Only \\\"Technical Intelligence\\\" type \\\"Source Category\\\" is supported\",\n    \"tooltip\": \"Only \\\"Technical Intelligence\\\" type \\\"Source Category\\\" is supported\"\n  },\n  {\n    \"title\": \"Confidence\",\n    \"name\": \"confidence\",\n    \"type\": \"integer\",\n    \"tooltip\": \"Default Confidence score to be set for the ioc while creating its feed record.\",\n    \"required\": false,\n    \"editable\": true,\n    \"visible\": true,\n    \"value\": 50,\n    \"validation\": {\n      \"minlength\": 0,\n      \"maxlength\": 100\n    }\n  },\n  {\n    \"title\": \"Reputation\",\n    \"name\": \"reputation\",\n    \"type\": \"select\",\n    \"tooltip\": \"Default Reputation score to be set for the ioc while creating its feed record.\",\n    \"required\": true,\n    \"editable\": true,\n    \"visible\": true,\n    \"options\": [\n      \"Good\",\n      \"Suspicious\",\n      \"Malicious\",\n      \"No Reputation Available\",\n      \"TBD\"\n    ],\n    \"value\": \"Suspicious\"\n  },\n  {\n    \"title\": \"Maximum Age (in days)\",\n    \"name\": \"expiry\",\n    \"type\": \"integer\",\n    \"tooltip\": \"Default age to be set for the ioc while creating its feed record. The indicator expires on 'valid_until' date unless a different expiry is specified here. If specified, the indicator will be marked expired on valid_until + expiry.\",\n    \"required\": false,\n    \"editable\": true,\n    \"visible\": true,\n    \"value\": 7\n  }\n]"
                 },
                 "triggerOnSource": true,
                 "triggerOnReplicate": false
               },
               "status": null,
               "top": "30",
-              "left": "475",
+              "left": "300",
               "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
               "group": null,
-              "uuid": "27abe2ef-0afa-47b0-bfb2-a420b33056ca"
+              "uuid": "d5af444a-b6e2-4189-8cb6-88c5ed76213a"
             },
             {
               "@type": "WorkflowStep",
@@ -497,148 +739,156 @@
                   "macro": "{{vars.pullTimeMacro}}",
                   "value": "{{vars.fetchTime}}"
                 },
-                "version": "3.5.0",
+                "version": "3.2.3",
                 "connector": "cyops_utilities",
                 "operation": "updatemacro",
                 "operationTitle": "CyOPs: Update Macro",
                 "step_variables": []
               },
               "status": null,
-              "top": "1380",
-              "left": "300",
+              "top": "1515",
+              "left": "125",
               "stepType": "/api/3/workflow_step_types/0109f35d-090b-4a2b-bd8a-94cbc3508562",
               "group": null,
-              "uuid": "2b8ddf7c-ce2d-4351-9b78-fa405df55fbe"
+              "uuid": "8c012039-e677-48f0-841d-f96b1014ec93"
             }
           ],
           "routes": [
             {
               "@type": "WorkflowRoute",
               "name": "Configuration -> Get Macro Value",
-              "targetStep": "/api/3/workflow_steps/66997a35-8f25-4f97-8700-84c127639ac2",
-              "sourceStep": "/api/3/workflow_steps/ecc4d235-070e-4c5c-aea0-c47ecdff0ec5",
+              "targetStep": "/api/3/workflow_steps/9e8921e9-c6e6-46d7-b1ab-c9c75e0e583f",
+              "sourceStep": "/api/3/workflow_steps/ca6369cf-5e42-4e98-a595-22c4fed02423",
               "label": null,
               "isExecuted": false,
               "group": null,
-              "uuid": "2b9481e8-503f-46fe-a6be-8405c867ef1f"
+              "uuid": "d7d51514-07e7-4004-bc58-ef4e090fa6cf"
             },
             {
               "@type": "WorkflowRoute",
               "name": "Create Threat Intel Record -> Update Pull Time",
-              "targetStep": "/api/3/workflow_steps/2b8ddf7c-ce2d-4351-9b78-fa405df55fbe",
-              "sourceStep": "/api/3/workflow_steps/110e8bb2-962b-42bc-9ab7-ddc34fd3c0d7",
+              "targetStep": "/api/3/workflow_steps/8c012039-e677-48f0-841d-f96b1014ec93",
+              "sourceStep": "/api/3/workflow_steps/184eceeb-82c8-4489-b387-a59b2d611c85",
               "label": null,
               "isExecuted": false,
               "group": null,
-              "uuid": "4e0a293d-c422-4140-a42f-28ef15752425"
+              "uuid": "7da9913f-0e58-42f7-8c79-ed2e02d94758"
             },
             {
               "@type": "WorkflowRoute",
               "name": "Extract Value from Response -> Is Data Mapping",
-              "targetStep": "/api/3/workflow_steps/9a9eb605-cd8e-405b-83c7-1ebc4b94dfc1",
-              "sourceStep": "/api/3/workflow_steps/19edd398-a96e-431b-a21c-d0f2341b1c73",
+              "targetStep": "/api/3/workflow_steps/9a594d6c-2576-4712-96ee-1b75d45eb90d",
+              "sourceStep": "/api/3/workflow_steps/865ac45d-39bc-4fc5-9c67-7f76a20075e2",
               "label": null,
               "isExecuted": false,
               "group": null,
-              "uuid": "3ee877d5-faad-4b0d-8831-4d3cfa99c6cc"
+              "uuid": "663b74c5-6f2c-40aa-82f9-77ee74d0db7e"
             },
             {
               "@type": "WorkflowRoute",
               "name": "Fetch Sample Reports -> Return Sample Reports",
-              "targetStep": "/api/3/workflow_steps/ee5f878a-f352-4531-b58b-7e219550fc5a",
-              "sourceStep": "/api/3/workflow_steps/030c0080-909f-443b-89a6-2bbe689886b1",
+              "targetStep": "/api/3/workflow_steps/c688b31b-f4f9-4056-ac87-0d38ec9dfa98",
+              "sourceStep": "/api/3/workflow_steps/38d26d88-420d-42cb-a58f-ddd0db901275",
               "label": null,
               "isExecuted": false,
               "group": null,
-              "uuid": "3f978f50-e08a-46ec-aeb6-b5ab01c74dc6"
+              "uuid": "056a7e92-c4ec-448e-b5cb-428741c7bba9"
             },
             {
               "@type": "WorkflowRoute",
               "name": "Fetch Technical Intelligence Reports -> Get All Technical Intelligence Reports",
-              "targetStep": "/api/3/workflow_steps/7fe509fc-d3cd-4566-ac38-79ecc119746a",
-              "sourceStep": "/api/3/workflow_steps/b687d2d4-f1b0-491d-8bf9-704f43a83873",
+              "targetStep": "/api/3/workflow_steps/af0e6fe4-5087-4200-bfaf-ad7b4d90535d",
+              "sourceStep": "/api/3/workflow_steps/a6f19a76-f975-42fe-af7c-2bf08510024c",
               "label": null,
               "isExecuted": false,
               "group": null,
-              "uuid": "c36a2d0c-77ec-4cf6-b04e-d8e20132f615"
+              "uuid": "4b8c6a0b-90e0-4bea-b8d5-3f1d09760ff2"
             },
             {
               "@type": "WorkflowRoute",
-              "name": "Get All Technical Intelligence Reports -> Create Threat Intel Record",
-              "targetStep": "/api/3/workflow_steps/110e8bb2-962b-42bc-9ab7-ddc34fd3c0d7",
-              "sourceStep": "/api/3/workflow_steps/7fe509fc-d3cd-4566-ac38-79ecc119746a",
+              "name": "Get All Technical Intelligence Reports -> Get Report IOCs",
+              "targetStep": "/api/3/workflow_steps/627221c9-6a85-4c43-97d6-91c63e90369a",
+              "sourceStep": "/api/3/workflow_steps/af0e6fe4-5087-4200-bfaf-ad7b4d90535d",
               "label": null,
               "isExecuted": false,
               "group": null,
-              "uuid": "44951120-3fb7-436d-980a-204130285434"
+              "uuid": "489ebecb-dd7f-49d6-a183-5fec8ce15bfc"
             },
             {
               "@type": "WorkflowRoute",
               "name": "Get Macro Value -> Extract Value from Response",
-              "targetStep": "/api/3/workflow_steps/19edd398-a96e-431b-a21c-d0f2341b1c73",
-              "sourceStep": "/api/3/workflow_steps/66997a35-8f25-4f97-8700-84c127639ac2",
+              "targetStep": "/api/3/workflow_steps/865ac45d-39bc-4fc5-9c67-7f76a20075e2",
+              "sourceStep": "/api/3/workflow_steps/9e8921e9-c6e6-46d7-b1ab-c9c75e0e583f",
               "label": null,
               "isExecuted": false,
               "group": null,
-              "uuid": "5809210d-597f-40b1-b2ec-af854c55fe92"
+              "uuid": "e36efa61-b4e1-4e47-adf3-74d124041e84"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Get Report IOCs -> Create Threat Intel Record",
+              "targetStep": "/api/3/workflow_steps/184eceeb-82c8-4489-b387-a59b2d611c85",
+              "sourceStep": "/api/3/workflow_steps/627221c9-6a85-4c43-97d6-91c63e90369a",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "97f8fb1e-c707-4e7e-af8c-dc1746378fca"
             },
             {
               "@type": "WorkflowRoute",
               "name": "Get Technical Intelligence Reports -> Get Total Number Pages",
-              "targetStep": "/api/3/workflow_steps/ab2729e8-aeca-456b-a585-25704674ab38",
-              "sourceStep": "/api/3/workflow_steps/02c6477c-f459-447b-ae91-c690b9d0ccb6",
+              "targetStep": "/api/3/workflow_steps/15532607-c27e-4a5b-a2cb-eacdf5eb3b6c",
+              "sourceStep": "/api/3/workflow_steps/b5ab6986-94a3-47d6-bf1b-cdb0b6d0183d",
               "label": null,
               "isExecuted": false,
               "group": null,
-              "uuid": "e575f637-93db-46dc-a887-9a1f6d59b375"
+              "uuid": "6ab42ae8-3f3c-463d-8e55-e8721eb741c0"
             },
             {
               "@type": "WorkflowRoute",
               "name": "Get Total Number Pages -> Fetch Technical Intelligence Reports",
-              "targetStep": "/api/3/workflow_steps/b687d2d4-f1b0-491d-8bf9-704f43a83873",
-              "sourceStep": "/api/3/workflow_steps/ab2729e8-aeca-456b-a585-25704674ab38",
+              "targetStep": "/api/3/workflow_steps/a6f19a76-f975-42fe-af7c-2bf08510024c",
+              "sourceStep": "/api/3/workflow_steps/15532607-c27e-4a5b-a2cb-eacdf5eb3b6c",
               "label": null,
               "isExecuted": false,
               "group": null,
-              "uuid": "695b28df-2157-403a-af36-e19283fbf16a"
+              "uuid": "d6cedcd9-d36c-4770-a40e-6a9b17ba06e7"
             },
             {
               "@type": "WorkflowRoute",
               "name": "Is Data Mapping -> Copy of Get Technical Intelligence Reports",
-              "targetStep": "/api/3/workflow_steps/030c0080-909f-443b-89a6-2bbe689886b1",
-              "sourceStep": "/api/3/workflow_steps/9a9eb605-cd8e-405b-83c7-1ebc4b94dfc1",
+              "targetStep": "/api/3/workflow_steps/38d26d88-420d-42cb-a58f-ddd0db901275",
+              "sourceStep": "/api/3/workflow_steps/9a594d6c-2576-4712-96ee-1b75d45eb90d",
               "label": "Yes, For Mapping",
               "isExecuted": false,
               "group": null,
-              "uuid": "7c166fc6-d411-4046-97f3-470b5ba48f63"
+              "uuid": "12541575-6e39-4b25-ad38-d3261bd9158e"
             },
             {
               "@type": "WorkflowRoute",
               "name": "Is Data Mapping -> Get Technical Intelligence Reports",
-              "targetStep": "/api/3/workflow_steps/02c6477c-f459-447b-ae91-c690b9d0ccb6",
-              "sourceStep": "/api/3/workflow_steps/9a9eb605-cd8e-405b-83c7-1ebc4b94dfc1",
+              "targetStep": "/api/3/workflow_steps/b5ab6986-94a3-47d6-bf1b-cdb0b6d0183d",
+              "sourceStep": "/api/3/workflow_steps/9a594d6c-2576-4712-96ee-1b75d45eb90d",
               "label": "No, For Ingestion",
               "isExecuted": false,
               "group": null,
-              "uuid": "d35a6f48-7c6d-4a82-999a-74c7ebc77db3"
+              "uuid": "c887b24c-9820-478e-bd45-6f7cc75b8d11"
             },
             {
               "@type": "WorkflowRoute",
               "name": "Start -> Configuration",
-              "targetStep": "/api/3/workflow_steps/ecc4d235-070e-4c5c-aea0-c47ecdff0ec5",
-              "sourceStep": "/api/3/workflow_steps/27abe2ef-0afa-47b0-bfb2-a420b33056ca",
+              "targetStep": "/api/3/workflow_steps/ca6369cf-5e42-4e98-a595-22c4fed02423",
+              "sourceStep": "/api/3/workflow_steps/d5af444a-b6e2-4189-8cb6-88c5ed76213a",
               "label": null,
               "isExecuted": false,
               "group": null,
-              "uuid": "11b2187d-a2f7-451f-9614-5529441a3c14"
+              "uuid": "a814af39-0e9e-4d2f-bfe0-e149df74fd09"
             }
           ],
           "groups": [],
           "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
-          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
-          "isEditable": true,
-          "uuid": "257d4279-e7ef-48dd-948b-102e3ceb5a6d",
-          "id": 577,
+          "uuid": "b0792a60-2318-4ed4-8d59-4b52fb8be078",
+          "id": 1239,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -648,543 +898,6 @@
             "fetch",
             "fortinet-fortirecon-aci",
             "ingest"
-          ]
-        },
-        {
-          "@type": "Workflow",
-          "triggerLimit": null,
-          "name": "Get FortiRecon ACI Threat Intel Report IOC and Create its Feed Records",
-          "aliasName": null,
-          "tag": null,
-          "description": "Fetch and Create the associated ioc for specified FortiRecon ACI threat intel report",
-          "isActive": false,
-          "debug": false,
-          "singleRecordExecution": false,
-          "remoteExecutableFlag": false,
-          "parameters": [
-            "report_details",
-            "page_size"
-          ],
-          "synchronous": false,
-          "lastModifyDate": 1735051427,
-          "collection": "/api/3/workflow_collections/550fbd66-d52e-41b6-bcf5-0cf0e96bc966",
-          "versions": [],
-          "triggerStep": "/api/3/workflow_steps/59acb3b1-82a5-468d-b259-d8c5f63565b3",
-          "steps": [
-            {
-              "@type": "WorkflowStep",
-              "name": "Configuration",
-              "description": null,
-              "arguments": {
-                "technical_intelligence_report_iocs": "[]"
-              },
-              "status": null,
-              "top": "165",
-              "left": "125",
-              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
-              "group": null,
-              "uuid": "b7eb1ecf-4ba2-4d5c-afa0-91cb081e5593"
-            },
-            {
-              "@type": "WorkflowStep",
-              "name": "Create Threat Intel Feed",
-              "description": null,
-              "arguments": {
-                "for_each": {
-                  "item": "{{vars.technical_intelligence_report_iocs}}",
-                  "__bulk": true,
-                  "parallel": false,
-                  "condition": "{{vars.item.ioc_type not in [\"adversary\", \"cve\"]}}",
-                  "batch_size": 500
-                },
-                "resource": {
-                  "tLP": "{{vars.input.params['tLP']['itemValue'] | resolveRange(vars.tlp_type_map)}}",
-                  "value": "{{vars.item.ioc}}",
-                  "__link": {
-                    "recordTags": "{{vars.input.records[0].recordTags}}",
-                    "threatIntelReports": "{{vars.input.records[0]['@id']}}"
-                  },
-                  "source": "FortiRecon ACI Report",
-                  "sourceId": "{{vars.report_details.report_id}}",
-                  "__replace": "true",
-                  "expiresOn": "{{ arrow.now().int_timestamp + (vars.input.params['feedExpiry'] | int) * 24 * 60 * 60 }}",
-                  "confidence": "{{vars.input.params.confidence}}",
-                  "reputation": "{{vars.input.params['reputation']['itemValue'] | resolveRange(vars.reputation_map)}}",
-                  "sourceData": "{{vars.item}}",
-                  "typeOfFeed": "{{vars.item.ioc_type | resolveRange(vars.threat_intel_feed_type_map)}}",
-                  "description": "<p>{{vars.input.records[0].reportTitle}}</p>",
-                  "patternType": "STIX",
-                  "patternVersion": "2.1"
-                },
-                "_showJson": false,
-                "operation": "Append",
-                "collection": "/api/3/upsert/threat_intel_feeds",
-                "__recommend": [],
-                "fieldOperation": {
-                  "recordTags": "Append",
-                  "threatTypes": "Overwrite",
-                  "killChainPhases": "Overwrite"
-                },
-                "step_variables": []
-              },
-              "status": null,
-              "top": "975",
-              "left": "125",
-              "stepType": "/api/3/workflow_step_types/2597053c-e718-44b4-8394-4d40fe26d357",
-              "group": null,
-              "uuid": "5fc60d49-b8e7-47c1-9a0b-86258db1f522"
-            },
-            {
-              "@type": "WorkflowStep",
-              "name": "Fetch IOC",
-              "description": null,
-              "arguments": {
-                "name": "Fortinet FortiRecon ACI",
-                "config": "0739e555-96c6-46f6-8a39-25066be858c5",
-                "params": {
-                  "page": "{{vars.item}}",
-                  "size": 500,
-                  "end_date": "",
-                  "ioc_type": "",
-                  "report_id": "{{vars.input.records[0].reportID}}",
-                  "start_date": ""
-                },
-                "version": "2.0.0",
-                "for_each": {
-                  "item": "{{range(2,((vars.page_numbers | int)+1)) | list}}",
-                  "parallel": false,
-                  "condition": ""
-                },
-                "connector": "fortinet-fortirecon-aci",
-                "operation": "get_iocs",
-                "operationTitle": "Get IOCs",
-                "pickFromTenant": false,
-                "step_variables": []
-              },
-              "status": null,
-              "top": "705",
-              "left": "125",
-              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
-              "group": null,
-              "uuid": "6ef946ef-cb2f-4c9a-a2fc-570471055127"
-            },
-            {
-              "@type": "WorkflowStep",
-              "name": "Field Mapping",
-              "description": null,
-              "arguments": {
-                "threat_tags": "[]",
-                "tlp_type_map": "{\n  \t\"White\": \"{{\"TrafficLightProtocol\" | picklist(\"White\")}}\",\n  \t\"Green\": \"{{\"TrafficLightProtocol\" | picklist(\"Green\")}}\",\n  \t\"Amber\": \"{{\"TrafficLightProtocol\" | picklist(\"Amber\")}}\",\n  \t\"Red\": \"{{\"TrafficLightProtocol\" | picklist(\"Red\")}}\"\n}",
-                "reputation_map": "{'Good': {{'IndicatorReputation'| picklist('Good') }}, 'Malicious': {{'IndicatorReputation'| picklist('Malicious') }}, 'Suspicious': {{'IndicatorReputation'| picklist('Suspicious') }}, 'TBD': {{'IndicatorReputation'| picklist('TBD') }}, 'No Reputation Available': {{'IndicatorReputation'| picklist('No Reputation Available') }}}",
-                "report_type_map": "{\n\"Flash Report\": \"{{\"Report Type\" | picklist(\"Flash Report\")}}\",\n\"Flash Alert\": \"{{\"Report Type\" | picklist(\"Flash Alert\")}}\",\n\"Threat Report\": \"{{\"Report Type\" | picklist(\"Threat Report\")}}\",\n\"Threat Alert\": \"{{\"Report Type\" | picklist(\"Threat Alert\")}}\"\n}",
-                "source_category_type_map": "{\n\t\"Media Trends\": \"{{\"Source Category\" | picklist(\"Media Trends\")}}\",\n\t\"Darknet\": \"{{\"Source Category\" | picklist(\"Darknet\")}}\",\n\t\"Humint\": \"{{\"Source Category\" | picklist(\"Humint\")}}\",\n\t\"OSINT\": \"{{\"Source Category\" | picklist(\"OSINT\")}}\",\n\t\"Fraudulent Domains\": \"{{\"Source Category\" | picklist(\"Fraudulent Domains\")}}\",\n\t\"Technical Intelligence\": \"{{\"Source Category\" | picklist(\"Technical Intelligence\")}}\",\n\t\"Executive Summary\": \"{{\"Source Category\" | picklist(\"Executive Summary\")}}\"\n}",
-                "relevance_rating_type_map": "{\n\t\"High\": \"{{\"Relevance Rating\" | picklist(\"High\")}}\",\n\t\"Medium\": \"{{\"Relevance Rating\" | picklist(\"Medium\")}}\",\n\t\"Low\": \"{{\"Relevance Rating\" | picklist(\"Low\")}}\"\n}",
-                "threat_intel_feed_type_map": "{\n\"hash\": \"{{\"ThreatIntelFeedType\" | picklist(\"FileHash\")}}\",\n\"url\": \"{{\"ThreatIntelFeedType\" | picklist(\"URL\")}}\",\n\"ip\": \"{{\"ThreatIntelFeedType\" | picklist(\"IP Address\")}}\",\n\"file_name, file_path\": \"{{\"ThreatIntelFeedType\" | picklist(\"Filename\")}}\",\n\"DOMAIN, domain\": \"{{\"ThreatIntelFeedType\" | picklist(\"Domain\")}}\",\n\"email\": \"{{\"ThreatIntelFeedType\" | picklist(\"Email Address\")}}\",\n\"registry_key\": \"{{\"ThreatIntelFeedType\" | picklist(\"Registry\")}}\"\n}",
-                "source_reliability_type_map": "{\n  \t\"A-Reliable\": \"{{\"Source Reliability\" | picklist(\"Reliable\")}}\",\n  \t\"B-Usually reliable\": \"{{\"Source Reliability\" | picklist(\"Usually Reliable\")}}\",\n  \t\"C-Fairly reliable\": \"{{\"Source Reliability\" | picklist(\"Fairly Reliable\")}}\",\n  \t\"D-Not usually reliable\": \"{{\"Source Reliability\" | picklist(\"Not Usually Reliable\")}}\",\n  \t\"E-Unreliable\": \"{{\"Source Reliability\" | picklist(\"Unreliable\")}}\",\n  \t\"F-Cannot be judged\": \"{{\"Source Reliability\" | picklist(\"Cannot Judged\")}}\"\n}",
-                "information_reliability_type_map": "{\n\t\"1-Confirmed\": \"{{\"Information Reliability\" | picklist(\"Confirmed\")}}\",\n\t\"2-Probably true\": \"{{\"Information Reliability\" | picklist(\"Probably True\")}}\",\n\t\"3-Possibly true\": \"{{\"Information Reliability\" | picklist(\"Possibly True\")}}\",\n\t\"4-Doubtfully true\": \"{{\"Information Reliability\" | picklist(\"Doubtfully True\")}}\",\n\t\"5-Improbable\": \"{{\"Information Reliability\" | picklist(\"Improbable\")}}\",\n\t\"6-Cannot be judged\": \"{{\"Information Reliability\" | picklist(\"Cannot Judged\")}}\"\n}"
-              },
-              "status": null,
-              "top": "300",
-              "left": "125",
-              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
-              "group": null,
-              "uuid": "8f5a7270-c0de-4995-b624-499ee65b4df8"
-            },
-            {
-              "@type": "WorkflowStep",
-              "name": "Get All Technical Intelligence Report IOCs",
-              "description": null,
-              "arguments": {
-                "_tmp": "{% for item in vars.steps.Get_IOC.data.hits %}{% set _ = vars.technical_intelligence_report_iocs.append(item) %}{% endfor %}\n{% for item in vars.steps.Fetch_IOC %}{% for i in item.data.hits %}{% set _ = vars.technical_intelligence_report_iocs.append(i) %}{% endfor %}{% endfor %}"
-              },
-              "status": null,
-              "top": "840",
-              "left": "125",
-              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
-              "group": null,
-              "uuid": "a44794f1-c235-4037-b972-67db9fc1963c"
-            },
-            {
-              "@type": "WorkflowStep",
-              "name": "Get IOC",
-              "description": null,
-              "arguments": {
-                "name": "Fortinet FortiRecon ACI",
-                "config": "0739e555-96c6-46f6-8a39-25066be858c5",
-                "params": {
-                  "page": "",
-                  "size": 500,
-                  "end_date": "",
-                  "ioc_type": "",
-                  "report_id": "{{vars.input.records[0].reportID}}",
-                  "start_date": ""
-                },
-                "version": "2.0.0",
-                "connector": "fortinet-fortirecon-aci",
-                "operation": "get_iocs",
-                "operationTitle": "Get IOCs",
-                "pickFromTenant": false,
-                "step_variables": []
-              },
-              "status": null,
-              "top": "435",
-              "left": "125",
-              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
-              "group": null,
-              "uuid": "6d10ccd0-3930-4ef1-839f-e2a3f379c2a8"
-            },
-            {
-              "@type": "WorkflowStep",
-              "name": "Get Total Number Pages",
-              "description": null,
-              "arguments": {
-                "page_numbers": "{{(vars.steps.Get_IOC.data.total / vars.steps.Get_IOC.data.size ) | round(0, 'ceil')}}"
-              },
-              "status": null,
-              "top": "570",
-              "left": "125",
-              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
-              "group": null,
-              "uuid": "faae7b76-5dac-41f1-ad74-ea9058bfcccd"
-            },
-            {
-              "@type": "WorkflowStep",
-              "name": "Start",
-              "description": null,
-              "arguments": {
-                "route": "b54f42ac-9db7-41d0-9880-9b5c20553708",
-                "title": "Get IOCs",
-                "resources": [
-                  "threat_intel_reports"
-                ],
-                "__triggerLimit": true,
-                "inputVariables": [
-                  {
-                    "name": "confidence",
-                    "type": "integer",
-                    "label": "Confidence",
-                    "title": "Integer Field",
-                    "usable": true,
-                    "tooltip": "Default Confidence score to be set for the feeds.",
-                    "dataType": "integer",
-                    "formType": "integer",
-                    "required": false,
-                    "_expanded": true,
-                    "mmdUpdate": true,
-                    "collection": false,
-                    "searchable": true,
-                    "templateUrl": "app/components/form/fields/integer.html",
-                    "defaultValue": 50,
-                    "_previousName": "",
-                    "playbookField": true,
-                    "lengthConstraint": true,
-                    "allowedEncryption": false,
-                    "allowedGridColumn": true,
-                    "jinjaExpressionView": true,
-                    "useRecordFieldDefault": false
-                  },
-                  {
-                    "name": "reputation",
-                    "type": "picklists",
-                    "label": "Reputation",
-                    "title": "Picklist",
-                    "usable": true,
-                    "tooltip": "Default Reputation to be set for the feeds.",
-                    "dataType": "picklist",
-                    "formType": "picklist",
-                    "required": false,
-                    "_expanded": true,
-                    "mmdUpdate": true,
-                    "collection": false,
-                    "dataSource": {
-                      "model": "picklists",
-                      "query": {
-                        "sort": [
-                          {
-                            "field": "orderIndex",
-                            "direction": "ASC"
-                          }
-                        ],
-                        "logic": "AND",
-                        "filters": [
-                          {
-                            "field": "listName__name",
-                            "value": "IndicatorReputation",
-                            "operator": "eq"
-                          }
-                        ]
-                      },
-                      "displayConditions": {
-                        "50bfd06c-9aff-4f7d-b6d9-821339e31fe7": {
-                          "conditions": null,
-                          "visibility": "visible"
-                        },
-                        "7074e547-7785-4979-be32-c6d0c863e4bd": {
-                          "conditions": null,
-                          "visibility": "visible"
-                        },
-                        "9a611980-1b5e-4ae9-8062-eb2c0c433cff": {
-                          "conditions": null,
-                          "visibility": "visible"
-                        },
-                        "ae98ebc6-beef-4882-9980-1d88fc6d87cd": {
-                          "conditions": null,
-                          "visibility": "visible"
-                        },
-                        "b19b42aa-aee4-47df-9cda-894537dacb2a": {
-                          "conditions": null,
-                          "visibility": "visible"
-                        }
-                      }
-                    },
-                    "searchable": false,
-                    "templateUrl": "app/components/form/fields/typeahead.html",
-                    "defaultValue": {
-                      "id": 386,
-                      "@id": "/api/3/picklists/7074e547-7785-4979-be32-c6d0c863e4bd",
-                      "icon": null,
-                      "uuid": "7074e547-7785-4979-be32-c6d0c863e4bd",
-                      "@type": "Picklist",
-                      "color": "#c42323",
-                      "display": "Malicious",
-                      "listName": "/api/3/picklist_names/e75ed3c3-9f23-4a43-832b-0daf236209ba",
-                      "itemValue": "Malicious",
-                      "importedBy": [],
-                      "orderIndex": 1
-                    },
-                    "_previousName": "re",
-                    "playbookField": true,
-                    "displayTemplate": "%7B%7B%20itemValue%20%7D%7D",
-                    "lengthConstraint": false,
-                    "allowedEncryption": false,
-                    "allowedGridColumn": true,
-                    "jinjaExpressionView": true,
-                    "useRecordFieldDefault": false
-                  },
-                  {
-                    "name": "tLP",
-                    "type": "picklists",
-                    "label": "TLP",
-                    "title": "Picklist",
-                    "usable": true,
-                    "tooltip": "Default TLP to be set for the feeds.",
-                    "dataType": "picklist",
-                    "formType": "picklist",
-                    "required": false,
-                    "_expanded": true,
-                    "mmdUpdate": true,
-                    "collection": false,
-                    "dataSource": {
-                      "model": "picklists",
-                      "query": {
-                        "sort": [
-                          {
-                            "field": "orderIndex",
-                            "direction": "ASC"
-                          }
-                        ],
-                        "logic": "AND",
-                        "filters": [
-                          {
-                            "field": "listName__name",
-                            "value": "TrafficLightProtocol",
-                            "operator": "eq"
-                          }
-                        ]
-                      },
-                      "displayConditions": {
-                        "0472d368-bd15-4f52-a119-d403470cbe43": {
-                          "conditions": null,
-                          "visibility": "visible"
-                        },
-                        "47004ad3-721e-43e0-b729-2ad8ee6441c0": {
-                          "conditions": null,
-                          "visibility": "visible"
-                        },
-                        "7bff95b7-6438-4b01-b23a-0fe8cb5b33d3": {
-                          "conditions": null,
-                          "visibility": "visible"
-                        },
-                        "815d21f7-787b-4480-8009-558aa64fe776": {
-                          "conditions": null,
-                          "visibility": "visible"
-                        }
-                      }
-                    },
-                    "searchable": false,
-                    "templateUrl": "app/components/form/fields/typeahead.html",
-                    "defaultValue": {
-                      "id": 442,
-                      "@id": "/api/3/picklists/7bff95b7-6438-4b01-b23a-0fe8cb5b33d3",
-                      "icon": null,
-                      "uuid": "7bff95b7-6438-4b01-b23a-0fe8cb5b33d3",
-                      "@type": "Picklist",
-                      "color": "#FFBF00",
-                      "display": "Amber",
-                      "listName": "/api/3/picklist_names/40f1345f-f679-43c0-9237-5b06edd8385f",
-                      "itemValue": "Amber",
-                      "importedBy": [],
-                      "orderIndex": 1
-                    },
-                    "_previousName": "",
-                    "playbookField": true,
-                    "displayTemplate": "%7B%7B%20itemValue%20%7D%7D",
-                    "lengthConstraint": false,
-                    "allowedEncryption": false,
-                    "allowedGridColumn": true,
-                    "jinjaExpressionView": true,
-                    "useRecordFieldDefault": false
-                  },
-                  {
-                    "name": "feedExpiry",
-                    "type": "integer",
-                    "label": "Feed Expiry",
-                    "title": "Integer Field",
-                    "usable": true,
-                    "tooltip": "Specify the default age (in days) for the feeds.",
-                    "dataType": "integer",
-                    "formType": "integer",
-                    "required": false,
-                    "_expanded": true,
-                    "mmdUpdate": true,
-                    "collection": false,
-                    "searchable": true,
-                    "templateUrl": "app/components/form/fields/integer.html",
-                    "defaultValue": 7,
-                    "_previousName": "",
-                    "playbookField": true,
-                    "lengthConstraint": true,
-                    "allowedEncryption": false,
-                    "allowedGridColumn": true,
-                    "jinjaExpressionView": true,
-                    "useRecordFieldDefault": false
-                  }
-                ],
-                "step_variables": {
-                  "input": {
-                    "params": {
-                      "tLP": "{{vars.request.data[\"tLP\"]}}",
-                      "page_size": "{{ vars.page_size }}",
-                      "confidence": "{{vars.request.data[\"confidence\"]}}",
-                      "feedExpiry": "{{vars.request.data[\"feedExpiry\"]}}",
-                      "reputation": "{{vars.request.data[\"reputation\"]}}",
-                      "report_details": "{{ vars.report_details }}"
-                    },
-                    "records": "{{vars.input.records}}"
-                  }
-                },
-                "_promptexpanded": true,
-                "triggerOnSource": true,
-                "displayConditions": {
-                  "threat_intel_reports": {
-                    "sort": [],
-                    "limit": 30,
-                    "logic": "AND",
-                    "filters": []
-                  }
-                },
-                "executeButtonText": "Execute",
-                "noRecordExecution": false,
-                "showToasterMessage": {
-                  "visible": false,
-                  "messageVisible": true
-                },
-                "triggerOnReplicate": false,
-                "singleRecordExecution": true
-              },
-              "status": null,
-              "top": "30",
-              "left": "125",
-              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
-              "group": null,
-              "uuid": "59acb3b1-82a5-468d-b259-d8c5f63565b3"
-            }
-          ],
-          "routes": [
-            {
-              "@type": "WorkflowRoute",
-              "name": "Configuration -> Field Mapping",
-              "targetStep": "/api/3/workflow_steps/8f5a7270-c0de-4995-b624-499ee65b4df8",
-              "sourceStep": "/api/3/workflow_steps/b7eb1ecf-4ba2-4d5c-afa0-91cb081e5593",
-              "label": null,
-              "isExecuted": false,
-              "group": null,
-              "uuid": "a0bd8f01-5305-453c-aafa-5a28f72cc86f"
-            },
-            {
-              "@type": "WorkflowRoute",
-              "name": "Fetch IOCs -> Get All Technical Intelligence Reports",
-              "targetStep": "/api/3/workflow_steps/a44794f1-c235-4037-b972-67db9fc1963c",
-              "sourceStep": "/api/3/workflow_steps/6ef946ef-cb2f-4c9a-a2fc-570471055127",
-              "label": null,
-              "isExecuted": false,
-              "group": null,
-              "uuid": "a8f67963-08b6-4672-9003-e099cd271e0d"
-            },
-            {
-              "@type": "WorkflowRoute",
-              "name": "Field Mapping -> Get IOC",
-              "targetStep": "/api/3/workflow_steps/6d10ccd0-3930-4ef1-839f-e2a3f379c2a8",
-              "sourceStep": "/api/3/workflow_steps/8f5a7270-c0de-4995-b624-499ee65b4df8",
-              "label": null,
-              "isExecuted": false,
-              "group": null,
-              "uuid": "93e31059-686e-40d3-a0ad-0b7ae0e97959"
-            },
-            {
-              "@type": "WorkflowRoute",
-              "name": "Get All Technical Intelligence Report IOCs -> Create Threat Intel Feed",
-              "targetStep": "/api/3/workflow_steps/5fc60d49-b8e7-47c1-9a0b-86258db1f522",
-              "sourceStep": "/api/3/workflow_steps/a44794f1-c235-4037-b972-67db9fc1963c",
-              "label": null,
-              "isExecuted": false,
-              "group": null,
-              "uuid": "b760d899-e655-47fd-abef-75d2600d439f"
-            },
-            {
-              "@type": "WorkflowRoute",
-              "name": "Get IOCs -> Get Total Number Pages",
-              "targetStep": "/api/3/workflow_steps/faae7b76-5dac-41f1-ad74-ea9058bfcccd",
-              "sourceStep": "/api/3/workflow_steps/6d10ccd0-3930-4ef1-839f-e2a3f379c2a8",
-              "label": null,
-              "isExecuted": false,
-              "group": null,
-              "uuid": "ce896708-8113-4f30-8c91-c0fe3cd96f50"
-            },
-            {
-              "@type": "WorkflowRoute",
-              "name": "Get Total Number Pages -> Copy of Get IOCs",
-              "targetStep": "/api/3/workflow_steps/6ef946ef-cb2f-4c9a-a2fc-570471055127",
-              "sourceStep": "/api/3/workflow_steps/faae7b76-5dac-41f1-ad74-ea9058bfcccd",
-              "label": null,
-              "isExecuted": false,
-              "group": null,
-              "uuid": "a5339f7d-3955-40b0-bf46-0eedd0fddeb5"
-            },
-            {
-              "@type": "WorkflowRoute",
-              "name": "Start -> Configuration",
-              "targetStep": "/api/3/workflow_steps/b7eb1ecf-4ba2-4d5c-afa0-91cb081e5593",
-              "sourceStep": "/api/3/workflow_steps/59acb3b1-82a5-468d-b259-d8c5f63565b3",
-              "label": null,
-              "isExecuted": false,
-              "group": null,
-              "uuid": "197c09c2-6625-4f98-9898-a356e15658be"
-            }
-          ],
-          "groups": [],
-          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
-          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
-          "isEditable": true,
-          "uuid": "7916227e-4ffc-4aaa-a3ce-4aa572e168b6",
-          "id": 578,
-          "owners": [],
-          "isPrivate": false,
-          "deletedAt": null,
-          "importedBy": [],
-          "recordTags": [
-            "dataingestion",
-            "fortinet-fortirecon-aci"
           ]
         },
         {
