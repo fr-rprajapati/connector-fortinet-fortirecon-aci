@@ -403,7 +403,7 @@
           "remoteExecutableFlag": false,
           "parameters": [],
           "synchronous": false,
-          "lastModifyDate": 1738305798,
+          "lastModifyDate": 1738746937,
           "collection": "/api/3/workflow_collections/550fbd66-d52e-41b6-bcf5-0cf0e96bc966",
           "versions": [],
           "triggerStep": "/api/3/workflow_steps/d5af444a-b6e2-4189-8cb6-88c5ed76213a",
@@ -718,7 +718,7 @@
                   "input": {
                     "params": []
                   },
-                  "_configuration_schema": "[\n  {\n    \"title\": \"Fetch Reports Since\",\n    \"required\": true,\n    \"editable\": true,\n    \"visible\": true,\n    \"type\": \"date\",\n    \"name\": \"last_sample_pull_time\",\n    \"tooltip\": \"Select a date and time to retrieve reports after the specified time.\"\n  },\n  {\n    \"name\": \"source_category\",\n    \"title\": \"Source Category\",\n    \"type\": \"text\",\n    \"editable\": true,\n    \"visible\": true,\n    \"required\": false,\n    \"value\": \"Technical Intelligence\",\n    \"placeholder\": \"Only \\\"Technical Intelligence\\\" type \\\"Source Category\\\" is supported\",\n    \"tooltip\": \"Only \\\"Technical Intelligence\\\" type \\\"Source Category\\\" is supported\"\n  },\n  {\n    \"title\": \"Confidence\",\n    \"name\": \"confidence\",\n    \"type\": \"integer\",\n    \"tooltip\": \"Default Confidence score to be set for the ioc while creating its feed record.\",\n    \"required\": false,\n    \"editable\": true,\n    \"visible\": true,\n    \"value\": 50,\n    \"validation\": {\n      \"minlength\": 0,\n      \"maxlength\": 100\n    }\n  },\n  {\n    \"title\": \"Reputation\",\n    \"name\": \"reputation\",\n    \"type\": \"select\",\n    \"tooltip\": \"Default Reputation score to be set for the ioc while creating its feed record.\",\n    \"required\": true,\n    \"editable\": true,\n    \"visible\": true,\n    \"options\": [\n      \"Good\",\n      \"Suspicious\",\n      \"Malicious\",\n      \"No Reputation Available\",\n      \"TBD\"\n    ],\n    \"value\": \"Suspicious\"\n  },\n  {\n    \"title\": \"Maximum Age (in days)\",\n    \"name\": \"expiry\",\n    \"type\": \"integer\",\n    \"tooltip\": \"Default age to be set for the ioc while creating its feed record. The indicator expires on 'valid_until' date unless a different expiry is specified here. If specified, the indicator will be marked expired on valid_until + expiry.\",\n    \"required\": false,\n    \"editable\": true,\n    \"visible\": true,\n    \"value\": 7\n  }\n]"
+                  "_configuration_schema": "[\n  {\n    \"title\": \"Fetch Reports Since\",\n    \"required\": true,\n    \"editable\": true,\n    \"visible\": true,\n    \"type\": \"date\",\n    \"name\": \"last_sample_pull_time\",\n    \"tooltip\": \"Select a date and time to retrieve reports after the specified time.\"\n  },\n  {\n    \"name\": \"source_category\",\n    \"title\": \"Source Category\",\n    \"type\": \"text\",\n    \"editable\": true,\n    \"visible\": true,\n    \"required\": false,\n    \"value\": \"Technical Intelligence\",\n    \"tooltip\": \"Filter by specific source category. Acceptable values are: Media Trends, Darknet, Humint, OSINT, Fraudulent Domains, Technical Intelligence, Executive Summary etc. Multiple source categories should be comma separated and will work as OR filter, example: Darknet, OSINT.\"\n  },\n  {\n    \"title\": \"Confidence\",\n    \"name\": \"confidence\",\n    \"type\": \"integer\",\n    \"tooltip\": \"Default Confidence score to be set for the ioc while creating its feed record.\",\n    \"required\": false,\n    \"editable\": true,\n    \"visible\": true,\n    \"value\": 50,\n    \"validation\": {\n      \"minlength\": 0,\n      \"maxlength\": 100\n    }\n  },\n  {\n    \"title\": \"Reputation\",\n    \"name\": \"reputation\",\n    \"type\": \"select\",\n    \"tooltip\": \"Default Reputation score to be set for the ioc while creating its feed record.\",\n    \"required\": true,\n    \"editable\": true,\n    \"visible\": true,\n    \"options\": [\n      \"Good\",\n      \"Suspicious\",\n      \"Malicious\",\n      \"No Reputation Available\",\n      \"TBD\"\n    ],\n    \"value\": \"Suspicious\"\n  },\n  {\n    \"title\": \"Maximum Age (in days)\",\n    \"name\": \"expiry\",\n    \"type\": \"integer\",\n    \"tooltip\": \"Default age to be set for the ioc while creating its feed record. The indicator expires on 'valid_until' date unless a different expiry is specified here. If specified, the indicator will be marked expired on valid_until + expiry.\",\n    \"required\": false,\n    \"editable\": true,\n    \"visible\": true,\n    \"value\": 7\n  }\n]"
                 },
                 "triggerOnSource": true,
                 "triggerOnReplicate": false
@@ -889,6 +889,10 @@
           "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
           "uuid": "b0792a60-2318-4ed4-8d59-4b52fb8be078",
           "id": 1239,
+          "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "createDate": 1738305741.771284,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1738746937.408204,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,

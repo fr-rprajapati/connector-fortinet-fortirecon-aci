@@ -14,7 +14,7 @@ def get_iocs(config: dict, params: dict) -> dict:
     if 'report_id' in params:
         params["report_id"] = str(params["report_id"]).strip('[]')
     for date_param in ("start_date", "end_date"):
-        if date_param in params:
+        if params.get(date_param):
             params[date_param] = MK.handle_date(params[date_param])
     if params.pop('get_all_records', None):
         params.pop('page', None)
@@ -28,5 +28,6 @@ def get_iocs(config: dict, params: dict) -> dict:
             iocs.extend(hits)
             params['page'] = params.get('page', 1) + 1
         response['hits'] = iocs
+        response['total'] = len(iocs)
         return response
     return MK.make_request(endpoint=endpoint, method="GET", params=params)
