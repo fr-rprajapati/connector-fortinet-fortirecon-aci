@@ -96,7 +96,7 @@
                   "item": "{{vars.input.params['report_iocs']}}",
                   "__bulk": true,
                   "parallel": false,
-                  "condition": "{{vars.item.ioc_type not in [\"adversary\", \"cve\"]}}",
+                  "condition": "",
                   "batch_size": 100
                 },
                 "resource": {
