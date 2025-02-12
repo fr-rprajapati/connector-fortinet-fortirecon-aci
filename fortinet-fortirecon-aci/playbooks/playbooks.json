@@ -53,7 +53,7 @@
                   "source": "FortiRecon ACI Report",
                   "status": "{{vars.report_details.status}}",
                   "threat": "{{vars.report_details.threat}}",
-                  "cVEList": "{{(vars.input.params['report_iocs']| json_query(\"[].ioc\")) | join(\",\")}}",
+                  "cVEList": "{{ vars.input.params['report_iocs'] | json_query(\"[?ioc_type=='cve'].ioc\") | join(\",\") }}",
                   "summary": "<p>{{vars.report_details.summary}}</p>",
                   "reportID": "{{vars.report_details.report_id}}",
                   "__replace": "false",
