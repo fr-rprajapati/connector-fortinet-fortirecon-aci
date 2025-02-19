@@ -1304,7 +1304,12 @@
                   "low": "",
                   "medium": ""
                 },
-                "sub_issues": []
+                "sub_issues": [
+                  {
+                    "asset_count": "",
+                    "issue_name": ""
+                  }
+                ]
               }
             ]
           }
