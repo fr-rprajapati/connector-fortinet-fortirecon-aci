@@ -260,5 +260,35 @@
             "stealers_on_sale_id": "Required_stealers_on_sale_id(text)",
             "status": "ACTIVE"
         }
+    ],
+    "get_intel_reports": [
+        {
+            "report_id": null,
+            "tag": null,
+            "adversaries": null,
+            "source": null,
+            "source_category": null,
+            "report_type": null,
+            "industries": null,
+            "geographies": null,
+            "iocs": null,
+            "keyword": null,
+            "source_reliability": null,
+            "information_reliability": null,
+            "report_generator_source": null,
+            "insight_relevance": null,
+            "motivations": null,
+            "vendors": null,
+            "products": null,
+            "start_date": "2024-11-19T06:41:14.166Z",
+            "end_date": "2024-11-19T06:41:14.166Z",
+            "page": null,
+            "size": 10
+        }
+    ],
+    "get_intel_report": [
+        {
+            "report_id": 1113330001111
+        }
     ]
 }
