@@ -212,3 +212,130 @@ def test_get_get_intel_report_invalid_id(valid_configuration_with_token, connect
     result = run_invalid_param_test(connector_details, operation_name='get_intel_report', param_name='report_id',
                                     param_type='text', action_params=params_json['get_intel_report'])
     assert result.get('status') == "failed"
+
+
+@pytest.mark.get_intel_iocs
+def test_get_intel_iocs_success(cache, valid_configuration_with_token, connector_details, params_json):
+    set_report_metadata(connector_details, "Get IOCs", "Verify with valid Input Parameters")
+    for result in run_success_test(cache, connector_details, operation_name='get_intel_iocs',
+                                   action_params=params_json['get_intel_iocs']):
+        assert result.get('status') == "Success"
+
+
+@pytest.mark.get_intel_iocs
+def test_validate_get_intel_iocs_output_schema(cache, valid_configuration_with_token, connector_details,
+                                               info_json, params_json):
+    set_report_metadata(connector_details, "Get IOCs", "Validate Output Schema")
+    run_output_schema_validation(cache, 'get_intel_iocs', info_json, params_json['get_intel_iocs'])
+
+
+@pytest.mark.get_intel_iocs
+def test_get_intel_iocs_invalid_report_ids(valid_configuration_with_token, connector_details, params_json):
+    set_report_metadata(connector_details, "Get IOCs", "Verify with invalid Report ID's")
+    result = run_invalid_param_test(connector_details, operation_name='get_intel_iocs', param_name='report_ids',
+                                    param_type='text', action_params=params_json['get_intel_iocs'])
+    assert result.get('status') == "failed"
+
+
+@pytest.mark.get_intel_iocs
+def test_get_intel_iocs_invalid_ioc_type(valid_configuration_with_token, connector_details, params_json):
+    set_report_metadata(connector_details, "Get IOCs", "Verify with invalid IOC Type")
+    result = run_invalid_param_test(connector_details, operation_name='get_intel_iocs', param_name='type',
+                                    param_type='text', action_params=params_json['get_intel_iocs'])
+    assert result.get('status') == "failed"
+
+
+@pytest.mark.get_intel_iocs
+def test_get_intel_iocs_invalid_ioc_name(valid_configuration_with_token, connector_details, params_json):
+    set_report_metadata(connector_details, "Get IOCs", "Verify with invalid IOC name")
+    result = run_invalid_param_test(connector_details, operation_name='get_intel_iocs', param_name='name',
+                                    param_type='text', action_params=params_json['get_intel_iocs'])
+    assert result.get('status') == "failed"
+
+
+@pytest.mark.get_intel_iocs
+def test_get_intel_iocs_invalid_ioc_first_seen(valid_configuration_with_token, connector_details, params_json):
+    set_report_metadata(connector_details, "Get IOCs", "Verify with invalid IOC first_seen")
+    result = run_invalid_param_test(connector_details, operation_name='get_intel_iocs', param_name='first_seen',
+                                    param_type='text', action_params=params_json['get_intel_iocs'])
+    assert result.get('status') == "failed"
+
+
+@pytest.mark.get_intel_iocs
+def test_get_intel_iocs_invalid_ioc_last_seen(valid_configuration_with_token, connector_details, params_json):
+    set_report_metadata(connector_details, "Get IOCs", "Verify with invalid IOC last_seen")
+    result = run_invalid_param_test(connector_details, operation_name='get_intel_iocs', param_name='last_seen',
+                                    param_type='text', action_params=params_json['get_intel_iocs'])
+    assert result.get('status') == "failed"
+
+
+@pytest.mark.get_intel_iocs
+def test_get_intel_iocs_invalid_ioc_added_by(valid_configuration_with_token, connector_details, params_json):
+    set_report_metadata(connector_details, "Get IOCs", "Verify with invalid IOC added_by")
+    result = run_invalid_param_test(connector_details, operation_name='get_intel_iocs', param_name='added_by',
+                                    param_type='text', action_params=params_json['get_intel_iocs'])
+    assert result.get('status') == "failed"
+
+
+@pytest.mark.get_intel_iocs
+def test_get_intel_iocs_invalid_ioc_updated_ts(valid_configuration_with_token, connector_details, params_json):
+    set_report_metadata(connector_details, "Get IOCs", "Verify with invalid IOC updated_ts")
+    result = run_invalid_param_test(connector_details, operation_name='get_intel_iocs', param_name='updated_ts',
+                                    param_type='text', action_params=params_json['get_intel_iocs'])
+    assert result.get('status') == "failed"
+
+
+@pytest.mark.get_intel_iocs
+def test_get_intel_iocs_invalid_ioc_keyword(valid_configuration_with_token, connector_details, params_json):
+    set_report_metadata(connector_details, "Get IOCs", "Verify with invalid keyword")
+    result = run_invalid_param_test(connector_details, operation_name='get_intel_iocs', param_name='keyword',
+                                    param_type='text', action_params=params_json['get_intel_iocs'])
+    assert result.get('status') == "failed"
+
+
+@pytest.mark.get_intel_iocs
+def test_get_intel_iocs_invalid_ioc_sort(valid_configuration_with_token, connector_details, params_json):
+    set_report_metadata(connector_details, "Get IOCs", "Verify with invalid sort ")
+    result = run_invalid_param_test(connector_details, operation_name='get_intel_iocs', param_name='sort',
+                                    param_type='text', action_params=params_json['get_intel_iocs'])
+    assert result.get('status') == "failed"
+
+
+@pytest.mark.get_intel_iocs
+def test_get_intel_iocs_invalid_page(valid_configuration_with_token, connector_details, params_json):
+    set_report_metadata(connector_details, "Get IOCs", "Verify with invalid Page")
+    result = run_invalid_param_test(connector_details, operation_name='get_intel_iocs', param_name='page',
+                                    param_type='integer', action_params=params_json['get_intel_iocs'])
+    assert result.get('status') == "failed"
+
+
+@pytest.mark.get_intel_iocs
+def test_get_intel_iocs_invalid_size(valid_configuration_with_token, connector_details, params_json):
+    set_report_metadata(connector_details, "Get IOCs", "Verify with invalid Size")
+    result = run_invalid_param_test(connector_details, operation_name='get_intel_iocs', param_name='size',
+                                    param_type='integer', action_params=params_json['get_intel_iocs'])
+    assert result.get('status') == "failed"
+
+
+@pytest.mark.get_intel_ioc
+def test_get_intel_ioc_success(cache, valid_configuration_with_token, connector_details, params_json):
+    set_report_metadata(connector_details, "Get Ioc details for specific Ioc ID", "Verify with valid Input Parameters")
+    for result in run_success_test(cache, connector_details, operation_name='get_intel_ioc',
+                                   action_params=params_json['get_intel_ioc']):
+        assert result.get('status') == "Success"
+
+
+@pytest.mark.get_intel_ioc
+def test_validate_get_intel_ioc_output_schema(cache, valid_configuration_with_token, connector_details,
+                                                      info_json, params_json):
+    set_report_metadata(connector_details, "Ioc details for specific Ioc ID with validate schema", "Validate Output Schema")
+    run_output_schema_validation(cache, 'get_intel_ioc', info_json, params_json['get_intel_ioc'])
+
+
+@pytest.mark.get_intel_ioc
+def test_get_intel_ioc_invalid_ioc_id(valid_configuration_with_token, connector_details, params_json):
+    set_report_metadata(connector_details, "Ioc details for specific Ioc ID invalid Iocs id", "Verify with invalid Ioc ID")
+    result = run_invalid_param_test(connector_details, operation_name='get_intel_ioc', param_name='ioc_id',
+                                    param_type='text', action_params=params_json['get_intel_ioc'])
+    assert result.get('status') == "failed"
+

@@ -288,7 +288,27 @@
     ],
     "get_intel_report": [
         {
-            "report_id": 1113330001111
+            "report_id": "1113330001111"
+        }
+    ],
+    "get_intel_iocs": [
+        {
+            "added_by": null,
+            "updated_ts": null,
+            "report_ids": null,
+            "type": null,
+            "name": null,
+            "first_seen": null,
+            "last_seen": null,
+            "keyword": null,
+            "sort": null,
+            "size": 10,
+            "page": null
+        }
+    ],
+    "get_intel_ioc": [
+        {
+            "ioc_id": "8a90d5e1efbe2bd67c52d8c7e8d2c3c0"
         }
     ]
 }
