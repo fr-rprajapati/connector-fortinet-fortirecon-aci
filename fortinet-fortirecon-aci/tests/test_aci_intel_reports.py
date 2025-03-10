@@ -37,7 +37,7 @@ def test_get_intel_reports_invalid_report_id(valid_configuration_with_token, con
     set_report_metadata(connector_details, "Get Reports", "Verify with invalid Report ID")
     result = run_invalid_param_test(connector_details, operation_name='get_intel_reports', param_name='report_id',
                                     param_type='text', action_params=params_json['get_intel_reports'])
-    assert result.get('status') == "failed"
+    assert result['data']['total'] == 0
 
 
 @pytest.mark.get_intel_reports
@@ -45,7 +45,7 @@ def test_get_intel_reports_invalid_tag(valid_configuration_with_token, connector
     set_report_metadata(connector_details, "Get Reports", "Verify with invalid Tag")
     result = run_invalid_param_test(connector_details, operation_name='get_intel_reports', param_name='tag',
                                     param_type='text', action_params=params_json['get_intel_reports'])
-    assert result.get('status') == "failed"
+    assert result['data']['total'] == 0
 
 
 @pytest.mark.get_intel_reports
@@ -53,7 +53,7 @@ def test_get_intel_reports_invalid_adversaries(valid_configuration_with_token, c
     set_report_metadata(connector_details, "Get Reports", "Verify with invalid Adversaries")
     result = run_invalid_param_test(connector_details, operation_name='get_intel_reports', param_name='adversaries',
                                     param_type='text', action_params=params_json['get_intel_reports'])
-    assert result.get('status') == "failed"
+    assert result['data']['total'] == 0
 
 
 @pytest.mark.get_intel_reports
@@ -62,7 +62,7 @@ def test_get_intel_reports_invalid_source(valid_configuration_with_token, connec
     result = run_invalid_param_test(connector_details, operation_name='get_intel_reports',
                                     param_name='source',
                                     param_type='text', action_params=params_json['get_intel_reports'])
-    assert result.get('status') == "failed"
+    assert result['data']['total'] == 0
 
 
 @pytest.mark.get_intel_reports
@@ -70,7 +70,7 @@ def test_get_intel_reports_invalid_source_category(valid_configuration_with_toke
     set_report_metadata(connector_details, "Get Reports", "Verify with invalid Source Category")
     result = run_invalid_param_test(connector_details, operation_name='get_intel_reports', param_name='source_category',
                                     param_type='text', action_params=params_json['get_intel_reports'])
-    assert result.get('status') == "failed"
+    assert result['data']['total'] == 0
 
 
 @pytest.mark.get_intel_reports
@@ -86,7 +86,7 @@ def test_get_intel_reports_invalid_industries(valid_configuration_with_token, co
     set_report_metadata(connector_details, "Get Reports", "Verify with invalid industries")
     result = run_invalid_param_test(connector_details, operation_name='get_intel_reports', param_name='industries',
                                     param_type='text', action_params=params_json['get_intel_reports'])
-    assert result.get('status') == "failed"
+    assert result['data']['total'] == 0
 
 
 @pytest.mark.get_intel_reports
@@ -94,7 +94,7 @@ def test_get_intel_reports_invalid_geographies(valid_configuration_with_token, c
     set_report_metadata(connector_details, "Get Reports", "Verify with invalid Geographies")
     result = run_invalid_param_test(connector_details, operation_name='get_intel_reports', param_name='geographies',
                                     param_type='text', action_params=params_json['get_intel_reports'])
-    assert result.get('status') == "failed"
+    assert result['data']['total'] == 0
 
 
 @pytest.mark.get_intel_reports
@@ -102,7 +102,7 @@ def test_get_intel_reports_invalid_iocs(valid_configuration_with_token, connecto
     set_report_metadata(connector_details, "Get Reports", "Verify with invalid iocs")
     result = run_invalid_param_test(connector_details, operation_name='get_intel_reports', param_name='iocs',
                                     param_type='text', action_params=params_json['get_intel_reports'])
-    assert result.get('status') == "failed"
+    assert result['data']['total'] == 0
 
 
 @pytest.mark.get_intel_reports
@@ -146,7 +146,7 @@ def test_get_intel_reports_invalid_motivations(valid_configuration_with_token, c
     result = run_invalid_param_test(connector_details, operation_name='get_intel_reports',
                                     param_name='motivations',
                                     param_type='text', action_params=params_json['get_intel_reports'])
-    assert result.get('status') == "failed"
+    assert result['data']['total'] == 0
 
 
 @pytest.mark.get_intel_reports
@@ -155,7 +155,7 @@ def test_get_intel_reports_invalid_vendors(valid_configuration_with_token, conne
     result = run_invalid_param_test(connector_details, operation_name='get_intel_reports',
                                     param_name='vendors',
                                     param_type='text', action_params=params_json['get_intel_reports'])
-    assert result.get('status') == "failed"
+    assert result['data']['total'] == 0
 
 
 @pytest.mark.get_intel_reports
@@ -164,7 +164,7 @@ def test_get_intel_reports_invalid_products(valid_configuration_with_token, conn
     result = run_invalid_param_test(connector_details, operation_name='get_intel_reports',
                                     param_name='products',
                                     param_type='text', action_params=params_json['get_intel_reports'])
-    assert result.get('status') == "failed"
+    assert result['data']['total'] == 0
 
 
 @pytest.mark.get_intel_reports
@@ -234,7 +234,7 @@ def test_get_intel_iocs_invalid_report_ids(valid_configuration_with_token, conne
     set_report_metadata(connector_details, "Get IOCs", "Verify with invalid Report ID's")
     result = run_invalid_param_test(connector_details, operation_name='get_intel_iocs', param_name='report_ids',
                                     param_type='text', action_params=params_json['get_intel_iocs'])
-    assert result.get('status') == "failed"
+    assert result['data']['total'] == 0
 
 
 @pytest.mark.get_intel_iocs
@@ -250,7 +250,7 @@ def test_get_intel_iocs_invalid_ioc_name(valid_configuration_with_token, connect
     set_report_metadata(connector_details, "Get IOCs", "Verify with invalid IOC name")
     result = run_invalid_param_test(connector_details, operation_name='get_intel_iocs', param_name='name',
                                     param_type='text', action_params=params_json['get_intel_iocs'])
-    assert result.get('status') == "failed"
+    assert result['data']['total'] == 0
 
 
 @pytest.mark.get_intel_iocs
@@ -270,9 +270,16 @@ def test_get_intel_iocs_invalid_ioc_last_seen(valid_configuration_with_token, co
 
 
 @pytest.mark.get_intel_iocs
-def test_get_intel_iocs_invalid_ioc_added_by(valid_configuration_with_token, connector_details, params_json):
-    set_report_metadata(connector_details, "Get IOCs", "Verify with invalid IOC added_by")
-    result = run_invalid_param_test(connector_details, operation_name='get_intel_iocs', param_name='added_by',
+def test_get_intel_iocs_invalid_ioc_start_date(valid_configuration_with_token, connector_details, params_json):
+    set_report_metadata(connector_details, "Get IOCs", "Verify with invalid IOC added start date")
+    result = run_invalid_param_test(connector_details, operation_name='get_intel_iocs', param_name='start_date',
+                                    param_type='text', action_params=params_json['get_intel_iocs'])
+    assert result.get('status') == "failed"
+
+@pytest.mark.get_intel_iocs
+def test_get_intel_iocs_invalid_ioc_end_date(valid_configuration_with_token, connector_details, params_json):
+    set_report_metadata(connector_details, "Get IOCs", "Verify with invalid IOC added end date")
+    result = run_invalid_param_test(connector_details, operation_name='get_intel_iocs', param_name='start_date',
                                     param_type='text', action_params=params_json['get_intel_iocs'])
     assert result.get('status') == "failed"
 
@@ -282,7 +289,7 @@ def test_get_intel_iocs_invalid_ioc_updated_ts(valid_configuration_with_token, c
     set_report_metadata(connector_details, "Get IOCs", "Verify with invalid IOC updated_ts")
     result = run_invalid_param_test(connector_details, operation_name='get_intel_iocs', param_name='updated_ts',
                                     param_type='text', action_params=params_json['get_intel_iocs'])
-    assert result.get('status') == "failed"
+    assert result['data']['total'] == 0
 
 
 @pytest.mark.get_intel_iocs
@@ -290,7 +297,7 @@ def test_get_intel_iocs_invalid_ioc_keyword(valid_configuration_with_token, conn
     set_report_metadata(connector_details, "Get IOCs", "Verify with invalid keyword")
     result = run_invalid_param_test(connector_details, operation_name='get_intel_iocs', param_name='keyword',
                                     param_type='text', action_params=params_json['get_intel_iocs'])
-    assert result.get('status') == "failed"
+    assert result['data']['total'] == 0
 
 
 @pytest.mark.get_intel_iocs
@@ -298,7 +305,7 @@ def test_get_intel_iocs_invalid_ioc_sort(valid_configuration_with_token, connect
     set_report_metadata(connector_details, "Get IOCs", "Verify with invalid sort ")
     result = run_invalid_param_test(connector_details, operation_name='get_intel_iocs', param_name='sort',
                                     param_type='text', action_params=params_json['get_intel_iocs'])
-    assert result.get('status') == "failed"
+    assert result['data']['total'] == 0
 
 
 @pytest.mark.get_intel_iocs

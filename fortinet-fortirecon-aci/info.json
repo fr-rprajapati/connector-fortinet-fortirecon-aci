@@ -3698,58 +3698,12 @@
           "tags": [],
           "adversaries": [],
           "category": {},
-          "iocs_count": 0,
+          "iocs_count": "",
           "motivations": [],
           "summary": {},
           "insight_relevance": "",
           "report_generator_source": "",
-          "insight": {"content_text": ""},
-          "original_post": {},
-          "entities": [],
-          "tlp": ""
-      },
-      "parameters": [
-        {
-          "name": "report_id",
-          "title": "ACI Report ID",
-          "type": "text",
-          "editable": true,
-          "visible": true,
-          "required": true,
-          "description": "Specify the ACI Intel report ID to get details about the specified report.",
-          "tooltip": "Specify the ACI Intel report ID."
-        }
-      ]
-    },
-    {
-      "operation": "get_intel_report",
-      "title": "Get specific Adversary Centric Intelligence (ACI) report.",
-      "annotation": "get_intel_report",
-      "description": "Get specific Adversary Centric Intelligence (ACI) report published by FortiRecon.",
-      "category": "investigation",
-      "is_config_required": true,
-      "visible": true,
-      "enabled": true,
-      "output_schema": {
-          "report_id": "",
-          "report_type": "",
-          "version": "",
-          "title": "",
-          "information_date": "",
-          "published_ts": "",
-          "source": {},
-          "reliability_rating": {},
-          "geographies": [],
-          "industries": [],
-          "tags": [],
-          "adversaries": [],
-          "category": {},
-          "iocs_count": 0,
-          "motivations": [],
-          "summary": {},
-          "insight_relevance": "",
-          "report_generator_source": "",
-          "insight": {"content_text": ""},
+          "insight": {},
           "original_post": {},
           "entities": [],
           "tlp": ""
@@ -3817,7 +3771,7 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Filter by Filter by first_seen date in this format: (YYYY-MM-DDTHH:MM:SS).",
+          "tooltip": "Filter by Filter by first_seen date in this format: (YYYY-MM-DD).",
           "placeholder": "first_seen",
           "description": "Specify first_seen date of IOCs you want to retrieve from Fortinet FortiRecon ACI."
         },
@@ -3828,19 +3782,29 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Filter by Filter by last_seen date in this format: (YYYY-MM-DDTHH:MM:SS).",
+          "tooltip": "Filter by Filter by last_seen date in this format: (YYYY-MM-DD).",
           "placeholder": "last_seen",
           "description": "Specify last_seen date of IOCs you want to retrieve from Fortinet FortiRecon ACI."
         },
         {
-          "name": "added_ts",
-          "title": "Added timestamp",
+          "name": "start_date",
+          "title": "Start Date",
           "type": "date",
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Filter by IOC's added timestamp in this format: (YYYY-MM-DDTHH:MM:SS).",
-          "description": "Specify the added_ts date from when you want to retrieve IOCs from Fortinet FortiRecon ACI."
+          "tooltip": "Filter by Ioc added date in this format: (YYYY-MM-DD, YYYY-MM-DDTHH:MM:SS).",
+          "description": "Filter by Ioc added date in this format: (YYYY-MM-DD, YYYY-MM-DDTHH:MM:SS)."
+        },
+        {
+          "name": "end_date",
+          "title": "End Date",
+          "type": "date",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Filter by Ioc added date in this format: (YYYY-MM-DD, YYYY-MM-DDTHH:MM:SS), default is today's date.",
+          "description": "Filter by Ioc added date in this format: (YYYY-MM-DD, YYYY-MM-DDTHH:MM:SS), default is today's date."
         },
         {
           "name": "updated_ts",
@@ -3904,7 +3868,11 @@
             "is_deleted": "",
             "name": "",
             "report_ids": [],
-            "type": ""
+            "type": "",
+            "updated_by": "",
+            "first_seen": "",
+            "last_seen": "",
+            "updated_ts": ""
           }
         ],
         "page": "",
@@ -3928,7 +3896,11 @@
           "is_deleted": "",
           "name": "",
           "report_ids": [],
-          "type": ""
+          "type": "",
+          "updated_by": "",
+          "first_seen": "",
+          "last_seen": "",
+          "updated_ts": ""
       },
       "parameters": [
         {

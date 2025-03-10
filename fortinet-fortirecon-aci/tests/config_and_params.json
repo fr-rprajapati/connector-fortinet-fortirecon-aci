@@ -288,18 +288,19 @@
     ],
     "get_intel_report": [
         {
-            "report_id": "1113330001111"
+            "report_id": "2024121152559"
         }
     ],
     "get_intel_iocs": [
         {
-            "added_by": null,
             "updated_ts": null,
             "report_ids": null,
             "type": null,
             "name": null,
             "first_seen": null,
             "last_seen": null,
+            "start_date": "2024-11-19T06:41:14.166Z",
+            "end_date": "2024-11-19T06:41:14.166Z",
             "keyword": null,
             "sort": null,
             "size": 10,
@@ -308,7 +309,7 @@
     ],
     "get_intel_ioc": [
         {
-            "ioc_id": "8a90d5e1efbe2bd67c52d8c7e8d2c3c0"
+            "ioc_id": "9c5ba44cb72e587c4c241088bbb9c6da"
         }
     ]
 }
