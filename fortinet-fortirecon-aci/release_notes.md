@@ -1,4 +1,4 @@
-#### What's New
+#### Following enhancements have been made to the Fortinet FortiRecon ACI Connector in version 2.0.0: 
 
 - Added following new actions and their playbooks:
    - Get ICL Saved Searches
@@ -28,21 +28,21 @@
    - Get Vulnerability Intelligence vulnerable products
    - Get Vulnerability Intelligence vulnerable vendors
    - Update Stealers Leaked Status
-   - Update Stealers On Sale(Marketplaces) Status
+   - Update Stealers On Sale Marketplaces Status
 
-- Added following playbooks:
+- The action Get Stealers Log is now deprecated and hence removed. 
+
+- Added a new parameter Get All Records in the action Get IOCs. 
+
+- The following playbooks have been added: 
    - FortiSOAR Threat Intel Feeds Using Threat Intel Report > Create
-   - Get FortiRecon ACI Threat Intel Report IOC"
+   - Get FortiRecon ACI Threat Intel Report IOC
    - FortiRecon ACI Threat Intel Report > Fetch
 
-
-### What's remove
-
-- Removed deprecated action
-   - Get Stealers Log
-
-- Removed following playbooks:
+- The following playbooks are now removed:
    - Get Stealers Log
    - Get FortiRecon ACI Report IOC
    - FortiRecon ACI Report > Fetch
    - FortiSOAR Threat Feeds Using FortiRecon ACI Report > Create
+
+- Updated the data ingestion parameters.

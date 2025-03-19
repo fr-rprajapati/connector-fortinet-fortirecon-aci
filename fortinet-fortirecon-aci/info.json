@@ -19,7 +19,7 @@
       "threat_intel_reports"
     ]
   },
-  "help_online": "",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/2.0.0/fortinet-fortirecon-aci/1037/fortinet-fortirecon-aci-v2-0-0",
   "configuration": {
     "fields": [
       {
@@ -29,7 +29,7 @@
         "editable": true,
         "visible": true,
         "required": true,
-        "description": "Specify the URL or IP address of the FortiRecon server to which you will connect and perform the automated operations.",
+        "description": "Specify the URL or IP address of the FortiRecon server to connect and perform the automated operations.",
         "value": "https://api.fortirecon.forticloud.com/"
       },
       {
@@ -50,7 +50,7 @@
         "required": true,
         "placeholder": "org_id",
         "tooltip": "Enter ID",
-        "description": "Specify the organization ID for which you will fetch the records using the Fortinet FortiRecon ACI connector."
+        "description": "Specify the organization ID for fetch the records using the Fortinet FortiRecon ACI connector."
       },
       {
         "name": "verify_ssl",
@@ -60,7 +60,7 @@
         "visible": true,
         "required": false,
         "value": true,
-        "description": "Specifies whether the SSL certificate for the server is to be verified or not. \nBy default, this option is set as True. "
+        "description": "Specifies whether the SSL certificate for the server is to be verified. By default, this option is set as True."
       }
     ]
   },
@@ -69,7 +69,7 @@
       "operation": "get_iocs",
       "title": "Get IOCs",
       "annotation": "get_iocs",
-      "description": "Retrieves a list of all IOCs or specific IOCs published in ACI reporting for the given organization ID and other input parameters you have specified.",
+      "description": "Retrieves a list of all IOCs or specific IOCs published in ACI reporting for the organization ID specified in the configuration parameters and other input parameters you have specified.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -84,7 +84,7 @@
           "required": false,
           "tooltip": "Filter by specific ACI report ID(s). Multiple IDs should be comma separated and will work as OR filter, example: 2019091459522,2019090116811.",
           "placeholder": "example: 2019091459522,2019090116811",
-          "description": "Specify a comma-separated list of report IDs from which you want to fetch the IOCs."
+          "description": "Specify a comma-separated list of report IDs from which to fetch the IOCs."
         },
         {
           "name": "ioc_type",
@@ -95,7 +95,7 @@
           "required": false,
           "tooltip": "Filter by specific Indicator of Compromise (IOC) type(s). Acceptable values are: URL, HASH, DOMAIN, IP, adversary, cve, file_name, email, file_path, registry_key. Multiple types should be comma separated and will work as OR filter, example:cve,IP.",
           "placeholder": "example: cve,IP-REPUTATION",
-          "description": "Specify a comma-separated string or single string of the type of IOCs you want to retrieve from Fortinet FortiRecon ACI. For example, cve,IP-REPUTATION"
+          "description": "Specify a comma-separated string or single string of the type of IOCs to retrieve from Fortinet FortiRecon ACI. For example, cve,IP-REPUTATION"
         },
         {
           "name": "start_date",
@@ -105,7 +105,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter by report published date, default is last 6 months.",
-          "description": "Specify the date from when you want to retrieve IOCs from Fortinet FortiRecon ACI. By default, this is set to Now - 6 months."
+          "description": "Specify the date from when to retrieve IOCs from Fortinet FortiRecon ACI. By default, this is set to Now - 6 months (YYYY-MM-DD)."
         },
         {
           "name": "end_date",
@@ -115,7 +115,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter by report published date, default is today's date.",
-          "description": "Specify the date till when you want to retrieve IOCs from Fortinet FortiRecon ACI. By default, this is set to Current Date."
+          "description": "Specify the date till when to retrieve IOCs from Fortinet FortiRecon ACI. By default, this is set to Current Date (YYYY-MM-DD)."
         },
         {
           "name": "page",
@@ -125,7 +125,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Navigate between pages. Defaults to 1.",
-          "description": "Specify the page number from which to retrieve results."
+          "description": "(Optional) Specify a page number to retrieve information from that page. Defaults to 1."
         },
         {
           "name": "size",
@@ -137,7 +137,7 @@
           "value": 10,
           "placeholder": "Must be greater 0 and less than or equal to 500.",
           "tooltip": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page.",
-          "description": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page. Must be greater 0 and less than or equal to 500."
+          "description": "(Optional) Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500."
         },
         {
           "name": "get_all_records",
@@ -147,8 +147,8 @@
           "visible": true,
           "required": false,
           "value": true,
-          "tooltip": "Select to retrieve all records present and ignore the parameters Page and Size. By default, this is selected, i.e. set to true.",
-          "description": "Select to retrieve all records present and ignore the parameters Page and Size. By default, this is selected, i.e. set to true."
+          "tooltip": "(Optional) Select to retrieve all records. Selecting this parameter ignores values in parameters Page and Size. By default, this is selected, i.e. set to true.",
+          "description": "(Optional) Select to retrieve all records. Selecting this parameter ignores values in parameters Page and Size. By default, this is selected, i.e. set to true. "
         }
       ],
       "output_schema": {
@@ -175,7 +175,7 @@
       "operation": "get_leaked_cards",
       "title": "Get Leaked Cards",
       "annotation": "get_leaked_cards",
-      "description": "Retrieves a list of all leaked cards or specific leaked cards found for the given organization ID and other input parameters you have specified from Fortinet FortiRecon ACI.",
+      "description": "Retrieves a list of all leaked cards or specific leaked cards found for the organization ID specified in the configuration parameters and other input parameters you have specified from Fortinet FortiRecon ACI.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -190,7 +190,7 @@
           "required": false,
           "tooltip": "Filter by card type(s). Acceptable values are: DEBIT, CREDIT. Multiple types should be comma separated and will work as OR filter, example: DEBIT,CREDIT.",
           "placeholder": "example: DEBIT,CREDIT",
-          "description": "Specify the type of leaked card you want to retrieve from Fortinet FortiRecon ACI."
+          "description": "Specify the type of leaked card to retrieve from Fortinet FortiRecon ACI."
         },
         {
           "name": "bin",
@@ -201,7 +201,7 @@
           "required": false,
           "tooltip": "Filter by Bank Identification Number (BIN). Multiple BIN(s) should be comma separated and will work as OR filter, example: 123456,234567.",
           "placeholder": "example: 123456,654321",
-          "description": "Specify the bin associated with the leaked card you want to retrieve from Fortinet FortiRecon ACI. For example, 123456,654321"
+          "description": "Specify the bin associated with the leaked card to retrieve from Fortinet FortiRecon ACI. For example, 123456,654321"
         },
         {
           "name": "start_date",
@@ -211,7 +211,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter by leaked card's discovery date, default is last 6 months.",
-          "description": "Specify the date from when you want to retrieve leaked cards from Fortinet FortiRecon ACI. By default, this is set to Now - 6 months."
+          "description": "Specify the date from when to retrieve leaked cards from Fortinet FortiRecon ACI. By default, this is set to Now - 6 months (YYYY-MM-DD)."
         },
         {
           "name": "end_date",
@@ -221,7 +221,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter by leaked card's discovery date, default is today's date.",
-          "description": "Specify the date till when you want to retrieve leaked cards from Fortinet FortiRecon ACI. By default, this is set to Current Date."
+          "description": "Specify the date till when to retrieve leaked cards from Fortinet FortiRecon ACI. By default, this is set to Current Date (YYYY-MM-DD)."
         },
         {
           "name": "page",
@@ -231,7 +231,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Navigate between pages. Defaults to 1.",
-          "description": "Specify the page number from which to retrieve results."
+          "description": "(Optional) Specify a page number to retrieve information from that page. Defaults to 1."
         },
         {
           "name": "size",
@@ -242,7 +242,7 @@
           "value": 10,
           "placeholder": "Must be greater 0 and less than or equal to 500.",
           "tooltip": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page.",
-          "description": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page. Must be greater 0 and less than or equal to 500."
+          "description": "(Optional) Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500."
         }
       ],
       "output_schema": {
@@ -277,7 +277,7 @@
       "operation": "get_widgets",
       "title": "Get Widgets",
       "annotation": "get_widgets",
-      "description": "Retrieves a list of all widgets or specific widgets for the given organization ID and other input parameters you have specified from Fortinet FortiRecon ACI.",
+      "description": "Retrieves a list of all widgets or specific widgets for the organization ID specified in the configuration parameters and other input parameters you have specified from Fortinet FortiRecon ACI.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -291,7 +291,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Navigate between pages. Defaults to 1.",
-          "description": "Specify the page number from which to retrieve results."
+          "description": "(Optional) Specify a page number to retrieve information from that page. Defaults to 1."
         },
         {
           "name": "size",
@@ -303,7 +303,7 @@
           "required": false,
           "placeholder": "Must be greater 0 and less than or equal to 500.",
           "tooltip": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page.",
-          "description": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page. Must be greater 0 and less than or equal to 500."
+          "description": "(Optional) Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500."
         }
       ],
       "output_schema": {
@@ -330,7 +330,7 @@
       "operation": "get_osint_feeds",
       "title": "Get OSINT Feeds",
       "annotation": "get_osint_feeds",
-      "description": "Retrieves a list of all OSINT feeds or specific OSINT feeds for the given organization ID and other input parameters you have specified from Fortinet FortiRecon ACI.",
+      "description": "Retrieves a list of all OSINT feeds or specific OSINT feeds for the organization ID specified in the configuration parameters and other input parameters you have specified from Fortinet FortiRecon ACI.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -345,7 +345,7 @@
           "required": false,
           "tooltip": "Specify the Widget ID using which you want to filter the OSINT feeds retrieved from Fortinet FortiRecon ACI.",
           "placeholder": "example:cae33d66-66yi-4fda-vc55-678c1ee23f88",
-          "description": "Specify the Widget ID using which you want to filter the OSINT feeds retrieved from Fortinet FortiRecon ACI."
+          "description": "Specify the Widget ID using which to filter the OSINT feeds retrieved from Fortinet FortiRecon ACI."
         },
         {
           "name": "keyword",
@@ -356,7 +356,7 @@
           "required": false,
           "tooltip": "Specify the keyword using which you want to filter the OSINT feeds retrieved from Fortinet FortiRecon ACI.",
           "placeholder": "example:breach",
-          "description": "Specify the keyword using which you want to filter the OSINT feeds retrieved from Fortinet FortiRecon ACI."
+          "description": "Specify the keyword using which to filter the OSINT feeds retrieved from Fortinet FortiRecon ACI."
         },
         {
           "name": "page",
@@ -366,7 +366,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Navigate between pages. Defaults to 1.",
-          "description": "Specify the page number from which to retrieve results."
+          "description": "(Optional) Specify a page number to retrieve information from that page. Defaults to 1."
         },
         {
           "name": "size",
@@ -378,7 +378,7 @@
           "required": false,
           "placeholder": "Must be greater 0 and less than or equal to 500.",
           "tooltip": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page.",
-          "description": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page. Must be greater 0 and less than or equal to 500."
+          "description": "(Optional) Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500."
         }
       ],
       "output_schema": {
@@ -406,7 +406,7 @@
       "operation": "get_reports",
       "title": "Get Reports",
       "annotation": "get_reports",
-      "description": "Retrieves a list of all reports or specific reports for the given organization ID and other input parameters you have specified from Fortinet FortiRecon ACI.\nThe data returned by this operation contains a list of all the filtered reports with title, summary, report URL, and the metadata related to the reports. Note that IOCs are not included in the returned data.",
+      "description": "Retrieves a list of all reports or specific reports for the organization ID specified in the configuration parameters and other input parameters you have specified from Fortinet FortiRecon ACI. The data returned by this operation contains a list of all the filtered reports with title, summary, report URL, and the metadata related to the reports. Note that IOCs are not included in the returned data.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -421,7 +421,7 @@
           "required": false,
           "tooltip": "Filter by specific relevance rating. This is the relevance of the report for the given organisation. Available values are: Low, Medium, High. Multiple relevance ratings should be comma separated and will work as OR filter, example: Medium,High.",
           "placeholder": "example:Medium,High,Low",
-          "description": "Specify a comma-separated string or single string of the relevance ratings of the reports you want to retrieve from Fortinet FortiRecon ACI. For example, Medium,High,Low"
+          "description": "Specify a comma-separated string or single string of the relevance ratings of the reports to retrieve from Fortinet FortiRecon ACI. For example, Medium,High,Low."
         },
         {
           "name": "tags",
@@ -432,7 +432,7 @@
           "required": false,
           "tooltip": "Filter by specific tag(s). Multiple tags should be comma separated and will work as OR filter, example: phishing,malware,exploited.",
           "placeholder": "example:Data Breach,Cyber Crime",
-          "description": "Specify a comma-separated string or single string of the tags associated with the reports you want to retrieve from Fortinet FortiRecon ACI. For example, Data Breach,Cyber Crime"
+          "description": "Specify a comma-separated string or single string of the tags associated with the reports to retrieve from Fortinet FortiRecon ACI. For example, Data Breach,Cyber Crime."
         },
         {
           "name": "adversary",
@@ -443,7 +443,7 @@
           "required": false,
           "tooltip": "Filter by specific adversary (actor names, APT groups). Multiple adversary should be comma separated and will work as OR filter, example: apt35,foo,bar.",
           "placeholder": "example:Databases,APT 34",
-          "description": "Specify a comma-separated string or single string of the adversary associated with the reports you want to retrieve from Fortinet FortiRecon ACI. For example, Databases,APT 34"
+          "description": "Specify a comma-separated string or single string of the adversary associated with the reports to retrieve from Fortinet FortiRecon ACI. For example, Databases,APT 34."
         },
         {
           "name": "source_category",
@@ -454,7 +454,7 @@
           "required": false,
           "tooltip": "Filter by specific source category. Acceptable values are: Media Trends, Darknet, Humint, OSINT, Fraudulent Domains, Technical Intelligence, Executive Summary. Multiple source categories should be comma separated and will work as OR filter, example: Darknet,OSINT.",
           "placeholder": "example: OSINT,Darknet",
-          "description": "Specify a comma-separated string or single string of the source category associated with the reports you want to retrieve from Fortinet FortiRecon ACI. For example, OSINT,Darknet"
+          "description": "Specify a comma-separated string or single string of the source category associated with the reports to retrieve from Fortinet FortiRecon ACI. For example, OSINT,Darknet."
         },
         {
           "name": "report_type",
@@ -465,7 +465,7 @@
           "required": false,
           "tooltip": "Filter by specific report type(s). Acceptable values are: Flash Report, Flash Alert, Threat alert, Threat report. Multiple report types should be comma separated and will work as OR filter, example: Flash Report,Flash Alert.",
           "placeholder": "example: Flash Report,Flash Alert",
-          "description": "Specify a comma-separated string or single string of the type of reports you want to retrieve from Fortinet FortiRecon ACI. For example, Flash Report,Flash Alert"
+          "description": "Specify a comma-separated string or single string of the type of reports to retrieve from Fortinet FortiRecon ACI. For example, Flash Report,Flash Alert."
         },
         {
           "name": "industry",
@@ -476,7 +476,7 @@
           "required": false,
           "tooltip": "Filter reports by specific industry. Multiple industries should be comma separated and will work as OR filter, example: manufacturing,government,hospitality.",
           "placeholder": "example: All Sectors,Technology",
-          "description": "Specify a comma-separated string or single string of the industry associated with the reports you want to retrieve from Fortinet FortiRecon ACI. For example, All Sectors,Technology"
+          "description": "Specify a comma-separated string or single string of the industry associated with the reports to retrieve from Fortinet FortiRecon ACI. For example, All Sectors,Technology."
         },
         {
           "name": "geography",
@@ -487,7 +487,7 @@
           "required": false,
           "tooltip": "Filter reports by geography. Multiple geographies should be comma separated and will work as OR filter, example: south america,western europe, east asia,africa.",
           "placeholder": "example: Western Europe,South East Asia",
-          "description": "Specify a comma-separated string or single string of the geography of the reports you want to retrieve from Fortinet FortiRecon ACI. For example, Western Europe,South East Asia"
+          "description": "Specify a comma-separated string or single string of the geography of the reports to retrieve from Fortinet FortiRecon ACI. For example, Western Europe,South East Asia."
         },
         {
           "name": "keyword",
@@ -498,7 +498,7 @@
           "required": false,
           "tooltip": "Filter by specific keyword. Provided keyword will be searched in these fields: Report ID, Report Title, Report Summary, Report Content, Source Category, Actors, Motivation, Threats, Industry Tags.",
           "placeholder": "keyword",
-          "description": "Specify the keyword using which you want to filter the reports retrieved from Fortinet FortiRecon ACI. "
+          "description": "Specify the keyword using which to filter the reports retrieved from Fortinet FortiRecon ACI."
         },
         {
           "name": "source_reliability",
@@ -509,7 +509,7 @@
           "required": false,
           "tooltip": "Filter by specific source reliability. Acceptable values are: A-Reliable, B-Usually reliable, C-Fairly reliable, D-Not usually reliable, E-Unreliable, F-Cannot be judged. Multiple source reliabilities should be comma separated and will work as OR filter, example: F-Cannot be judged,A-Reliable.",
           "placeholder": "source_reliability",
-          "description": "Specify the source reliability of the reports you want to retrieve from Fortinet FortiRecon ACI."
+          "description": "Specify the source reliability of the reports to retrieve from Fortinet FortiRecon ACI."
         },
         {
           "name": "information_reliability",
@@ -520,7 +520,7 @@
           "required": false,
           "tooltip": "Filter by specific information reliability. Acceptable values are:1-Confirmed, 2-Probably true, 3-Possibly true, 4-Doubtfully true, 5-Improbable, 6-Cannot be judged. Multiple information reliabilities should be comma separated and will work as OR filter, example: 1-Confirmed,2-Probably true.",
           "placeholder": "information_reliability",
-          "description": "Specify the information reliability of the reports you want to retrieve from Fortinet FortiRecon ACI."
+          "description": "Specify the information reliability of the reports to retrieve from Fortinet FortiRecon ACI."
         },
         {
           "name": "start_date",
@@ -530,7 +530,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter by report published date, default is last 6 months.",
-          "description": "Specify the date from when you want to retrieve reports from Fortinet FortiRecon ACI. By default, this is set to Now - 6 months."
+          "description": "Specify the date from when to retrieve reports from Fortinet FortiRecon ACI. By default, this is set to Now - 6 months (YYYY-MM-DD)."
         },
         {
           "name": "end_date",
@@ -540,7 +540,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter by report published date, default is today's date.",
-          "description": "Specify the date till when you want to retrieve reports from Fortinet FortiRecon ACI. By default, this is set to Current Date."
+          "description": "Specify the date till when to retrieve reports from Fortinet FortiRecon ACI. By default, this is set to Current Date (YYYY-MM-DD)."
         },
         {
           "name": "page",
@@ -550,7 +550,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Navigate between pages. Defaults to 1.",
-          "description": "Specify the page number from which to retrieve results."
+          "description": "(Optional) Specify a page number to retrieve information from that page. Defaults to 1."
         },
         {
           "name": "size",
@@ -562,7 +562,7 @@
           "required": false,
           "placeholder": "Must be greater 0 and less than or equal to 500.",
           "tooltip": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page.",
-          "description": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page. Must be greater 0 and less than or equal to 500."
+          "description": "(Optional) Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500."
         }
       ],
       "output_schema": {
@@ -606,7 +606,7 @@
       "operation": "get_reports_with_iocs",
       "title": "Get Reports With IOCs",
       "annotation": "get_reports_with_iocs",
-      "description": "Retrieves details, including IOCs, for a specific report for the given organization ID and the report ID you have specified from Fortinet FortiRecon ACI.\nThe data returned by this operation contains a list of all the filtered reports with title, summary, report URL, IOCs, and the metadata related to the reports.",
+      "description": "Retrieves details, including IOCs, for a specific report for the organization ID specified in the configuration parameters and the report ID you have specified from Fortinet FortiRecon ACI. The data returned by this operation contains a list of all the filtered reports with title, summary, report URL, IOCs, and the metadata related to the reports.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -621,7 +621,7 @@
           "required": true,
           "placeholder": " specify id",
           "tooltip": "Specify the ID of the report whose details, including IOCs, you want to retrieve from Fortinet FortiRecon ACI.",
-          "description": "Specify the ID of the report whose details, including IOCs, you want to retrieve from Fortinet FortiRecon ACI."
+          "description": "Specify the ID of the report whose details, including IOCs, to retrieve from Fortinet FortiRecon ACI."
         }
       ],
       "output_schema": {
@@ -662,7 +662,7 @@
       "operation": "get_icl_saved_searches",
       "title": "Get ICL Saved Searches",
       "annotation": "get_icl_saved_searches",
-      "description": "Retrieves a list of intelligence collection lookup saved searches for the given org id and other input parameters you have specified.",
+      "description": "Retrieves a list of intelligence collection lookup (ICL) searches saved for the organization ID specified in the configuration parameters based on the search keyword, query type, and other filter criteria that you have specified.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -676,7 +676,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Specify a keyword to search in saved searches by searching the given keyword in sources, query fields.",
-          "description": "Specify a keyword to search in saved searches by searching the given keyword in sources, query fields."
+          "description": "(Optional) Specify a keyword to filter the retrieve results by searching in sources and query fields of the saved searches."
         },
         {
           "name": "alert",
@@ -690,7 +690,7 @@
             "False"
           ],
           "tooltip": "Select 'True' to retrieve the list of saved searches that are enabled for notifications.",
-          "description": "Select 'True' to retrieve the list of saved searches that are enabled for notifications."
+          "description": "(Optional) Select True to return ICL saved searches that trigger alerts. Select False to return searches that do not trigger alerts."
         },
         {
           "name": "query_type",
@@ -704,7 +704,7 @@
             "USER"
           ],
           "tooltip": "Filter the results by specific query type. You can select between SYSTEM and USER.",
-          "description": "Filter the results by specific query type. You can select between SYSTEM and USER."
+          "description": "(Optional) Select a query type to filter retrieved results. You can select from the following options: System User"
         },
         {
           "name": "start_date",
@@ -714,7 +714,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Select the start date of the range containing the date when a saved search was added. Selecting a start date is mandatory if an End Date is selected.",
-          "description": "Select the start date of the range containing the date when a saved search was added. Selecting a start date is mandatory if an End Date is selected."
+          "description": "(Optional) Select the start date of the range when a saved search was added. NOTE: Selecting a start date is mandatory if an end date is selected."
         },
         {
           "name": "end_date",
@@ -724,7 +724,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Select the end date of the range containing the date when a saved search was added. Default is the current date.",
-          "description": "Select the end date of the range containing the date when a saved search was added. Default is the current date."
+          "description": "(Optional) Select the end date of the range when a saved search was added. Default is current date. NOTE: Selecting a start date is mandatory if a start date is selected."
         },
         {
           "name": "page",
@@ -734,7 +734,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Navigate between pages. Defaults to 1.",
-          "description": "Navigate between pages. Defaults to 1."
+          "description": "(Optional) Specify a page number to retrieve information from that page. Defaults to 1."
         },
         {
           "name": "size",
@@ -745,7 +745,7 @@
           "required": false,
           "value": 10,
           "tooltip": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page.",
-          "description": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page."
+          "description": "(Optional) Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500."
         }
       ],
       "output_schema": {
@@ -769,7 +769,7 @@
       "operation": "get_icl_saved_searches_by_id",
       "title": "Get ICL Saved Searches By ID",
       "annotation": "get_icl_saved_searches_by_id",
-      "description": "Retrieves a list of intelligence collection lookup saved searches for the given org id by saved search ID.",
+      "description": "Retrieves a list of intelligence collection lookup (ICL) searches saved for the organization ID specified in the configuration parameters based on the search ID, time period, and other filter criteria that you have specified.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -783,7 +783,7 @@
           "visible": true,
           "required": true,
           "tooltip": "Select on what basis you want to fetch the ICL Saved Searches Result.",
-          "description": "Select on what basis you want to fetch the ICL Saved Searches Result.",
+          "description": "Select a criteria or platform based on which to fetch the ICL Saved Searches Result. You can choose from the following options: Archived Forums Defacements Forums Leak Docs Osint Feeds Pastes Ransomware Telegram",
           "options": [
             "Archived Forums",
             "Defacements",
@@ -813,7 +813,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Select the start date of the range containing the date when a saved search was added. Default is last 12 months.",
-          "description": "Select the start date of the range containing the date when a saved search was added. Default is last 12 months."
+          "description": "(Optional) Select the start date of the range when a saved search was added. Default is last 12 months. NOTE: Selecting a start date is mandatory if an end date is selected."
         },
         {
           "name": "end_date",
@@ -823,7 +823,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Select the end date of the range containing the date when a saved search was added. Default is the current date.",
-          "description": "Select the end date of the range containing the date when a saved search was added. Default is the current date."
+          "description": "(Optional) Select the end date of the range when a saved search was added. Default is current date. NOTE: Selecting a start date is mandatory if a start date is selected."
         },
         {
           "name": "page",
@@ -833,7 +833,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Navigate between pages. Defaults to 1.",
-          "description": "Navigate between pages. Defaults to 1."
+          "description": "(Optional) Specify a page number to retrieve information from that page. Defaults to 1."
         },
         {
           "name": "size",
@@ -844,7 +844,7 @@
           "required": false,
           "value": 10,
           "tooltip": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page.",
-          "description": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page."
+          "description": "(Optional) Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500."
         }
       ],
       "conditional_output_schema": [
@@ -990,7 +990,7 @@
       "operation": "get_stealers_infections_leaked_count",
       "title": "Get Stealers Infections Leaked Count",
       "annotation": "get_stealers_infections_leaked_count",
-      "description": "Retrieves stealer infections leaked count for the given org id and the input parameters specified.",
+      "description": "Retrieves a count of systems for the organization ID specified in the configuration parameters that have been infected with credential stealers or malware programs designed to capture sensitive data, such as usernames, passwords, and other credentials from compromised machines; filtered by affiliated domain or stealer.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -1004,7 +1004,7 @@
           "visible": true,
           "required": true,
           "tooltip": "Select on what basis to fetch the stealers infections leaked count. You can choose between Affiliated Domain, Status and Stealer.",
-          "description": "Select on what basis to fetch the stealers infections leaked count. You can choose between Affiliated Domain, Status and Stealer.",
+          "description": "Select the criteria based on which to fetch the count of systems infected with stealers malware and whose data might have been leaked in underground forums or marketplaces. You can choose from the following options: Affiliated Domain: Select to filter the count based on the domain or a set of domains associated with the stealer infections. Once selected, specify the following parameters: Page: Specify a page number to retrieve information from that page. Defaults to 1. Size: Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500. Status: Select to filter the count based on the current status of the infections, such as whether they are still active, leaked, or resolved. Stealer: Select to filter the count based on the specific type of stealer malware involved. Once selected, specify the following parameters: Page: Specify a page number to retrieve information from that page. Defaults to 1. Size: Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500.",
           "options": [
             "Affiliated Domain",
             "Status",
@@ -1019,8 +1019,8 @@
                 "editable": true,
                 "visible": true,
                 "required": false,
-                "tooltip": "Navigate between pages. Defaults to 1.",
-                "description": "Navigate between pages. Defaults to 1."
+                "tooltip": "Specify a page number to retrieve information from that page. Defaults to 1.",
+                "description": "Specify a page number to retrieve information from that page. Defaults to 1."
               },
               {
                 "name": "size",
@@ -1030,8 +1030,8 @@
                 "visible": true,
                 "required": false,
                 "value": 10,
-                "tooltip": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page.",
-                "description": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page."
+                "tooltip": "Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500.",
+                "description": "Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500."
               }
             ],
             "Stealer": [
@@ -1042,8 +1042,8 @@
                 "editable": true,
                 "visible": true,
                 "required": false,
-                "tooltip": "Navigate between pages. Defaults to 1.",
-                "description": "Navigate between pages. Defaults to 1."
+                "tooltip": "Specify a page number to retrieve information from that page. Defaults to 1.",
+                "description": "Specify a page number to retrieve information from that page. Defaults to 1."
               },
               {
                 "name": "size",
@@ -1053,8 +1053,8 @@
                 "visible": true,
                 "required": false,
                 "value": 10,
-                "tooltip": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page.",
-                "description": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page."
+                "tooltip": "Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500.",
+                "description": "Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500."
               }
             ]
           }
@@ -1109,7 +1109,7 @@
       "operation": "get_leaked_stealers_infections",
       "title": "Get Leaked Stealers Infections",
       "annotation": "get_leaked_stealers_infections",
-      "description": "Retrieves a list of leaked stealers infections for the given org id and the input parameters you have specified.",
+      "description": "Retrieves a list of systems for the organization ID specified in the configuration parameters that have been infected with credential stealers or malware programs designed to capture sensitive data, such as usernames, passwords, and other credentials from compromised machines; based on the search keyword, stealer name, and other filter criteria that you have specified.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -1123,7 +1123,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Specify a keyword to search in leaked stealers infections by searching the given keyword in username, stealer name.",
-          "description": "Specify a keyword to search in leaked stealers infections by searching the given keyword in username, stealer name."
+          "description": "(Optional) Specify a keyword to search in systems that have been infected by credential stealers by searching the given keyword in username and stealer name."
         },
         {
           "name": "stealer_name",
@@ -1133,7 +1133,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter the results by specific stealer name. Multiple stealer names should be comma separated and will work as OR filter, example: Vidar,Redline,Racoon,AZORult,risepro.",
-          "description": "Filter the results by specific stealer name. Multiple stealer names should be comma separated and will work as OR filter, example: Vidar,Redline,Racoon,AZORult,risepro."
+          "description": "(Optional) Specify a keyword to search by the specified stealer name. Multiple stealer names can be specified as comma-separated OR values. For example: Vidar,Redline,Racoon,AZORult,risepro."
         },
         {
           "name": "affiliated_domain",
@@ -1143,7 +1143,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter the results by specific affiliated domain. Multiple affiliated domains should be comma separated and will work as OR filter, example: domain1.com,domain2.com",
-          "description": "Filter the results by specific affiliated domain. Multiple affiliated domains should be comma separated and will work as OR filter, example: domain1.com,domain2.com"
+          "description": "(Optional) Specify a keyword to search by the specified affiliated domain. Multiple affiliated domains can be specified as comma-separated OR values. For example: domain1.com,domain2.com."
         },
         {
           "name": "status",
@@ -1153,7 +1153,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Specify the status of leaked stealers infections, you can select between ACTIVE and RESOLVED.",
-          "description": "Specify the status of leaked stealers infections, you can select between ACTIVE and RESOLVED.",
+          "description": "(Optional) Select the current state of the stealer infection or the data leak event. You can choose from the following options: ACTIVE: Select to retrieve results where the infection or the data leak is still ongoing and has not been contained. RESOLVED: Select to retrieve results where the infection or the data leak has been contained or mitigated, and the risk from that specific incident has been addressed.",
           "options": [
             "ACTIVE",
             "RESOLVED"
@@ -1167,7 +1167,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Specify the user type of leaked stealers infections, you can select between EMPLOYEE and USER.",
-          "description": "Specify the user type of leaked stealers infections, you can select between EMPLOYEE and USER.",
+          "description": "(Optional) Select the type of the user to filter based on the affected users who have had their credentials or other sensitive information compromised by stealer malware. You can choose from the following options: EMPLOYEE USER",
           "options": [
             "EMPLOYEE",
             "USER"
@@ -1181,7 +1181,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Select the start date of the range containing the date when a leaked stealers infection was added. Selecting a start date is mandatory if an End Date is selected.",
-          "description": "Select the start date of the range containing the date when a leaked stealers infection was added. Selecting a start date is mandatory if an End Date is selected."
+          "description": "(Optional) Select the start date of the timeframe during which the data leak by the stealer infection was reported. NOTE: Selecting a start date is mandatory if an End Date is selected."
         },
         {
           "name": "end_date",
@@ -1191,7 +1191,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Select the end date of the range containing the date when a leaked stealers infection was added. Default is the current date.",
-          "description": "Select the end date of the range containing the date when a leaked stealers infection was added. Default is the current date."
+          "description": "(Optional) Select the end date of the timeframe during which the data leak by the stealer infection was reported. Default is the current date."
         },
         {
           "name": "page",
@@ -1201,7 +1201,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Navigate between pages. Defaults to 1.",
-          "description": "Navigate between pages. Defaults to 1."
+          "description": "(Optional) Specify a page number to retrieve information from that page. Defaults to 1."
         },
         {
           "name": "size",
@@ -1212,7 +1212,7 @@
           "required": false,
           "value": 10,
           "tooltip": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page.",
-          "description": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page."
+          "description": "(Optional) Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500."
         }
       ],
       "output_schema": {
@@ -1240,7 +1240,7 @@
       "operation": "get_vendor_exposures_by_id",
       "title": "Get Vendor Exposures By Vendor ID",
       "annotation": "get_vendor_exposures_by_id",
-      "description": "Retrieves vendor exposures by its ID for the given organization ID and other input parameters specified.",
+      "description": "Retrieves detailed intelligence about vendor-specific security exposures or vulnerabilities tied to a particular vendor (a third-party supplier, software provider, or hardware manufacturer) vendor exposures for the organization ID specified in the configuration parameters based on the required information type and vendor ID that you have specified",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -1254,7 +1254,7 @@
           "visible": true,
           "required": true,
           "tooltip": "Select the type of information you want to fetch for vendor.",
-          "description": "Select the type of information you want to fetch for vendor.",
+          "description": "Select the exposure type to fetch for the specified vendor. You can choose from the following options: Attack Surface Exposure Darknet Exposure Incidents",
           "options": [
             "Attack Surface Exposure",
             "Darknet Exposure",
@@ -1269,7 +1269,7 @@
           "visible": true,
           "required": true,
           "tooltip": "Specify the vendor ID to fetch its details.",
-          "description": "Specify the vendor ID to fetch its details."
+          "description": "Specify the vendor ID to fetch its details related to the selected exposure type."
         }
       ],
       "conditional_output_schema": [
@@ -1398,7 +1398,7 @@
       "operation": "get_vendor_watchlist",
       "title": "Get Vendor Watchlist",
       "annotation": "get_vendor_watchlist",
-      "description": "Retrieves vendor watch-list for the given organization ID.",
+      "description": "Retrieves potential security risks and exposures associated with specific vendors that are part of their supply chain or external partnerships for the organization ID specified in the configuration parameters based on the domain, name, and other filter criteria that you have specified.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -1412,7 +1412,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Specify a domain to filter the vendors added for monitoring by domain.",
-          "description": "Specify a domain to filter the vendors added for monitoring by domain."
+          "description": "(Optional) Specify a domain to filter the retrieved vendors added for monitoring by the specified domain."
         },
         {
           "name": "name",
@@ -1422,7 +1422,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Specify a name to filter the vendors added for monitoring by name.",
-          "description": "Specify a name to filter the vendors added for monitoring by name."
+          "description": "(Optional) Specify a name to filter the retrieved vendors added for monitoring by the specified name."
         },
         {
           "name": "approval_status",
@@ -1432,7 +1432,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Specify the approval status of the vendor, you can select between pending, approved, rejected.",
-          "description": "Specify the status of the vendor, you can select between pending, approved, rejected.",
+          "description": "(Optional) Select the approval status of the vendor. You can choose from the following options: Pending Approved Rejected",
           "options": [
             "Pending",
             "Approved",
@@ -1447,7 +1447,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Specify the monitoring status of the vendor, you can select between pending, started, failed, completed.",
-          "description": "Specify the monitoring status of the vendor, you can select between pending, started, failed, completed.",
+          "description": "(Optional) Select the monitoring status of the vendor. You can choose from the following options: Pending Started Failed Completed",
           "options": [
             "Pending",
             "Started",
@@ -1463,7 +1463,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Navigate between pages. Defaults to 1.",
-          "description": "Navigate between pages. Defaults to 1."
+          "description": "(Optional) Specify a page number to retrieve information from that page. Defaults to 1."
         },
         {
           "name": "size",
@@ -1474,7 +1474,7 @@
           "required": false,
           "value": 10,
           "tooltip": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page.",
-          "description": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page."
+          "description": "(Optional) Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500."
         }
       ],
       "output_schema": {
@@ -1500,7 +1500,7 @@
       "operation": "get_vendor_details_by_id",
       "title": "Get Vendor Details By ID",
       "annotation": "get_vendor_details_by_id",
-      "description": "Retrieves a vendor details by ID for the given organization ID.",
+      "description": "Retrieves a vendor's details for the organization ID specified in the configuration parameters based on the vendor ID that you have specified.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -1514,7 +1514,7 @@
           "visible": true,
           "required": true,
           "tooltip": "Specify the vendor ID to fetch its details. Get the vendor ID from the action: Get Vendor Watchlist",
-          "description": "Specify the vendor ID to fetch its details."
+          "description": "Specify the vendor ID to fetch its details like Alexa rank, approval status, and country.."
         }
       ],
       "output_schema": {
@@ -1538,7 +1538,7 @@
       "operation": "get_vulnerability_intelligence_cves",
       "title": "Get Vulnerability Intelligence CVEs",
       "annotation": "get_vulnerability_intelligence_cves",
-      "description": "Retrieves a list Vulnerability Intelligence CVEs for the given organization ID and the input parameters specified.",
+      "description": "Retrieves a list of Vulnerability Intelligence CVEs for the organization ID specified in the configuration parameters based on the source type, FortiRecon severity, and other filter criteria that you have specified.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -1552,7 +1552,7 @@
           "visible": true,
           "required": true,
           "tooltip": "Select the input source type based on which you want to filter the result. You can select between client and aci.",
-          "description": "Select the input source type based on which you want to filter the result. You can select between client and aci.",
+          "description": "Select the input source type based on which to filter the retrieved results. You can choose from the following options: CLIENT ACI",
           "options": [
             "CLIENT",
             "ACI"
@@ -1566,7 +1566,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Select the severity based on which you want to filter the result. You can select between CRITICAL, HIGH, MEDIUM and LOW.",
-          "description": "Select the severity based on which you want to filter the result. You can select between CRITICAL, HIGH, MEDIUM and LOW.",
+          "description": "(Optional) Select the severity based on which you want to filter the result. You can choose from the following options: CRITICAL HIGH MEDIUM LOW",
           "options": [
             "CRITICAL",
             "HIGH",
@@ -1582,7 +1582,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Select the severity based on which you want to filter the result. You can select between CRITICAL, HIGH, MEDIUM and LOW.",
-          "description": "Select the severity based on which you want to filter the result. You can select between CRITICAL, HIGH, MEDIUM and LOW.",
+          "description": "(Optional) Select the severity based on which you want to filter the result. You can choose from the following options: CRITICAL HIGH MEDIUM LOW",
           "options": [
             "CRITICAL",
             "HIGH",
@@ -1598,7 +1598,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter the results by specific CVE year. Multiple CVE years should be comma separated and will work as OR filter, example: 2018,2019.",
-          "description": "Filter the results by specific CVE year. Multiple CVE years should be comma separated and will work as OR filter, example: 2018,2019."
+          "description": "(Optional) Specify the year when the CVE was reported to filter the results by the specified CVE year. Multiple CVE years can be specified as comma-separated OR values. For example: 2018,2019."
         },
         {
           "name": "input_src_subtype",
@@ -1608,7 +1608,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Select the addition type based on which you want to filter the result. You can select between EASM and MANUAL.",
-          "description": "Select the addition type based on which you want to filter the result. You can select between EASM and MANUAL.",
+          "description": "(Optional) Select the input source type to filter the results when the value selected in the parameter Input Type is CLIENT. You can choose from the following options: EASM IASM MANUAL",
           "options": [
             "EASM",
             "MANUAL",
@@ -1623,7 +1623,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Select the Vulnerability Exploitation type based on which you want to filter the result. You can select between APT_GROUP, RANSOMWARE and UNKNOWN.",
-          "description": "Select the Vulnerability Exploitation type based on which you want to filter the result. You can select between APT_GROUP, RANSOMWARE and UNKNOWN.",
+          "description": "(Optional) Select the vulnerability exploitation type to filter the retrieved results. You can choose from the following options: APT_GROUP RANSOMWARE UNKNOWN",
           "options": [
             "APT_GROUP",
             "RANSOMWARE",
@@ -1638,7 +1638,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter the results by specific vendor. Multiple vendors should be comma separated and will work as OR filter, example: debian,canonical,nodejs,openssl.",
-          "description": "Filter the results by specific vendor. Multiple vendors should be comma separated and will work as OR filter, example: debian,canonical,nodejs,openssl."
+          "description": "(Optional) Specify the vendor based on which to filter the retrieved results. Multiple vendors can be specified as comma-separated OR values. For example: debian,canonical,nodejs,openssl."
         },
         {
           "name": "products",
@@ -1648,7 +1648,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter the results by specific product. Multiple products should be comma separated and will work as OR filter, example: debian_linux,ubuntu_linux,openssl.",
-          "description": "Filter the results by specific product. Multiple products should be comma separated and will work as OR filter, example: debian_linux,ubuntu_linux,openssl."
+          "description": "(Optional) Specify the products based on which to filter the retrieved results. Multiple products can be specified as comma-separated OR values. For example: debian,canonical,nodejs,openssl."
         },
         {
           "name": "tags",
@@ -1658,7 +1658,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter the results by specific tag ID. Multiple tag IDs should be comma separated and will work as OR filter, example: 65dd1123aa1d5e9ab668ac56,56dd1768aa1d5o9ab668ac56..",
-          "description": "Filter the results by specific tag ID. Multiple tag IDs should be comma separated and will work as OR filter, example: 65dd1123aa1d5e9ab668ac56,56dd1768aa1d5o9ab668ac56.."
+          "description": "(Optional) Specify the tag IDs based on which to filter the retrieved results. Multiple tag IDs can be specified as comma-separated OR values. For example: 65dd1123aa1d5e9ab668ac56,56dd1768aa1d5o9ab668ac56."
         },
         {
           "name": "keyword",
@@ -1668,7 +1668,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter the results by specific keyword. Provided keyword will be partially searched in these fields: cve id, . Example: CVE-2018.",
-          "description": "Filter the results by specific keyword. Provided keyword will be partially searched in these fields: cve id, . Example: CVE-2018."
+          "description": "(Optional) Specify the keyword based on which to filter the retrieved results. Specified keyword is used to perform partial search in the CVE ID field. For example: CVE-2018."
         },
         {
           "name": "is_elevated",
@@ -1682,7 +1682,7 @@
             "False"
           ],
           "tooltip": "Select 'True' to fetch elevated CVEs.",
-          "description": "Select 'True' to fetch elevated CVEs."
+          "description": "(Optional) Select to fetch the CVEs (Common Vulnerabilities and Exposures) associated with a higher level of impact or severity."
         },
         {
           "name": "sort",
@@ -1692,7 +1692,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Select the sort by type based on which you want to sort the result. You can select between recon_score:desc or recon_score:asc.",
-          "description": "Select the sort by type based on which you want to sort the result. You can select between recon_score:desc or recon_score:asc.",
+          "description": "(Optional) Select the order by which to sort the results. You can choose from the following options: Sort by Recon Score Descending Order Sort by Recon Score Ascending Order",
           "options": [
             "Sort By Recon Score Descending Order",
             "Sort By Recon Score Ascending Order"
@@ -1706,7 +1706,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter the results by specific data source.",
-          "description": "Filter the results by specific data source.",
+          "description": "(Optional) Specify the data sources based on which to filter the retrieved results. Multiple data sources can be specified as comma-separated OR values. You can choose more than one from the following options: ACI Reporting Darknet Chatter Working Exploits POC Exploits Security Blogs Hacktivist Chatter Social Media FortiGuard Outbreak Alert",
           "options": [
             "ACI Reporting",
             "Darknet Chatter",
@@ -1726,7 +1726,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Select the start date of the range containing the date when a vulnerability intelligence CVE was added.",
-          "description": "Select the start date of the range containing the date when a vulnerability intelligence CVE was added."
+          "description": "(Optional) Select the start date of the timeframe during which the vulnerability intelligence CVE was added."
         },
         {
           "name": "end_date",
@@ -1736,7 +1736,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Select the end date of the range containing the date when a vulnerability intelligence CVE was added.",
-          "description": "Select the end date of the range containing the date when a vulnerability intelligence CVE was added."
+          "description": "(Optional) Select the end date of the timeframe during which the vulnerability intelligence CVE was added."
         },
         {
           "name": "page",
@@ -1746,7 +1746,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Navigate between pages. Defaults to 1.",
-          "description": "Navigate between pages. Defaults to 1."
+          "description": "(Optional) Specify a page number to retrieve information from that page. Defaults to 1."
         },
         {
           "name": "size",
@@ -1757,7 +1757,7 @@
           "required": false,
           "value": 10,
           "tooltip": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page.",
-          "description": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page."
+          "description": "(Optional) Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500."
         }
       ],
       "output_schema": {
@@ -1791,7 +1791,7 @@
       "operation": "get_vulnerability_intelligence_cves_by_id",
       "title": "Get Vulnerability Intelligence CVEs By ID",
       "annotation": "get_vulnerability_intelligence_cves_by_id",
-      "description": "Retrieves a list Vulnerability Intelligence CVEs by ID for the given organization ID.",
+      "description": "Retrieves a list of Vulnerability Intelligence CVEs for the organization ID specified in the configuration parameters based on the vulnerability ID that you have specified.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -1834,7 +1834,7 @@
       "operation": "get_vulnerability_intelligence_vulnerable_products",
       "title": "Get Vulnerability Intelligence vulnerable products",
       "annotation": "get_vulnerability_intelligence_vulnerable_products",
-      "description": "Retrieves a list vulnerable products for the given organization ID and the input parameters specified.",
+      "description": "Retrieves a list of vulnerability intelligence on vulnerable products for the organization ID specified in the configuration parameters based on the input source type, sorting criteria and other filter criteria that you have specified.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -1848,7 +1848,7 @@
           "visible": true,
           "required": true,
           "tooltip": "Select the input source type based on which you want to filter the result. You can select between client and aci.",
-          "description": "Select the input source type based on which you want to filter the result. You can select between client and aci.",
+          "description": "Select the input source type based on which to filter the retrieved results. You can choose from the following options: CLIENT ACI",
           "options": [
             "CLIENT",
             "ACI"
@@ -1862,7 +1862,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Select the sort by type based on which you want to sort the result. You can select between count:desc and count:asc.",
-          "description": "Select the sort by type based on which you want to sort the result. You can select between count:desc and count:asc.",
+          "description": "(Optional) Select the order by which to sort the results. You can choose from the following options: Sort by Product Count Descending Order Sort by Product Count Ascending Order",
           "options": [
             "Sort By Product Count Descending Order",
             "Sort By Product Count Ascending Order"
@@ -1876,7 +1876,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Navigate between pages. Defaults to 1.",
-          "description": "Navigate between pages. Defaults to 1."
+          "description": "(Optional) Specify a page number to retrieve information from that page. Defaults to 1."
         },
         {
           "name": "size",
@@ -1887,7 +1887,7 @@
           "required": false,
           "value": 10,
           "tooltip": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page.",
-          "description": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page."
+          "description": "(Optional) Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500."
         }
       ],
       "output_schema": {
@@ -1896,17 +1896,17 @@
             "product": "",
             "count": "",
             "recon_severity": {
-                "low": "",
-                "medium": "",
-                "critical": ""
+              "low": "",
+              "medium": "",
+              "critical": ""
             },
             "nvd_severity": {
-                "medium": "",
-                "high": "",
-                "critical": "",
-                "low": ""
+              "medium": "",
+              "high": "",
+              "critical": "",
+              "low": ""
             }
-        }
+          }
         ],
         "page": "",
         "size": "",
@@ -1917,7 +1917,7 @@
       "operation": "get_vulnerability_intelligence_vulnerable_vendors",
       "title": "Get Vulnerability Intelligence vulnerable vendors",
       "annotation": "get_vulnerability_intelligence_vulnerable_vendors",
-      "description": "Retrieves a list vulnerable vendors for the given organization ID and the input parameters specified.",
+      "description": ">Retrieves a list of vulnerability intelligence on vulnerable vendors for the organization ID specified in the configuration parameters based on the input source type, sorting criteria and other filter criteria that you have specified.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -1931,7 +1931,7 @@
           "visible": true,
           "required": true,
           "tooltip": "Select the input source type based on which you want to filter the result. You can select between client and aci.",
-          "description": "Select the input source type based on which you want to filter the result. You can select between client and aci.",
+          "description": "Select the input source type based on which to filter the retrieved results. You can choose from the following options: CLIENT ACI",
           "options": [
             "CLIENT",
             "ACI"
@@ -1944,8 +1944,8 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Select the sort by type based on which you want to sort the result. You can select between count:desc and count:asc.",
-          "description": "Select the sort by type based on which you want to sort the result. You can select between count:desc and count:asc.",
+          "tooltip": "(Optional) Select the order by which to sort the results. You can choose from the following options:\nSort by Vendor Count Descending Order\nSort by Vendor Count Ascending Order",
+          "description": "(Optional) Select the order by which to sort the results. You can choose from the following options:\nSort by Vendor Count Descending Order\nSort by Vendor Count Ascending Order",
           "options": [
             "Sort By Vendor Count Descending Order",
             "Sort By Vendor Count Ascending Order"
@@ -1959,7 +1959,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Navigate between pages. Defaults to 1.",
-          "description": "Navigate between pages. Defaults to 1."
+          "description": "(Optional) Specify a page number to retrieve information from that page. Defaults to 1."
         },
         {
           "name": "size",
@@ -1970,7 +1970,7 @@
           "required": false,
           "value": 10,
           "tooltip": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page.",
-          "description": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page."
+          "description": "(Optional) Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500."
         }
       ],
       "output_schema": {
@@ -1979,17 +1979,17 @@
             "vendor": "",
             "count": "",
             "recon_severity": {
-                "low": "",
-                "medium": "",
-                "critical": ""
+              "low": "",
+              "medium": "",
+              "critical": ""
             },
             "nvd_severity": {
-                "medium": "",
-                "high": "",
-                "critical": "",
-                "low": ""
+              "medium": "",
+              "high": "",
+              "critical": "",
+              "low": ""
             }
-        }
+          }
         ],
         "page": "",
         "size": "",
@@ -2000,7 +2000,7 @@
       "operation": "get_vulnerability_intelligence_hits_by_cve_id",
       "title": "Get Vulnerability Intelligence hits By CVE ID",
       "annotation": "get_vulnerability_intelligence_hits_by_cve_id",
-      "description": "Get details found in the various data sources for the given CVE ID.",
+      "description": "Retrieves vulnerability intelligence found in the various data sources for a given CVE ID based on the selected source, CVE ID, and other filter criteria that you have specified.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -2014,7 +2014,7 @@
           "visible": true,
           "required": true,
           "tooltip": "Select on what basis you want to fetch the CVE Result.",
-          "description": "Select on what basis you want to fetch the CVE Result.",
+          "description": "Select on what basis you want to filter the vulnerability intelligence hits. You can choose from the following options: ACI Reporting Darknet Chatter Working Exploits POC Exploits Security Blogs Hacktivist Chatter Social Media",
           "options": [
             "ACI Reporting",
             "Darknet Chatter",
@@ -2033,7 +2033,7 @@
           "visible": true,
           "required": true,
           "tooltip": "Specify the CVE ID to fetch its results.",
-          "description": "Specify the CVE ID to fetch its results."
+          "description": "Specify the CVE ID to filter the vulnerability intelligence hits."
         },
         {
           "name": "page",
@@ -2043,7 +2043,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Navigate between pages. Defaults to 1.",
-          "description": "Navigate between pages. Defaults to 1."
+          "description": "(Optional) Specify a page number to retrieve information from that page. Defaults to 1."
         },
         {
           "name": "size",
@@ -2054,7 +2054,7 @@
           "required": false,
           "value": 10,
           "tooltip": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page.",
-          "description": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page."
+          "description": "(Optional) Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500."
         }
       ],
       "conditional_output_schema": [
@@ -2198,7 +2198,7 @@
       "operation": "get_vulnerability_intelligence_stats_for_cve_id",
       "title": "Get Vulnerability Intelligence Stats For CVE ID",
       "annotation": "get_vulnerability_intelligence_stats_for_cve_id",
-      "description": "Get stats for the given CVE ID based on various parameters.",
+      "description": "Retrieves vulnerability intelligence statistics for a given CVE ID based on the selected source, CVE ID, and other filter criteria that you have specified.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -2212,7 +2212,7 @@
           "visible": true,
           "required": true,
           "tooltip": "Select on what basis you want to fetch the CVE stats.",
-          "description": "Select on what basis you want to fetch the CVE stats.",
+          "description": "Select on what basis you want to filter the vulnerability intelligence statistics. You can choose from the following options: Data Source Distribution Data Source Trend Score Trend",
           "options": [
             "Data Source Distribution",
             "Data Source Trend",
@@ -2227,7 +2227,7 @@
           "visible": true,
           "required": true,
           "tooltip": "Specify the CVE ID to fetch its stats.",
-          "description": "Specify the CVE ID to fetch its stats."
+          "description": "Specify the CVE ID to filter the vulnerability intelligence statistics."
         },
         {
           "name": "page",
@@ -2237,7 +2237,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Navigate between pages. Defaults to 1.",
-          "description": "Navigate between pages. Defaults to 1."
+          "description": "(Optional) Specify a page number to retrieve information from that page. Defaults to 1."
         },
         {
           "name": "size",
@@ -2248,7 +2248,7 @@
           "required": false,
           "value": 10,
           "tooltip": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page.",
-          "description": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page."
+          "description": "(Optional) Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500."
         }
       ],
       "conditional_output_schema": [
@@ -2307,7 +2307,7 @@
       "operation": "get_stealers_infections_on_sale_count",
       "title": "Get Stealers Infections On Sale Count",
       "annotation": "get_stealers_infections_on_sale_count",
-      "description": "Retrieves stealer infections on sale count for the given org id and the input parameters specified.",
+      "description": "Retrieves the count of compromised systems affiliated with the organization ID specified in the configuration parameters that are currently being offered for sale on darknet marketplaces.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -2321,7 +2321,7 @@
           "visible": true,
           "required": true,
           "tooltip": "Select on what basis to fetch the stealers infections on sale count. You can choose between Affiliated Domain and Stealer.",
-          "description": "Select on what basis to fetch the stealers infections on sale count. You can choose between Affiliated Domain and Stealer.",
+          "description": "Select the criteria based on which to fetch the count of systems infected with stealers malware and whose data is on sale in underground forums or marketplaces. You can choose from the following options: Matched Domain: Select to filter the count based on the domain or a set of domains associated with the stealer infections. Once selected, specify the following parameters: Page: Specify a page number to retrieve information from that page. Defaults to 1. Size: Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500. Stealer: Select to filter the count based on the specific type of stealer malware involved. Once selected, specify the following parameters: Page: Specify a page number to retrieve information from that page. Defaults to 1. Size: Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500.",
           "options": [
             "Matched Domain",
             "Stealer"
@@ -2335,8 +2335,8 @@
                 "editable": true,
                 "visible": true,
                 "required": false,
-                "tooltip": "Navigate between pages. Defaults to 1.",
-                "description": "Navigate between pages. Defaults to 1."
+                "tooltip": "Specify a page number to retrieve information from that page. Defaults to 1.",
+                "description": "Specify a page number to retrieve information from that page. Defaults to 1."
               },
               {
                 "name": "size",
@@ -2346,8 +2346,8 @@
                 "visible": true,
                 "required": false,
                 "value": 10,
-                "tooltip": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page.",
-                "description": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page."
+                "tooltip": "Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500.",
+                "description": "Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500."
               }
             ],
             "Stealer": [
@@ -2358,8 +2358,8 @@
                 "editable": true,
                 "visible": true,
                 "required": false,
-                "tooltip": "Navigate between pages. Defaults to 1.",
-                "description": "Navigate between pages. Defaults to 1."
+                "tooltip": "Specify a page number to retrieve information from that page. Defaults to 1.",
+                "description": "Specify a page number to retrieve information from that page. Defaults to 1."
               },
               {
                 "name": "size",
@@ -2369,8 +2369,8 @@
                 "visible": true,
                 "required": false,
                 "value": 10,
-                "tooltip": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page.",
-                "description": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page."
+                "tooltip": "Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500.",
+                "description": "Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500."
               }
             ]
           }
@@ -2411,7 +2411,7 @@
       "operation": "get_stealers_infections_on_sale",
       "title": "Get Stealers Infections On Sale",
       "annotation": "get_stealers_infections_on_sale",
-      "description": "Retrieves a list of stealers infections on sale for the given org id and the input parameters you have specified.",
+      "description": "Retrieves information on compromised systems affiliated with the organization ID specified in the configuration parameters that are currently being offered for sale on darknet marketplaces, based on searched keyword, stealer name and other filter criteria that you have specified.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -2425,7 +2425,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Specify a keyword to search in stealers infections on sale by searching the given keyword in stealer name, sites, country, isp, state.",
-          "description": "Specify a keyword to search in stealers infections on sale by searching the given keyword in stealer name, sites, country, isp, state."
+          "description": "(Optional) Specify a keyword to search in systems that have been infected by credential stealers by searching the given keyword in username, stealer name, sites, country, ISP, and state fields."
         },
         {
           "name": "stealers",
@@ -2435,7 +2435,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter the results by specific stealer name. Multiple stealer names should be comma separated and will work as OR filter, example: Vidar,Redline,Racoon,AZORult,risepro.",
-          "description": "Filter the results by specific stealer name. Multiple stealer names should be comma separated and will work as OR filter, example: Vidar,Redline,Racoon,AZORult,risepro."
+          "description": "(Optional) Specify a keyword to filter the results by the specified stealer name. Multiple stealer names can be specified as comma-separated OR values. For example: Vidar,Redline,Racoon,AZORult,risepro."
         },
         {
           "name": "marketplaces",
@@ -2445,7 +2445,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter the results by specific marketplace name. Multiple marketplace names should be comma separated and will work as OR filter, example: 2easy,genesis,russian market.",
-          "description": "Filter the results by specific marketplace name. Multiple marketplace names should be comma separated and will work as OR filter, example: 2easy,genesis,russian market."
+          "description": "(Optional) Specify a marketplace name to filter the results by the specified marketplace name. Multiple marketplace names can be specified as comma-separated OR values. For example: 2easy,genesis,russian market."
         },
         {
           "name": "isps",
@@ -2455,7 +2455,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter the results by specific ISP name. Multiple ISP names should be comma separated and will work as OR filter, example: Amazon.com,IRANET TELECOM.",
-          "description": "Filter the results by specific ISP name. Multiple ISP names should be comma separated and will work as OR filter, example: Amazon.com,IRANET TELECOM."
+          "description": "(Optional) Specify a ISP name to filter the results by the specified ISP. Multiple ISPs can be specified as comma-separated OR values. For example: Amazon.com,IRANET TELECOM"
         },
         {
           "name": "countries",
@@ -2465,7 +2465,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter the results by specific country name. Multiple country names should be comma separated and will work as OR filter, example: India,Colombia.",
-          "description": "Filter the results by specific country name. Multiple country names should be comma separated and will work as OR filter, example: India,Colombia."
+          "description": "(Optional) Specify a country name to filter the results by the specified country. Multiple countries can be specified as comma-separated OR values. For example: India,Colombia."
         },
         {
           "name": "states",
@@ -2475,7 +2475,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter the results by specific State name. Multiple State names should be comma separated and will work as OR filter, example: India,Colombia.",
-          "description": "Filter the results by specific State name. Multiple State names should be comma separated and will work as OR filter, example: India,Colombia."
+          "description": "(Optional) Specify a state name to filter the results by the specified state. Multiple states can be specified as comma-separated OR values. For example: Indiana,Texas."
         },
         {
           "name": "matched_domains",
@@ -2485,7 +2485,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter the results by specific matched domain. Multiple matched domains should be comma separated and will work as OR filter, example: domain1.com,domain2.com",
-          "description": "Filter the results by specific matched domain. Multiple matched domains should be comma separated and will work as OR filter, example: domain1.com,domain2.com"
+          "description": "(Optional) Specify a keyword to search by the specified matched domain. Multiple matched domains can be specified as comma-separated OR values. For example: domain1.com,domain2.com."
         },
         {
           "name": "status",
@@ -2495,7 +2495,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Specify the status of stealers infections on sale, you can select between ACTIVE and RESOLVED.",
-          "description": "Specify the status of stealers infections on sale, you can select between ACTIVE and RESOLVED.",
+          "description": "(Optional) Specify the status of stolen credentials that are on sale. You can choose from the following options: ACTIVE RESOLVED",
           "options": [
             "ACTIVE",
             "RESOLVED"
@@ -2509,7 +2509,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Select the start date of the range containing the date when a stealers infection on sale was added. Selecting a start date is mandatory if an End Date is selected.",
-          "description": "Select the start date of the range containing the date when a stealers infection on sale was added. Selecting a start date is mandatory if an End Date is selected."
+          "description": "(Optional) Select the start date of the timeframe during which the leaked credentials appearing on marketplace was reported. NOTE: Selecting a start date is mandatory if an End Date is selected."
         },
         {
           "name": "end_date",
@@ -2519,7 +2519,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Select the end date of the range containing the date when a stealers infection on sale was added. Default is the current date.",
-          "description": "Select the end date of the range containing the date when a stealers infection on sale was added. Default is the current date."
+          "description": "(Optional) Select the end date of the timeframe during which the leaked credentials appearing on marketplace was reported. Default is the current date."
         },
         {
           "name": "page",
@@ -2529,7 +2529,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Navigate between pages. Defaults to 1.",
-          "description": "Navigate between pages. Defaults to 1."
+          "description": "(Optional) Specify a page number to retrieve information from that page. Defaults to 1."
         },
         {
           "name": "size",
@@ -2540,7 +2540,7 @@
           "required": false,
           "value": 10,
           "tooltip": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page.",
-          "description": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page."
+          "description": "(Optional) Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500."
         }
       ],
       "output_schema": {
@@ -2571,7 +2571,7 @@
       "operation": "get_ransomware_victims",
       "title": "Get Ransomware Victims",
       "annotation": "get_ransomware_victims",
-      "description": "Retrieves ransomware victims list.",
+      "description": "Retrieves a list of ransomware victims affiliated with the organization ID specified in the configuration parameters based on the searched keyword, ransomware name, and other filter criteria that you have specified.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -2585,7 +2585,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Specify a keyword to search in ransomware victims by searching the given keyword in title, ransomware name, description fields.",
-          "description": "Specify a keyword to search in ransomware victims by searching the given keyword in title, ransomware name, description fields."
+          "description": "(Optional) Specify the keyword based on which to filter the retrieved results. Specified keyword is used to perform search in the title, ransomware name, and description fields."
         },
         {
           "name": "ransomware_name",
@@ -2595,7 +2595,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Specify a ransomware name to filter the ransomware victims by ransomware name.",
-          "description": "Specify a ransomware name to filter the ransomware victims by ransomware name."
+          "description": "(Optional) Specify a ransomware name based on which to filter the ransomware victims."
         },
         {
           "name": "country",
@@ -2605,7 +2605,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter the ransomware victims by specific country/countries. Multiple countries should be comma separated and will work as OR filter, example: India, United States.",
-          "description": "Filter the ransomware victims by specific country/countries. Multiple countries should be comma separated and will work as OR filter, example: India, United States."
+          "description": "(Optional) Specify a country name to filter the results by the specified country. Multiple countries can be specified as comma-separated OR values. For example: India,Colombia."
         },
         {
           "name": "sectors",
@@ -2615,7 +2615,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter the ransomware victims by specific sector(s). Multiple sectors should be comma separated and will work as OR filter, example: Business Services,Accounting Services.",
-          "description": "Filter the ransomware victims by specific sector(s). Multiple sectors should be comma separated and will work as OR filter, example: Business Services,Accounting Services."
+          "description": "(Optional) Specify a sector name to filter the results by the specified sector. Multiple sectors can be specified as comma-separated OR values. For example: Business Services,Accounting Services."
         },
         {
           "name": "start_date",
@@ -2625,7 +2625,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Specify the date from when you want to retrieve ransomware victims.",
-          "description": "Specify the date from when you want to retrieve ransomware victims."
+          "description": "(Optional) Select the start date of the timeframe during which to retrieve ransomware victims."
         },
         {
           "name": "end_date",
@@ -2635,7 +2635,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Specify the date till when you want to retrieve ransomware victims.",
-          "description": "Specify the date till when you want to retrieve ransomware victims."
+          "description": "(Optional) Select the end date of the timeframe during which to retrieve ransomware victims."
         },
         {
           "name": "page",
@@ -2645,7 +2645,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Navigate between pages. Defaults to 1.",
-          "description": "Navigate between pages. Defaults to 1."
+          "description": "(Optional) Specify a page number to retrieve information from that page. Defaults to 1."
         },
         {
           "name": "size",
@@ -2656,7 +2656,7 @@
           "required": false,
           "value": 10,
           "tooltip": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page.",
-          "description": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page."
+          "description": "(Optional) Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500."
         }
       ],
       "output_schema": {
@@ -2687,7 +2687,7 @@
       "operation": "get_ransomware_victims_details_by_id",
       "title": "Get Ransomware Victim Details By ID",
       "annotation": "get_ransomware_victims_details_by_id",
-      "description": "Retrieves a ransomware victim details by ID.",
+      "description": "Retrieves details of a ransomware victim based on the ID that you have specified.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -2726,7 +2726,7 @@
       "operation": "get_ransomware_intel_vendors_watchlist",
       "title": "Get Ransomware Vendors Added For Ransomware Intelligence Monitoring",
       "annotation": "get_ransomware_intel_vendors_watchlist",
-      "description": "Retrieves the vendors added for ransomware intelligence monitoring.",
+      "description": "Retrieves vendors being monitored for potential ransomware threats based on the pagination parameters that you have specified.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -2740,7 +2740,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Navigate between pages. Defaults to 1.",
-          "description": "Navigate between pages. Defaults to 1."
+          "description": "(Optional) Specify a page number to retrieve information from that page. Defaults to 1."
         },
         {
           "name": "size",
@@ -2751,7 +2751,7 @@
           "required": false,
           "value": 10,
           "tooltip": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page.",
-          "description": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page."
+          "description": "(Optional) Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500."
         }
       ],
       "output_schema": {
@@ -2773,7 +2773,7 @@
       "operation": "get_ransomware_intel_vendors_watchlist_matched",
       "title": "Get Ransomware Vendors Matched",
       "annotation": "get_ransomware_intel_vendors_watchlist_matched",
-      "description": "Retrieves the matched vendors which are added for ransomware intelligence monitoring.",
+      "description": "Retrieves a list of vendors for the organization ID specified in the configuration parameters and who have been affected by ransomware activity based on the pagination parameters that you have specified.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -2787,7 +2787,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Navigate between pages. Defaults to 1.",
-          "description": "Navigate between pages. Defaults to 1."
+          "description": "(Optional) Specify a page number to retrieve information from that page. Defaults to 1."
         },
         {
           "name": "size",
@@ -2798,7 +2798,7 @@
           "required": false,
           "value": 10,
           "tooltip": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page.",
-          "description": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page."
+          "description": "(Optional) Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500."
         }
       ],
       "output_schema": {
@@ -2819,7 +2819,7 @@
       "operation": "get_ransomware_intelligence_statistics",
       "title": "Get Ransomware Intelligence Stats",
       "annotation": "get_ransomware_intelligence_statistics",
-      "description": "Retrieves Ransomware Intelligence Stats for the input parameters specified.",
+      "description": "Retrieves statistics of a ransomware activity for the organization ID specified in the configuration parameters based on the statistics type, time range type, and other filter criteria that you have specified.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -2833,7 +2833,7 @@
           "visible": true,
           "required": true,
           "tooltip": "Select the type of stats you want to fetch for ransomware intelligence.",
-          "description": "Select the type of stats you want to fetch for ransomware intelligence.",
+          "description": "Select the type of stats you want to fetch for ransomware intelligence. You can choose from the following options: Top Ransomware Victims By Sector Top Ransomware Victims By Revenue Top Ransomware Victims By Country Top Ransomware Groups Ransomware Victims Over Time Latest Active Ransomware Groups",
           "options": [
             "Top Ransomware Victims By Sector",
             "Top Ransomware Victims By Revenue",
@@ -2851,15 +2851,15 @@
           "visible": true,
           "required": false,
           "tooltip": "Specify the range type to get the ransomware intelligence stats for the time range, you can select between all, last90days, last30days, last15days, last7days, current_month, previous_month.",
-          "description": "Specify the range type to get the ransomware intelligence stats for the time range, you can select between all, last90days, last30days, last15days, last7days, current_month, previous_month.",
+          "description": "(Optional) Specify the time range to get the ransomware intelligence stats. You can choose from the following options: All Time Last 90 Days Last 30 Days Last 15 Days Last 7 Days Current Month Previous Month",
           "options": [
-              "All Time",
-              "Last 90 Days",
-              "Last 30 Days",
-              "Last 15 Days",
-              "Last 7 Days",
-              "Current Month",
-              "Previous Month"
+            "All Time",
+            "Last 90 Days",
+            "Last 30 Days",
+            "Last 15 Days",
+            "Last 7 Days",
+            "Current Month",
+            "Previous Month"
           ]
         },
         {
@@ -2870,7 +2870,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Specify the date from when you want to retrieve ransomware intelligence stats.",
-          "description": "Specify the date from when you want to retrieve ransomware intelligence stats."
+          "description": "(Optional) Select the start date of the timeframe during which to retrieve intelligence stats."
         },
         {
           "name": "end_date",
@@ -2880,98 +2880,97 @@
           "visible": true,
           "required": false,
           "tooltip": "Specify the date till when you want to retrieve ransomware intelligence stats.",
-          "description": "Specify the date till when you want to retrieve ransomware intelligence stats."
+          "description": "(Optional) Select the end date of the timeframe during which to retrieve intelligence stats."
         }
       ],
       "conditional_output_schema": [
         {
           "condition": "{{type_of_info === 'Top Ransomware Victims By Sector'}}",
-          "output_schema":
+          "output_schema": {
+            "items": [
               {
                 "items": [
-                    {
-                        "items": [
-                            {
-                                "count": "",
-                                "country": ""
-                            }
-                        ]
-                    }
-                ],
-                "sectors": "Manufacturing"
-            }
+                  {
+                    "count": "",
+                    "country": ""
+                  }
+                ]
+              }
+            ],
+            "sectors": "Manufacturing"
+          }
         },
         {
           "condition": "{{type_of_info === 'Top Ransomware Victims By Revenue'}}",
           "output_schema": {
-              "items": [
+            "items": [
+              {
+                "data": [
                   {
-                      "data": [
-                          {
-                              "name": "",
-                              "ransomware_name": "",
-                              "revenue": "",
-                              "revenue_in_number": ""
-                          }
-                      ],
-                      "display_id": "",
-                      "label": ""
+                    "name": "",
+                    "ransomware_name": "",
+                    "revenue": "",
+                    "revenue_in_number": ""
                   }
-              ]
+                ],
+                "display_id": "",
+                "label": ""
+              }
+            ]
           }
         },
         {
           "condition": "{{type_of_info === 'Top Ransomware Victims By Country'}}",
           "output_schema": {
-              "items": [
+            "items": [
+              {
+                "country": "",
+                "items": [
                   {
-                      "country": "",
-                      "items": [
-                          {
-                              "count": "",
-                              "sectors": ""
-                          }
-                      ]
+                    "count": "",
+                    "sectors": ""
                   }
-              ]
+                ]
+              }
+            ]
           }
         },
         {
           "condition": "{{type_of_info === 'Top Ransomware Groups'}}",
           "output_schema": {
-              "date_range": "",
-              "items": [
-                  {
-                      "count": "",
-                      "group": ""
-                  }
-              ],
-              "total": ""
+            "date_range": "",
+            "items": [
+              {
+                "count": "",
+                "group": ""
+              }
+            ],
+            "total": ""
           }
         },
         {
           "condition": "{{type_of_info === 'Ransomware Victims Over Time'}}",
           "output_schema": {
-              "items": [
-                  {
-                      "count": "",
-                      "date": ""
-                  }
-              ],
-              "total": ""
+            "items": [
+              {
+                "count": "",
+                "date": ""
+              }
+            ],
+            "total": ""
           }
         },
         {
           "condition": "{{type_of_info === 'Latest Active Ransomware Groups'}}",
           "output_schema": {
-              "items": [
-                  {
-                      "count": "",
-                      "group": "",
-                      "last_added": ""
-                  }
-              ],
-              "total": ""
+            "items": [
+              {
+                "count": "",
+                "group": "",
+                "last_added": ""
+              }
+            ],
+            "total": ""
           }
         }
       ]
@@ -2980,7 +2979,7 @@
       "operation": "get_ransomware_threat_campaigns",
       "title": "Get Ransomware Threat Campaign",
       "annotation": "get_ransomware_threat_campaigns",
-      "description": "Retrieves the ransomware threat campaign.",
+      "description": "Retrieves ransomware threat campaigns for the organization ID specified in the configuration parameters based on the pagination parameters that you have specified.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -2994,7 +2993,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Navigate between pages. Defaults to 1.",
-          "description": "Navigate between pages. Defaults to 1."
+          "description": "(Optional) Specify a page number to retrieve information from that page. Defaults to 1."
         },
         {
           "name": "size",
@@ -3005,7 +3004,7 @@
           "required": false,
           "value": 10,
           "tooltip": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page.",
-          "description": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page."
+          "description": "(Optional) Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500."
         }
       ],
       "output_schema": {
@@ -3028,7 +3027,7 @@
       "operation": "get_ransomware_potential_victims",
       "title": "Get Potential Ransomware Victims",
       "annotation": "get_ransomware_potential_victims",
-      "description": "Retrieves potential ransomware victim targets.",
+      "description": "Retrieves potential ransomware victim targets for the organization ID specified in the configuration parameters based on the threat actor name, country, and other filter criteria that you have specified.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -3042,7 +3041,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Specify a Actor name to filter the potential ransomware victims by actor name. Multiple actor names should be comma separated and will work as OR filter, example: abc,pqr.",
-          "description": "Specify a Actor name to filter the potential ransomware victims by actor name. Multiple actor names should be comma separated and will work as OR filter, example: abc,pqr."
+          "description": "(Optional) Specify an actor name to filter the results by the specified actor. Multiple actors can be specified as comma-separated OR values. For example: abc,pqr."
         },
         {
           "name": "country",
@@ -3052,7 +3051,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter the potential ransomware victims by specific country/countries. Multiple countries should be comma separated and will work as OR filter, example: India, United States.",
-          "description": "Filter the potential ransomware victims by specific country/countries. Multiple countries should be comma separated and will work as OR filter, example: India, United States."
+          "description": "(Optional) Specify a country name to filter the results by the specified country. Multiple countries can be specified as comma-separated OR values. For example: India,Colombia."
         },
         {
           "name": "sectors",
@@ -3062,7 +3061,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter the potential ransomware victims by specific sector(s). Multiple sectors should be comma separated and will work as OR filter, example: Business Services,Accounting Services.",
-          "description": "Filter the potential ransomware victims by specific sector(s). Multiple sectors should be comma separated and will work as OR filter, example: Business Services,Accounting Services."
+          "description": "(Optional) Specify a sector name to filter the results by the specified sector. Multiple sectors can be specified as comma-separated OR values. For example: Business Services,Accounting Services."
         },
         {
           "name": "start_date",
@@ -3072,7 +3071,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Specify the date from when you want to retrieve potential ransomware victims",
-          "description": "Specify the date from when you want to retrieve potential ransomware victims."
+          "description": "(Optional) Select the start date of the timeframe during which to retrieve potential ransomware victims."
         },
         {
           "name": "end_date",
@@ -3082,7 +3081,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Specify the date till when you want to retrieve potential ransomware victims.",
-          "description": "Specify the date till when you want to retrieve potential ransomware victims."
+          "description": "(Optional) Select the end date of the timeframe during which to retrieve potential ransomware victims."
         },
         {
           "name": "page",
@@ -3092,7 +3091,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Navigate between pages. Defaults to 1.",
-          "description": "Navigate between pages. Defaults to 1."
+          "description": "(Optional) Specify a page number to retrieve information from that page. Defaults to 1."
         },
         {
           "name": "size",
@@ -3103,24 +3102,24 @@
           "required": false,
           "value": 10,
           "tooltip": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page.",
-          "description": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page."
+          "description": "(Optional) Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500."
         }
       ],
       "output_schema": {
         "hits": [
-            {
-              "actor": "",
-              "collection_date": "",
-              "country": "",
-              "description": "",
-              "domains": [],
-              "id": "",
-              "name": "",
-              "report_id": "",
-              "revenue": "",
-              "sectors": [],
-              "source": "",
-              "updated_date": ""
+          {
+            "actor": "",
+            "collection_date": "",
+            "country": "",
+            "description": "",
+            "domains": [],
+            "id": "",
+            "name": "",
+            "report_id": "",
+            "revenue": "",
+            "sectors": [],
+            "source": "",
+            "updated_date": ""
           }
         ],
         "page": "",
@@ -3132,7 +3131,7 @@
       "operation": "get_ransomware_intel_org_watchlist",
       "title": "Get Ransomware Intelligence Orgs Watchlist To Monitor",
       "annotation": "get_ransomware_intel_org_watchlist",
-      "description": "Retrieves the orgs added for ransomware intelligence monitoring.",
+      "description": "Retrieves organizations added, for ransomware intelligence monitoring, within the organization ID specified in the configuration parameters based on the pagination parameters that you have specified.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -3146,7 +3145,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Specify the org added by type to get the organizations added for ransomware intelligence monitoring, you can select between ALL, EASM, MANUAL.",
-          "description": "Specify the org added by type to get the organizations added for ransomware intelligence monitoring, you can select between ALL, EASM, MANUAL.",
+          "description": "(Optional) Select the input source type to filter the results. You can choose from the following options: ALL EASM MANUAL",
           "options": [
             "ALL",
             "EASM",
@@ -3161,7 +3160,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Navigate between pages. Defaults to 1.",
-          "description": "Navigate between pages. Defaults to 1."
+          "description": "(Optional) Specify a page number to retrieve information from that page. Defaults to 1."
         },
         {
           "name": "size",
@@ -3172,7 +3171,7 @@
           "required": false,
           "value": 10,
           "tooltip": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page.",
-          "description": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page."
+          "description": "(Optional) Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500."
         }
       ],
       "output_schema": {
@@ -3195,7 +3194,7 @@
       "operation": "get_ransomware_intel_org_watchlist_matched",
       "title": "Get The Matched Organizations For Ransomware Intelligence Monitoring",
       "annotation": "get_ransomware_intel_org_watchlist_matched",
-      "description": "Retrieves the matched organizations which are added for ransomware intelligence monitoring.",
+      "description": "Retrieves a list of organizations for the organization ID specified in the configuration parameters and who have been affected by ransomware activity based on the pagination parameters that you have specified.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -3209,7 +3208,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Navigate between pages. Defaults to 1.",
-          "description": "Navigate between pages. Defaults to 1."
+          "description": "(Optional) Specify a page number to retrieve information from that page. Defaults to 1."
         },
         {
           "name": "size",
@@ -3220,7 +3219,7 @@
           "required": false,
           "value": 10,
           "tooltip": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page.",
-          "description": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page."
+          "description": "(Optional) Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500."
         }
       ],
       "output_schema": {
@@ -3241,7 +3240,7 @@
       "operation": "get_technical_indicators_for_given_ransomware_group",
       "title": "Get The Technical Indicators For The Given Ransomware Group",
       "annotation": "get_technical_indicators_for_given_ransomware_group",
-      "description": "Retrieves the technical indicators for the given ransomware group.",
+      "description": "Retrieves specific tactics, techniques, and procedures (TTPs), such as IP addresses, file hashes, and malware signatures, associated with a particular ransomware group based on the ransomware group name and other filter criteria that you have specified.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -3255,7 +3254,7 @@
           "visible": true,
           "required": true,
           "tooltip": "Specify the ransomware Group Name to fetch its technical indicators.",
-          "description": "Specify the ransomware Group Name to fetch its technical indicators."
+          "description": "Specify the ransomware group name to fetch its technical indicators."
         },
         {
           "name": "page",
@@ -3265,7 +3264,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Navigate between pages. Defaults to 1.",
-          "description": "Navigate between pages. Defaults to 1."
+          "description": "(Optional) Specify a page number to retrieve information from that page. Defaults to 1."
         },
         {
           "name": "size",
@@ -3276,7 +3275,7 @@
           "required": false,
           "value": 10,
           "tooltip": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page.",
-          "description": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page."
+          "description": "(Optional) Specify the number of records to fetch per page. Default value is 10 and the maximum value is 500."
         }
       ],
       "output_schema": {
@@ -3296,7 +3295,7 @@
       "operation": "get_ransomware_group_info",
       "title": "Get Ransomware Group Information",
       "annotation": "get_ransomware_group_info",
-      "description": "Retrieves the ransomware group information for the given ransomware group.",
+      "description": "Retrieves detailed intelligence on a specific ransomware group, including their known tactics, techniques, procedures (TTPs), targeted industries, history of attacks, and associated malware based on the ransomware group name that you have specified.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -3310,23 +3309,23 @@
           "visible": true,
           "required": true,
           "tooltip": "Specify the ransomware Group Name to fetch its technical indicators.",
-          "description": "Specify the ransomware Group Name to fetch its technical indicators."
+          "description": "Specify the ransomware Group Name to fetch its information."
         }
       ],
       "output_schema": {
         "first_seen": "",
         "total_victims": "",
         "victim_countries": [
-            {
-                "count": "",
-                "country": ""
-            }
+          {
+            "count": "",
+            "country": ""
+          }
         ],
         "victim_sectors": [
-            {
-                "count": "",
-                "sector": ""
-            }
+          {
+            "count": "",
+            "sector": ""
+          }
         ]
       }
     },
@@ -3334,7 +3333,7 @@
       "operation": "update_stealers_leaked_status",
       "title": "Update Stealers Leaked Status",
       "annotation": "update_stealers_leaked_status",
-      "description": "Updates the status of the stealer leaked record.",
+      "description": "Updates the status of stealer malware that has been leaked or exposed, typically in underground forums or marketplaces based on the stealers leaked record ID.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -3350,7 +3349,7 @@
           "editable": true,
           "visible": true,
           "required": true,
-          "description": "Specify the Stealers Leaked Record ID to update the status.",
+          "description": "Specify the stealers leaked record ID to update the status.",
           "tooltip": "Specify the Stealers Leaked Record ID to update the status."
         },
         {
@@ -3361,7 +3360,7 @@
           "editable": true,
           "required": true,
           "tooltip": "Specify the status to update the Stealers Leaked Record.",
-          "description": "Specify the status to update the Stealers Leaked Record. You can choose from ACTIVE, RESOLVED.",
+          "description": "Specify the status to update to the Stealers Leaked Record. You can choose from: ACTIVE RESOLVED",
           "options": [
             "ACTIVE",
             "RESOLVED"
@@ -3373,7 +3372,7 @@
       "operation": "update_stealers_on_sale_status",
       "title": "Update Stealers On Sale(Marketplaces) Status",
       "annotation": "update_stealers_on_sale_status",
-      "description": "Updates the status of the Stealers On Sale(Marketplaces) record.",
+      "description": "Updates the status of stealer malware that is currently being sold or traded on underground marketplaces based on the stealers record ID.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -3389,7 +3388,7 @@
           "editable": true,
           "visible": true,
           "required": true,
-          "description": "Specify the Stealers On Sale(Marketplaces) Record ID to update the status.",
+          "description": "Specify the stealers on sale (marketplaces) record ID to update the status.",
           "tooltip": "Specify the Stealers On Sale(Marketplaces) Record ID to update the status."
         },
         {
@@ -3400,7 +3399,7 @@
           "editable": true,
           "required": true,
           "tooltip": "Specify the status to update the Stealers On Sale(Marketplaces) Record. You can choose from ACTIVE, RESOLVED.",
-          "description": "Specify the status to update the Stealers On Sale(Marketplaces) Record. You can choose from ACTIVE, RESOLVED.",
+          "description": "Specify the status to update the stealers on sale (marketplaces) record. You can choose from: ACTIVE RESOLVED",
           "options": [
             "ACTIVE",
             "RESOLVED"
