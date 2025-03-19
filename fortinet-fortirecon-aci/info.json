@@ -3425,8 +3425,8 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Provide a single report id or a comma-separated list of reports.",
-          "placeholder": "Example:1111177777799999,1111177777799990",
+          "tooltip": "Filter by specific report id(s). Multiple report id's should be comma separated and will work as OR filter.",
+          "placeholder": "Example: 1111177777799999,1111177777799990",
           "description": "Provide a single report ID or a comma-separated list of report IDs."
         },
         {
@@ -3437,7 +3437,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter by specific tag(s). Multiple tags should be comma separated and will work as OR filter, example: phishing,malware,exploited.",
-          "placeholder": "Example:Data Breach,Cyber Crime",
+          "placeholder": "Example: Data Breach,Cyber Crime",
           "description": "Provide a single tag or a comma-separated list of tags associated with the reports. For example, Data Breach,Cyber Crime."
         },
         {
@@ -3448,7 +3448,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter by specific adversary (actor names, APT groups). Multiple adversary should be comma separated and will work as OR filter, example: apt35,foo,bar.",
-          "placeholder": "Example:Databases,APT 34",
+          "placeholder": "Example: Databases,APT 34",
           "description": "Provide a single adversary name or a comma-separated list of adversary names associated with the reports. For example, Foo,APT 34."
         },
         {
@@ -3458,8 +3458,8 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Filter by specific source category. Example: ,Exploit Forum,TECHINT.",
-          "placeholder": "Example:FortiGuard Threat Research, FortiGuard Research, Exploit Forum TECHINT",
+          "tooltip": "Filter by specific source. Example: ,Exploit Forum,TECHINT, FortiGuard Threat Research, FortiGuard Research.",
+          "placeholder": "Example: Exploit Forum TECHINT",
           "description": "Multiple source should be comma separated and will work as OR filter, example: FortiGuard Research,Exploit Forum,TECHINT."
         },
         {
@@ -3513,7 +3513,7 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Filter reports by specific Ioc value or Iocs name. Available Iocs names are: IP, IPV6, URL, DOMAIN, EMAIL, CVE, SUB_DOMAIN, FILE_NAME, REGISTRY_KEY, HASH. Iocs values example: https://url,com, 12.11.20.111.",
+          "tooltip": "Filter reports by specific Ioc value or Iocs name. Available Iocs names are: IP, IPV6, URL, DOMAIN, EMAIL, CVE, SUB_DOMAIN, FILE_NAME, REGISTRY_KEY, HASH. Iocs values example: https://url.com, 12.11.20.111.",
           "placeholder": "Example: URL",
           "description": "Provide Ioc value or Iocs name to get reports associated with Iocs. Example: url.com, 12.11.20.111."
         },
@@ -3771,6 +3771,7 @@
           "editable": true,
           "visible": true,
           "required": false,
+          "placeholder": "IOC Keyword",
           "tooltip": "Filter by specific keyword. Provided keyword will be searched in these fields: type, name, report_ids, first_seen, last_seen.",
           "description": "Specify the specific keyword. Provided keyword will be searched in these fields: type, name, report_ids, first_seen, last_seen."
         },
@@ -3781,6 +3782,7 @@
           "editable": true,
           "visible": true,
           "required": false,
+          "placeholder": "Example: name:desc",
           "tooltip": "Sort by specific field. Sorting apply in these fields: type, name, first_seen, last_seen.",
           "description": "Sort by specific field. Sorting apply in these fields: type, name, first_seen, last_seen. Example: name:desc."
         },
