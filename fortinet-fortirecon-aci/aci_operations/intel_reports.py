@@ -12,14 +12,13 @@ def get_intel_reports(config: Dict[str, any], params: Dict[str, any]) -> Dict[st
 
     MK = MakeRestApiCall(config=config)
     endpoint = "/aci/{org_id}/intel/reports"
-    method = "GET"
 
     if params.get("start_date"):
         params["start_date"] = MK.handle_date(params.get("start_date"))
     if params.get("end_date"):
         params["end_date"] = MK.handle_date(params.get("end_date"))
 
-    response = MK.make_request(endpoint=endpoint, method=method, params=params)
+    response = MK.make_request(endpoint=endpoint, method="GET", params=params)
     return response
 
 def get_intel_report(config: Dict[str, any], params: Dict[str, any]) -> Dict[str, any]:
@@ -32,14 +31,13 @@ def get_intel_iocs(config: Dict[str, any], params: Dict[str, any]) -> Dict[str, 
 
     MK = MakeRestApiCall(config=config)
     endpoint = "/aci/{org_id}/intel/iocs"
-    method = "GET"
 
     if params.get("start_date"):
         params["start_date"] = MK.handle_date(params.get("start_date"))
     if params.get("end_date"):
         params["end_date"] = MK.handle_date(params.get("end_date"))
 
-    response = MK.make_request(endpoint=endpoint, method=method, params=params)
+    response = MK.make_request(endpoint=endpoint, method="GET", params=params)
     return response
 
 def get_intel_ioc(config: Dict[str, any], params: Dict[str, any]) -> Dict[str, any]:

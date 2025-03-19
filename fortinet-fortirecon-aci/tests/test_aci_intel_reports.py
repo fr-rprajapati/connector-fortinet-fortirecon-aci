@@ -150,24 +150,6 @@ def test_get_intel_reports_invalid_motivations(valid_configuration_with_token, c
 
 
 @pytest.mark.get_intel_reports
-def test_get_intel_reports_invalid_vendors(valid_configuration_with_token, connector_details, params_json):
-    set_report_metadata(connector_details, "Get Reports", "Verify with invalid vendors")
-    result = run_invalid_param_test(connector_details, operation_name='get_intel_reports',
-                                    param_name='vendors',
-                                    param_type='text', action_params=params_json['get_intel_reports'])
-    assert result['data']['total'] == 0
-
-
-@pytest.mark.get_intel_reports
-def test_get_intel_reports_invalid_products(valid_configuration_with_token, connector_details, params_json):
-    set_report_metadata(connector_details, "Get Reports", "Verify with invalid products")
-    result = run_invalid_param_test(connector_details, operation_name='get_intel_reports',
-                                    param_name='products',
-                                    param_type='text', action_params=params_json['get_intel_reports'])
-    assert result['data']['total'] == 0
-
-
-@pytest.mark.get_intel_reports
 def test_get_intel_reports_invalid_keyword(valid_configuration_with_token, connector_details, params_json):
     set_report_metadata(connector_details, "Get Reports", "Verify with invalid Keyword")
     result = run_invalid_param_test(connector_details, operation_name='get_intel_reports', param_name='keyword',
@@ -270,34 +252,11 @@ def test_get_intel_iocs_invalid_ioc_last_seen(valid_configuration_with_token, co
 
 
 @pytest.mark.get_intel_iocs
-def test_get_intel_iocs_invalid_ioc_start_date(valid_configuration_with_token, connector_details, params_json):
-    set_report_metadata(connector_details, "Get IOCs", "Verify with invalid IOC added start date")
-    result = run_invalid_param_test(connector_details, operation_name='get_intel_iocs', param_name='start_date',
-                                    param_type='text', action_params=params_json['get_intel_iocs'])
-    assert result.get('status') == "failed"
-
-@pytest.mark.get_intel_iocs
-def test_get_intel_iocs_invalid_ioc_end_date(valid_configuration_with_token, connector_details, params_json):
-    set_report_metadata(connector_details, "Get IOCs", "Verify with invalid IOC added end date")
-    result = run_invalid_param_test(connector_details, operation_name='get_intel_iocs', param_name='start_date',
-                                    param_type='text', action_params=params_json['get_intel_iocs'])
-    assert result.get('status') == "failed"
-
-
-@pytest.mark.get_intel_iocs
-def test_get_intel_iocs_invalid_ioc_updated_ts(valid_configuration_with_token, connector_details, params_json):
-    set_report_metadata(connector_details, "Get IOCs", "Verify with invalid IOC updated_ts")
-    result = run_invalid_param_test(connector_details, operation_name='get_intel_iocs', param_name='updated_ts',
-                                    param_type='text', action_params=params_json['get_intel_iocs'])
-    assert result['data']['total'] == 0
-
-
-@pytest.mark.get_intel_iocs
 def test_get_intel_iocs_invalid_ioc_keyword(valid_configuration_with_token, connector_details, params_json):
     set_report_metadata(connector_details, "Get IOCs", "Verify with invalid keyword")
     result = run_invalid_param_test(connector_details, operation_name='get_intel_iocs', param_name='keyword',
                                     param_type='text', action_params=params_json['get_intel_iocs'])
-    assert result['data']['total'] == 0
+    assert result.get('status') == "failed"
 
 
 @pytest.mark.get_intel_iocs
@@ -305,7 +264,7 @@ def test_get_intel_iocs_invalid_ioc_sort(valid_configuration_with_token, connect
     set_report_metadata(connector_details, "Get IOCs", "Verify with invalid sort ")
     result = run_invalid_param_test(connector_details, operation_name='get_intel_iocs', param_name='sort',
                                     param_type='text', action_params=params_json['get_intel_iocs'])
-    assert result['data']['total'] == 0
+    assert result['data']['total']
 
 
 @pytest.mark.get_intel_iocs

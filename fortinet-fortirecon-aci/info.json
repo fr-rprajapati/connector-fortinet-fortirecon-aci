@@ -3412,7 +3412,7 @@
       "operation": "get_intel_reports",
       "title": "Get Adversary Centric Intelligence (ACI) reports",
       "annotation": "get_intel_reports",
-      "description": "Get Adversary Centric Intelligence (ACI) reports published by FortiRecon..",
+      "description": "Get Adversary Centric Intelligence (ACI) reports published by FortiRecon.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -3425,9 +3425,9 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Filter by specific report id(s).",
-          "placeholder": "example:1111177777799999,1111177777799990",
-          "description": "Specify a comma-separated string or single string of the report id's from Fortinet FortiRecon ACI."
+          "tooltip": "Provide a single report id or a comma-separated list of reports.",
+          "placeholder": "Example:1111177777799999,1111177777799990",
+          "description": "Provide a single report ID or a comma-separated list of report IDs."
         },
         {
           "name": "tag",
@@ -3437,8 +3437,8 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter by specific tag(s). Multiple tags should be comma separated and will work as OR filter, example: phishing,malware,exploited.",
-          "placeholder": "example:Data Breach,Cyber Crime",
-          "description": "Specify a comma-separated string or single string of the tags associated with the reports you want to retrieve from Fortinet FortiRecon ACI. For example, Data Breach,Cyber Crime"
+          "placeholder": "Example:Data Breach,Cyber Crime",
+          "description": "Provide a single tag or a comma-separated list of tags associated with the reports. For example, Data Breach,Cyber Crime."
         },
         {
           "name": "adversaries",
@@ -3448,8 +3448,8 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter by specific adversary (actor names, APT groups). Multiple adversary should be comma separated and will work as OR filter, example: apt35,foo,bar.",
-          "placeholder": "example:Databases,APT 34",
-          "description": "Specify a comma-separated string or single string of the adversary associated with the reports you want to retrieve from Fortinet FortiRecon ACI. For example, Databases,APT 34"
+          "placeholder": "Example:Databases,APT 34",
+          "description": "Provide a single adversary name or a comma-separated list of adversary names associated with the reports. For example, Foo,APT 34."
         },
         {
           "name": "source",
@@ -3458,9 +3458,9 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Filter by specific source category. ",
-          "placeholder": "example:FortiGuard Threat Research, FortiGuard Research, Exploit Forum TECHINT",
-          "description": "Multiple source should be comma separated and will work as OR filter, example: FortiGuard Research,Exploit Forum,TECHINT"
+          "tooltip": "Filter by specific source category. Example: ,Exploit Forum,TECHINT.",
+          "placeholder": "Example:FortiGuard Threat Research, FortiGuard Research, Exploit Forum TECHINT",
+          "description": "Multiple source should be comma separated and will work as OR filter, example: FortiGuard Research,Exploit Forum,TECHINT."
         },
         {
           "name": "source_category",
@@ -3469,9 +3469,9 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Filter by specific source category. Acceptable values are: `Media Trends`, `Darknet`, `Humint`, `OSINT`, `Fraudulent Domains`, `Technical Intelligence`, `Executive Summary`",
-          "placeholder": "example: OSINT,Darknet",
-          "description": "Specify a comma-separated string or single string of the source category associated with the reports you want to retrieve from Fortinet FortiRecon ACI. For example, OSINT,Darknet"
+          "tooltip": "Filter by specific source category. Acceptable values are: `Media Trends`, `Darknet`, `Humint`, `OSINT`, `Fraudulent Domains`, `Technical Intelligence`, `Executive Summary`.",
+          "placeholder": "Example: OSINT,Darknet",
+          "description": "Provide a single source category or a comma-separated list of source category associated with the report. For example, OSINT,Darknet."
         },
         {
           "name": "report_type",
@@ -3481,8 +3481,8 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter by specific report type(s). Acceptable values are: `THREAT_ALERT`, `FLASH_REPORT`, `THREAT_REPORT`, `FLASH_ALERT`. Multiple report types should be comma separated and will work as OR filter, example: THREAT_ALERT,FLASH_REPORT.",
-          "placeholder": "example: THREAT_ALERT,FLASH_REPORT",
-          "description": "Specify a comma-separated string or single string of the type of reports you want to retrieve from Fortinet FortiRecon ACI. For example, THREAT_ALERT,FLASH_REPORT."
+          "placeholder": "Example: THREAT_ALERT,FLASH_REPORT",
+          "description": "Provide a single report type or a comma-separated list of report type associated with the report. For example, THREAT_ALERT,FLASH_REPORT."
         },
         {
           "name": "industries",
@@ -3492,8 +3492,8 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter reports by specific industry. Multiple industries should be comma separated and will work as OR filter, example: manufacturing,government,hospitality.",
-          "placeholder": "example: manufacturing,government,hospitality",
-          "description": "Specify a comma-separated string or single string of the industry associated with the reports you want to retrieve from Fortinet FortiRecon ACI. For example, manufacturing,government,hospitality"
+          "placeholder": "Example: manufacturing,government,hospitality",
+          "description": "Provide a single industry or a comma-separated list of industries associated with the report. For example, manufacturing,government,hospitality."
         },
         {
           "name": "geographies",
@@ -3503,8 +3503,8 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter reports by geography. Multiple geographies should be comma separated and will work as OR filter, example: south america,western europe, east asia,africa.",
-          "placeholder": "example: Western Europe,South East Asia",
-          "description": "Specify a comma-separated string or single string of the geography of the reports you want to retrieve from Fortinet FortiRecon ACI. For example, Western Europe,South East Asia"
+          "placeholder": "Example: Western Europe,South East Asia",
+          "description": "Provide a single geography or a comma-separated list of geographies associated with the report. For example, Western Europe,South East Asia."
         },
         {
           "name": "iocs",
@@ -3513,9 +3513,9 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Filter by specific iocs value/name.",
-          "placeholder": "example: ursl.com, 12.11.20.111",
-          "description": "Filter by specific iocs value/name."
+          "tooltip": "Filter reports by specific Ioc value or Iocs name. Available Iocs names are: IP, IPV6, URL, DOMAIN, EMAIL, CVE, SUB_DOMAIN, FILE_NAME, REGISTRY_KEY, HASH. Iocs values example: https://url,com, 12.11.20.111.",
+          "placeholder": "Example: URL",
+          "description": "Provide Ioc value or Iocs name to get reports associated with Iocs. Example: url.com, 12.11.20.111."
         },
         {
           "name": "source_reliability",
@@ -3525,8 +3525,8 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter by specific source reliability. Acceptable values are: `A - Reliable`, `B - Usually reliable`, `C - Fairly reliable`, `D - Not usually reliable`, `E - Unreliable`, `F - Cannot be judged`. Multiple source reliabilities should be comma separated and will work as OR filter, example: F - Cannot be judged,A - Reliable.",
-          "placeholder": "source_reliability",
-          "description": "Specify the source reliability of the reports you want to retrieve from Fortinet FortiRecon ACI."
+          "placeholder": "Example: A - Reliable",
+          "description": "Provide a single source reliability or a comma-separated list of source reliability associated with the report. Example: A - Reliable,B - Usually reliable."
         },
         {
           "name": "information_reliability",
@@ -3536,8 +3536,8 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter by specific information reliability. Acceptable values are:1 - Confirmed, 2 - Probably true, 3 - Possibly true, 4 - Doubtfully true, 5 - Improbable, 6 - Cannot be judged. Multiple information reliabilities should be comma separated and will work as OR filter, example: 1 - Confirmed,2 - Probably true.",
-          "placeholder": "information_reliability",
-          "description": "Specify the information reliability of the reports you want to retrieve from Fortinet FortiRecon ACI."
+          "placeholder": "Example: 5 - Improbable",
+          "description": "Provide a single information reliability or a comma-separated list of source information associated with the report. Example: 4 - Doubtfully true,5 - Improbable."
         },
         {
           "name": "report_generator_source",
@@ -3547,8 +3547,8 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter by specific report generation source. Acceptable values are:`AI INSIGHT`, `Analyst Curated Reports`, `Automated Reports`.",
-          "placeholder": "report_generator_source",
-          "description": "Multiple report_generator_source should be comma separated and will work as OR filter. Specify the report generator source of the reports you want to retrieve from Fortinet FortiRecon ACI."
+          "placeholder": "Example: AI INSIGHT",
+          "description": "Provide a single report generation source or a comma-separated list of report generation source associated with the report. Example: AI INSIGHT,Automated Reports."
         },
         {
           "name": "insight_relevance",
@@ -3558,8 +3558,8 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter by specific insight relevance. Acceptable values are: `MEDIUM`, `LOW`, `INFORMATIONAL`, `HIGH`.",
-          "placeholder": "insight_relevance",
-          "description": "Multiple insight_relevance should be comma separated and will work as OR filter. Specify the insight_relevance of the reports you want to retrieve from Fortinet FortiRecon ACI."
+          "placeholder": "Example: HIGH,MEDIUM",
+          "description": "Provide a single insight relevance or a comma-separated list of insight relevance associated with the report. Example: HIGH,MEDIUM."
         },
         {
           "name": "motivations",
@@ -3568,31 +3568,9 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Filter by specific motivations. example: Hacktivist, Cyber Crime",
-          "placeholder": "motivations",
-          "description": "Multiple motivations should be comma separated and will work as OR filter. Specify the motivations using which you want to filter the reports retrieved from Fortinet FortiRecon ACI."
-        },
-        {
-          "name": "vendors",
-          "title": "Vendors",
-          "type": "text",
-          "editable": true,
-          "visible": true,
-          "required": false,
-          "tooltip": "Filter by specific vendors.",
-          "placeholder": "vendors",
-          "description": "Multiple vendors should be comma separated and will work as OR filter. Specify the vendors using which you want to filter the reports retrieved from Fortinet FortiRecon ACI. "
-        },
-        {
-          "name": "products",
-          "title": "Products",
-          "type": "text",
-          "editable": true,
-          "visible": true,
-          "required": false,
-          "tooltip": "Filter by specific products. example: Citrix, Nginx",
-          "placeholder": "products",
-          "description": "Multiple products should be comma separated and will work as OR filter. Specify the products using which you want to filter the reports retrieved from Fortinet FortiRecon ACI. "
+          "tooltip": "Filter by specific motivations. example: Hacktivist, Cyber Crime.",
+          "placeholder": "Example: Hacktivist",
+          "description": "Provide a single motivation or a comma-separated list of motivations associated with the report. Example: Hacktivist,Cyber Crime."
         },
         {
           "name": "keyword",
@@ -3612,8 +3590,8 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Filter by report published date.",
-          "description": "Specify the date from when you want to retrieve reports from Fortinet FortiRecon ACI. format: (YYYY-MM-DD, YYYY-MM-DDTHH:MM:SS)"
+          "tooltip": "Filter by report published date. Format: (YYYY-MM-DD, YYYY-MM-DDTHH:MM:SS).",
+          "description": "Specify the date from when you want to retrieve reports from Fortinet FortiRecon ACI. Format: (YYYY-MM-DD, YYYY-MM-DDTHH:MM:SS)."
         },
         {
           "name": "end_date",
@@ -3622,8 +3600,8 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Filter by report published date, default is today's date.",
-          "description": "Specify the date till when you want to retrieve reports from Fortinet FortiRecon ACI. By default, this is set to Current Date. format: (YYYY-MM-DD, YYYY-MM-DDTHH:MM:SS)"
+          "tooltip": "Filter by report published date, default is today's date. Format: (YYYY-MM-DD, YYYY-MM-DDTHH:MM:SS).",
+          "description": "Specify the date till when you want to retrieve reports from Fortinet FortiRecon ACI. By default, this is set to Current Date. Format: (YYYY-MM-DD, YYYY-MM-DDTHH:MM:SS)."
         },
         {
           "name": "page",
@@ -3717,7 +3695,7 @@
           "visible": true,
           "required": true,
           "description": "Specify the ACI Intel report ID to get details about the specified report.",
-          "tooltip": "Specify the ACI Intel report ID."
+          "tooltip": "Specify the report ID to filter the IOCs of the specified report."
         }
       ]
     },
@@ -3750,8 +3728,8 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter by specific ACI report ID(s). Multiple IDs should be comma separated and will work as OR filter, example: 2019091459522,2019090116811.",
-          "placeholder": "example: 2019091459522,2019090116811",
-          "description": "Specify a comma-separated list of report IDs from which you want to fetch the IOCs."
+          "placeholder": "Example: 2019091459522,2019090116811",
+          "description": "Provide a single report id or a comma-separated list of report id's."
         },
         {
           "name": "type",
@@ -3761,8 +3739,8 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter by specific Indicator of Compromise (IOC) type(s). Acceptable values are: IP, IPV6, URL, HASH, DOMAIN, SUB_DOMAIN, EMAIL, CVE, FILE_PATH, FILE_NAME, REGISTRY_KEY.",
-          "placeholder": "example: CVE",
-          "description": "Specify a single string of the type of IOCs you want to retrieve from Fortinet FortiRecon ACI. For example, CVE."
+          "placeholder": "Example: CVE",
+          "description": "Specify a single string of the type of IOCs you want to retrieve from Fortinet FortiRecon ACI.  Example, CVE."
         },
         {
           "name": "first_seen",
@@ -3772,8 +3750,8 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter by Filter by first_seen date in this format: (YYYY-MM-DD).",
-          "placeholder": "first_seen",
-          "description": "Specify first_seen date of IOCs you want to retrieve from Fortinet FortiRecon ACI."
+          "placeholder": "Format: (YYYY-MM-DD)",
+          "description": "Specify first_seen date of IOCs you want to retrieve from Fortinet FortiRecon ACI. Format: (YYYY-MM-DD)."
         },
         {
           "name": "last_seen",
@@ -3783,38 +3761,8 @@
           "visible": true,
           "required": false,
           "tooltip": "Filter by Filter by last_seen date in this format: (YYYY-MM-DD).",
-          "placeholder": "last_seen",
-          "description": "Specify last_seen date of IOCs you want to retrieve from Fortinet FortiRecon ACI."
-        },
-        {
-          "name": "start_date",
-          "title": "Start Date",
-          "type": "date",
-          "editable": true,
-          "visible": true,
-          "required": false,
-          "tooltip": "Filter by Ioc added date in this format: (YYYY-MM-DD, YYYY-MM-DDTHH:MM:SS).",
-          "description": "Filter by Ioc added date in this format: (YYYY-MM-DD, YYYY-MM-DDTHH:MM:SS)."
-        },
-        {
-          "name": "end_date",
-          "title": "End Date",
-          "type": "date",
-          "editable": true,
-          "visible": true,
-          "required": false,
-          "tooltip": "Filter by Ioc added date in this format: (YYYY-MM-DD, YYYY-MM-DDTHH:MM:SS), default is today's date.",
-          "description": "Filter by Ioc added date in this format: (YYYY-MM-DD, YYYY-MM-DDTHH:MM:SS), default is today's date."
-        },
-        {
-          "name": "updated_ts",
-          "title": "Updated timestamp",
-          "type": "date",
-          "editable": true,
-          "visible": true,
-          "required": false,
-          "tooltip": "Filter by IOC's updated timestamp in this format: (YYYY-MM-DDTHH:MM:SS).",
-          "description": "Specify the updated_ts date from when you want to retrieve IOCs from Fortinet FortiRecon ACI."
+          "placeholder": "Format: (YYYY-MM-DD)",
+          "description": "Specify last_seen date of IOCs you want to retrieve from Fortinet FortiRecon ACI. format: (YYYY-MM-DD)."
         },
         {
           "name": "keyword",
@@ -3833,8 +3781,8 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Sort by specific field. Sorting apply in these fields: type, name, report_ids, first_seen, last_seen, added_ts, updated_ts",
-          "description": "Sort by specific field. Sorting apply in these fields: type, name, report_ids, first_seen, last_seen, added_ts, updated_ts. Example: added_ts:desc"
+          "tooltip": "Sort by specific field. Sorting apply in these fields: type, name, first_seen, last_seen.",
+          "description": "Sort by specific field. Sorting apply in these fields: type, name, first_seen, last_seen. Example: name:desc."
         },
         {
           "name": "page",
@@ -3862,17 +3810,12 @@
       "output_schema": {
         "hits": [
           {
-            "added_by": "",
-            "added_ts": "",
             "ioc_id": "",
-            "is_deleted": "",
             "name": "",
             "report_ids": [],
             "type": "",
-            "updated_by": "",
             "first_seen": "",
-            "last_seen": "",
-            "updated_ts": ""
+            "last_seen": ""
           }
         ],
         "page": "",
@@ -3890,17 +3833,12 @@
       "visible": true,
       "enabled": true,
       "output_schema": {
-          "added_by": "",
-          "added_ts": "",
           "ioc_id": "",
-          "is_deleted": "",
           "name": "",
           "report_ids": [],
           "type": "",
-          "updated_by": "",
           "first_seen": "",
-          "last_seen": "",
-          "updated_ts": ""
+          "last_seen": ""
       },
       "parameters": [
         {
@@ -3910,8 +3848,8 @@
           "editable": true,
           "visible": true,
           "required": true,
-          "description": "Specify the ACI Intel IOC ID to get details about the specified IOC.",
-          "tooltip": "Specify the ACI Intel IOC ID."
+          "description": "Specify the ACI Intel IOC id to get details about the specified IOC.",
+          "tooltip": "Specify the ACI Intel IOC id to get the Ioc details."
         }
       ]
     }
