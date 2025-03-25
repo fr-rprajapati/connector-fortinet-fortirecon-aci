@@ -35,7 +35,7 @@ from .aci_operations.ransomware_intelligence import (get_ransomware_victims,
                                                      get_ransomware_intel_org_watchlist_matched,
                                                      get_technical_indicators_for_given_ransomware_group,
                                                      get_ransomware_group_info)
-
+from .aci_operations.intel_reports import get_intel_reports, get_intel_report, get_intel_iocs, get_intel_ioc
 
 
 operations = {
@@ -72,5 +72,9 @@ operations = {
     "get_technical_indicators_for_given_ransomware_group": get_technical_indicators_for_given_ransomware_group,
     "get_ransomware_group_info": get_ransomware_group_info,
     "update_stealers_on_sale_status": update_stealers_on_sale_status,
-    "update_stealers_leaked_status": update_stealers_leaked_status
+    "update_stealers_leaked_status": update_stealers_leaked_status,
+    "get_intel_reports": get_intel_reports,
+    "get_intel_report": get_intel_report,
+    "get_intel_iocs": get_intel_iocs,
+    "get_intel_ioc": get_intel_ioc
 }

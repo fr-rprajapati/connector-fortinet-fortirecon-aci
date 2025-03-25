@@ -1,7 +1,7 @@
 {
   "name": "fortinet-fortirecon-aci",
   "label": "Fortinet FortiRecon ACI",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "FortiRecon is a Digital Risk Protection Service (DRPS) product that provides an outside-the-network view to the risks posed to your enterprise.The Adversary Centric Intelligence (ACI) module leverages FortiGuard Threat Analysts to provide comprehensive coverage of dark web, open source, and technical threat intelligence, including threat actor insights. This information enables administrators to proactively assess risks, respond faster to incidents, better understand their attackers, and protect assets. This connector facilitates the automated operations related to ACI. <br/><br/>This connector has a dependency on the <a href=\"/content-hub/all-content/?contentType=solutionpack&amp;tag=ThreatIntelManagement\" target=\"_blank\" rel=\"noopener\">Threat Intel Management Solution Pack</a>. Install the Solution Pack before enabling ingestion of Threat Feeds from this source.",
   "publisher": "Fortinet",
   "contributor": "Ramkrushna Pathade",
@@ -3405,6 +3405,453 @@
             "ACTIVE",
             "RESOLVED"
           ]
+        }
+      ]
+    },
+    {
+      "operation": "get_intel_reports",
+      "title": "Get Adversary Centric Intelligence (ACI) reports",
+      "annotation": "get_intel_reports",
+      "description": "Get Adversary Centric Intelligence (ACI) reports published by FortiRecon.",
+      "category": "investigation",
+      "is_config_required": true,
+      "visible": true,
+      "enabled": true,
+      "parameters": [
+        {
+          "name": "report_id",
+          "title": "Report Id",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Filter by specific report id(s). Multiple report id's should be comma separated and will work as OR filter.",
+          "placeholder": "Example: 1111177777799999,1111177777799990",
+          "description": "Provide a single report ID or a comma-separated list of report IDs."
+        },
+        {
+          "name": "tag",
+          "title": "Tag",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Filter by specific tag(s). Multiple tags should be comma separated and will work as OR filter, example: phishing,malware,exploited.",
+          "placeholder": "Example: Data Breach,Cyber Crime",
+          "description": "Provide a single tag or a comma-separated list of tags associated with the reports. For example, Data Breach,Cyber Crime."
+        },
+        {
+          "name": "adversaries",
+          "title": "Adversaries",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Filter by specific adversary (actor names, APT groups). Multiple adversary should be comma separated and will work as OR filter, example: apt35,foo,bar.",
+          "placeholder": "Example: Databases,APT 34",
+          "description": "Provide a single adversary name or a comma-separated list of adversary names associated with the reports. For example, Foo,APT 34."
+        },
+        {
+          "name": "source",
+          "title": "Source",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Filter by specific source. Example: ,Exploit Forum,TECHINT, FortiGuard Threat Research, FortiGuard Research.",
+          "placeholder": "Example: Exploit Forum TECHINT",
+          "description": "Multiple source should be comma separated and will work as OR filter, example: FortiGuard Research,Exploit Forum,TECHINT."
+        },
+        {
+          "name": "source_category",
+          "title": "Source Category",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Filter by specific source category. Acceptable values are: `Media Trends`, `Darknet`, `Humint`, `OSINT`, `Fraudulent Domains`, `Technical Intelligence`, `Executive Summary`.",
+          "placeholder": "Example: OSINT,Darknet",
+          "description": "Provide a single source category or a comma-separated list of source category associated with the report. For example, OSINT,Darknet."
+        },
+        {
+          "name": "report_type",
+          "title": "Report Type",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Filter by specific report type(s). Acceptable values are: `THREAT_ALERT`, `FLASH_REPORT`, `THREAT_REPORT`, `FLASH_ALERT`. Multiple report types should be comma separated and will work as OR filter, example: THREAT_ALERT,FLASH_REPORT.",
+          "placeholder": "Example: THREAT_ALERT,FLASH_REPORT",
+          "description": "Provide a single report type or a comma-separated list of report type associated with the report. For example, THREAT_ALERT,FLASH_REPORT."
+        },
+        {
+          "name": "industries",
+          "title": "Industries",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Filter reports by specific industry. Multiple industries should be comma separated and will work as OR filter, example: manufacturing,government,hospitality.",
+          "placeholder": "Example: manufacturing,government,hospitality",
+          "description": "Provide a single industry or a comma-separated list of industries associated with the report. For example, manufacturing,government,hospitality."
+        },
+        {
+          "name": "geographies",
+          "title": "Geographies",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Filter reports by geography. Multiple geographies should be comma separated and will work as OR filter, example: south america,western europe, east asia,africa.",
+          "placeholder": "Example: Western Europe,South East Asia",
+          "description": "Provide a single geography or a comma-separated list of geographies associated with the report. For example, Western Europe,South East Asia."
+        },
+        {
+          "name": "iocs",
+          "title": "Iocs",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Filter reports by specific Ioc value or Iocs name. Available Iocs names are: IP, IPV6, URL, DOMAIN, EMAIL, CVE, SUB_DOMAIN, FILE_NAME, REGISTRY_KEY, HASH. Iocs values example: https://url.com, 12.11.20.111.",
+          "placeholder": "Example: URL",
+          "description": "Provide Ioc value or Iocs name to get reports associated with Iocs. Example: url.com, 12.11.20.111."
+        },
+        {
+          "name": "source_reliability",
+          "title": "Source Reliability",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Filter by specific source reliability. Acceptable values are: `A - Reliable`, `B - Usually reliable`, `C - Fairly reliable`, `D - Not usually reliable`, `E - Unreliable`, `F - Cannot be judged`. Multiple source reliabilities should be comma separated and will work as OR filter, example: F - Cannot be judged,A - Reliable.",
+          "placeholder": "Example: A - Reliable",
+          "description": "Provide a single source reliability or a comma-separated list of source reliability associated with the report. Example: A - Reliable,B - Usually reliable."
+        },
+        {
+          "name": "information_reliability",
+          "title": "Information Reliability",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Filter by specific information reliability. Acceptable values are:1 - Confirmed, 2 - Probably true, 3 - Possibly true, 4 - Doubtfully true, 5 - Improbable, 6 - Cannot be judged. Multiple information reliabilities should be comma separated and will work as OR filter, example: 1 - Confirmed,2 - Probably true.",
+          "placeholder": "Example: 5 - Improbable",
+          "description": "Provide a single information reliability or a comma-separated list of source information associated with the report. Example: 4 - Doubtfully true,5 - Improbable."
+        },
+        {
+          "name": "report_generator_source",
+          "title": "Report Generator Source",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Filter by specific report generation source. Acceptable values are:`AI INSIGHT`, `Analyst Curated Reports`, `Automated Reports`.",
+          "placeholder": "Example: AI INSIGHT",
+          "description": "Provide a single report generation source or a comma-separated list of report generation source associated with the report. Example: AI INSIGHT,Automated Reports."
+        },
+        {
+          "name": "insight_relevance",
+          "title": "Report insight relevance",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Filter by specific insight relevance. Acceptable values are: `MEDIUM`, `LOW`, `INFORMATIONAL`, `HIGH`.",
+          "placeholder": "Example: HIGH,MEDIUM",
+          "description": "Provide a single insight relevance or a comma-separated list of insight relevance associated with the report. Example: HIGH,MEDIUM."
+        },
+        {
+          "name": "motivations",
+          "title": "Motivations",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Filter by specific motivations. example: Hacktivist, Cyber Crime.",
+          "placeholder": "Example: Hacktivist",
+          "description": "Provide a single motivation or a comma-separated list of motivations associated with the report. Example: Hacktivist,Cyber Crime."
+        },
+        {
+          "name": "keyword",
+          "title": "Keyword",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Filter by specific keyword. Provided keyword will be searched in these fields: Report ID, Report Title, Report Summary, Report Content, Source Category, Actors, Motivation, Threats, Industry Tags.",
+          "placeholder": "keyword",
+          "description": "Specify the keyword using which you want to filter the reports retrieved from Fortinet FortiRecon ACI. Provided keyword will be searched in these fields: Report ID, Report Title, Report Summary, Report Content, Source Category, Actors, Motivation, Threats, Industry Tags."
+        },
+        {
+          "name": "start_date",
+          "title": "Start Date",
+          "type": "datetime",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Filter by report published date. Format: (YYYY-MM-DD, YYYY-MM-DDTHH:MM:SS).",
+          "description": "Specify the date from when you want to retrieve reports from Fortinet FortiRecon ACI. Format: (YYYY-MM-DD, YYYY-MM-DDTHH:MM:SS)."
+        },
+        {
+          "name": "end_date",
+          "title": "End Date",
+          "type": "datetime",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Filter by report published date, default is today's date. Format: (YYYY-MM-DD, YYYY-MM-DDTHH:MM:SS).",
+          "description": "Specify the date till when you want to retrieve reports from Fortinet FortiRecon ACI. By default, this is set to Current Date. Format: (YYYY-MM-DD, YYYY-MM-DDTHH:MM:SS)."
+        },
+        {
+          "name": "page",
+          "title": "Page",
+          "type": "integer",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Navigate between pages. Defaults to 1.",
+          "description": "Specify the page number from which to retrieve results."
+        },
+        {
+          "name": "size",
+          "title": "Size",
+          "type": "integer",
+          "editable": true,
+          "visible": true,
+          "value": 10,
+          "required": false,
+          "placeholder": "Must be greater 0 and less than or equal to 500.",
+          "tooltip": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page.",
+          "description": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page. Must be greater 0 and less than or equal to 500."
+        }
+      ],
+      "output_schema": {
+        "hits": [
+          {
+              "report_id": "",
+              "report_type": "",
+              "version": "",
+              "title": "",
+              "information_date": "",
+              "published_ts": "",
+              "source": {},
+              "reliability_rating": {},
+              "geographies": [],
+              "industries": [],
+              "adversaries": [],
+              "category": {},
+              "threat_types": [],
+              "iocs_count": "",
+              "motivations": [],
+              "insight_relevance": "",
+              "report_generator_source": ""
+          }
+        ],
+        "page": "",
+        "size": "",
+        "total": ""
+      }
+    },
+    {
+      "operation": "get_intel_report",
+      "title": "Get specific Adversary Centric Intelligence (ACI) report.",
+      "annotation": "get_intel_report",
+      "description": "Get specific Adversary Centric Intelligence (ACI) report published by FortiRecon.",
+      "category": "investigation",
+      "is_config_required": true,
+      "visible": true,
+      "enabled": true,
+      "output_schema": {
+          "report_id": "",
+          "report_type": "",
+          "version": "",
+          "title": "",
+          "information_date": "",
+          "published_ts": "",
+          "source": {},
+          "reliability_rating": {},
+          "geographies": [],
+          "industries": [],
+          "tags": [],
+          "adversaries": [],
+          "category": {},
+          "iocs_count": "",
+          "motivations": [],
+          "summary": {},
+          "insight_relevance": "",
+          "report_generator_source": "",
+          "insight": {},
+          "original_post": {},
+          "entities": [],
+          "tlp": ""
+      },
+      "parameters": [
+        {
+          "name": "report_id",
+          "title": "ACI Report ID",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "description": "Specify the ACI Intel report ID to get details about the specified report.",
+          "tooltip": "Specify the report ID to filter the IOCs of the specified report."
+        }
+      ]
+    },
+    {
+      "operation": "get_intel_iocs",
+      "title": "Get Intel IOCs",
+      "annotation": "get_intel_iocs",
+      "description": "Retrieves a list of all Intel IOCs or specific IOCs published in ACI reporting for the given organization ID and other input parameters you have specified.",
+      "category": "investigation",
+      "is_config_required": true,
+      "visible": true,
+      "enabled": true,
+      "parameters": [
+        {
+          "name": "name",
+          "title": "Ioc name",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Filter by specific ACI IOC name.",
+          "placeholder": "IOC name",
+          "description": "Filter by specific ACI IOC name."
+        },
+        {
+          "name": "report_ids",
+          "title": "Report ID's",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Filter by specific ACI report ID(s). Multiple IDs should be comma separated and will work as OR filter, example: 2019091459522,2019090116811.",
+          "placeholder": "Example: 2019091459522,2019090116811",
+          "description": "Provide a single report id or a comma-separated list of report id's."
+        },
+        {
+          "name": "type",
+          "title": "IOC Type",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Filter by specific Indicator of Compromise (IOC) type(s). Acceptable values are: IP, IPV6, URL, HASH, DOMAIN, SUB_DOMAIN, EMAIL, CVE, FILE_PATH, FILE_NAME, REGISTRY_KEY.",
+          "placeholder": "Example: CVE",
+          "description": "Specify a single string of the type of IOCs you want to retrieve from Fortinet FortiRecon ACI.  Example, CVE."
+        },
+        {
+          "name": "first_seen",
+          "title": "First seen",
+          "type": "date",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Filter by Filter by first_seen date in this format: (YYYY-MM-DD).",
+          "placeholder": "Format: (YYYY-MM-DD)",
+          "description": "Specify first_seen date of IOCs you want to retrieve from Fortinet FortiRecon ACI. Format: (YYYY-MM-DD)."
+        },
+        {
+          "name": "last_seen",
+          "title": "Last seen",
+          "type": "date",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Filter by Filter by last_seen date in this format: (YYYY-MM-DD).",
+          "placeholder": "Format: (YYYY-MM-DD)",
+          "description": "Specify last_seen date of IOCs you want to retrieve from Fortinet FortiRecon ACI. format: (YYYY-MM-DD)."
+        },
+        {
+          "name": "keyword",
+          "title": "Keyword",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "placeholder": "IOC Keyword",
+          "tooltip": "Filter by specific keyword. Provided keyword will be searched in these fields: type, name, report_ids, first_seen, last_seen.",
+          "description": "Specify the specific keyword. Provided keyword will be searched in these fields: type, name, report_ids, first_seen, last_seen."
+        },
+        {
+          "name": "sort",
+          "title": "Sort",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "placeholder": "Example: name:desc",
+          "tooltip": "Sort by specific field. Sorting apply in these fields: type, name, first_seen, last_seen.",
+          "description": "Sort by specific field. Sorting apply in these fields: type, name, first_seen, last_seen. Example: name:desc."
+        },
+        {
+          "name": "page",
+          "title": "Page",
+          "type": "integer",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Navigate between pages. Defaults to 1.",
+          "description": "Specify the page number from which to retrieve results."
+        },
+        {
+          "name": "size",
+          "title": "Size",
+          "type": "integer",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "value": 10,
+          "placeholder": "Must be greater 0 and less than or equal to 500.",
+          "tooltip": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page.",
+          "description": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page. Must be greater 0 and less than or equal to 500."
+        }
+      ],
+      "output_schema": {
+        "hits": [
+          {
+            "ioc_id": "",
+            "name": "",
+            "report_ids": [],
+            "type": "",
+            "first_seen": "",
+            "last_seen": ""
+          }
+        ],
+        "page": "",
+        "size": "",
+        "total": ""
+      }
+    },
+    {
+      "operation": "get_intel_ioc",
+      "title": "Get specific Adversary Centric Intelligence (ACI) IOC's.",
+      "annotation": "get_intel_ioc",
+      "description": "Get specific Adversary Centric Intelligence (ACI) IOC's published by FortiRecon.",
+      "category": "investigation",
+      "is_config_required": true,
+      "visible": true,
+      "enabled": true,
+      "output_schema": {
+          "ioc_id": "",
+          "name": "",
+          "report_ids": [],
+          "type": "",
+          "first_seen": "",
+          "last_seen": ""
+      },
+      "parameters": [
+        {
+          "name": "ioc_id",
+          "title": "IOC ID",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "description": "Specify the ACI Intel IOC id to get details about the specified IOC.",
+          "tooltip": "Specify the ACI Intel IOC id to get the Ioc details."
         }
       ]
     }
