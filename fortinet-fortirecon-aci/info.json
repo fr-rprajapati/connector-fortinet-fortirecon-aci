@@ -3409,7 +3409,7 @@
     },
     {
       "operation": "get_intel_reports",
-      "title": "Get Adversary Centric Intelligence (ACI) reports",
+      "title": "Get Adversary Centric Intelligence (ACI) Reports",
       "annotation": "get_intel_reports",
       "description": "Get Adversary Centric Intelligence (ACI) reports published by FortiRecon.",
       "category": "investigation",
@@ -3654,7 +3654,7 @@
     },
     {
       "operation": "get_intel_report",
-      "title": "Get specific Adversary Centric Intelligence (ACI) report.",
+      "title": "Get Specific Adversary Centric Intelligence (ACI) Report.",
       "annotation": "get_intel_report",
       "description": "Get specific Adversary Centric Intelligence (ACI) report published by FortiRecon.",
       "category": "investigation",
@@ -3826,9 +3826,9 @@
     },
     {
       "operation": "get_intel_ioc",
-      "title": "Get specific Adversary Centric Intelligence (ACI) IOC's.",
+      "title": "Get Specific Adversary Centric Intelligence (ACI) IOCs",
       "annotation": "get_intel_ioc",
-      "description": "Get specific Adversary Centric Intelligence (ACI) IOC's published by FortiRecon.",
+      "description": "Get specific Adversary Centric Intelligence (ACI) IOCs published by FortiRecon.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
