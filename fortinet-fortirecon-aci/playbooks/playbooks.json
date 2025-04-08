@@ -3973,6 +3973,318 @@
               "targetStep": "/api/3/workflow_steps/0f37d878-b510-423f-9de8-865a872e8a77"
             }
           ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "6c5f7b6e-5980-4d9e-8a74-107f812e82e4",
+          "collection": "/api/3/workflow_collections/178e7627-82f7-4205-aac4-33ac732d0593",
+          "triggerLimit": null,
+          "description": "Get Adversary Centric Intelligence ACI reports published by FortiRecon",
+          "name": "Get Adversary Centric Intelligence ACI Reports",
+          "tag": "#Fortinet FortiRecon ACI",
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortirecon-aci"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/3bed5610-280b-4c13-ad13-4834f2a93801",
+          "steps": [
+            {
+              "uuid": "3bed5610-280b-4c13-ad13-4834f2a93801",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "e797e50e-97e0-4814-847d-a4f9b13dda32",
+                "title": "Fortinet FortiRecon ACI: Get Adversary Centric Intelligence ACI Reports",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "830eb1f6-0349-431d-a455-d52f82ed7a7a",
+              "@type": "WorkflowStep",
+              "name": "Get Adversary Centric Intelligence ACI reports",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Fortinet FortiRecon ACI",
+                "config": "''",
+                "params": {
+                  "size": 10
+                },
+                "version": "2.1.0",
+                "connector": "fortinet-fortirecon-aci",
+                "operation": "get_intel_reports",
+                "operationTitle": "Get Adversary Centric Intelligence ACI Reports"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "b9b26358-c556-49c0-a9a2-f1561d027b50",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Adversary Centric Intelligence ACI Reports",
+              "sourceStep": "/api/3/workflow_steps/3bed5610-280b-4c13-ad13-4834f2a93801",
+              "targetStep": "/api/3/workflow_steps/830eb1f6-0349-431d-a455-d52f82ed7a7a"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "1d9caa87-3662-4897-9faf-e58a039918bf",
+          "collection": "/api/3/workflow_collections/178e7627-82f7-4205-aac4-33ac732d0593",
+          "triggerLimit": null,
+          "description": "Get specific Adversary Centric Intelligence ACI report published by FortiRecon.",
+          "name": "Get specific Adversary Centric Intelligence ACI report.",
+          "tag": "#Fortinet FortiRecon ACI",
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortirecon-aci"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/6d570872-6233-4e5a-ab48-69d407dc3c37",
+          "steps": [
+            {
+              "uuid": "6d570872-6233-4e5a-ab48-69d407dc3c37",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "df912bc2-238e-4fb8-9e98-391557f1fd7e",
+                "title": "Fortinet FortiRecon ACI: Get specific Adversary Centric Intelligence ACI report.",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "8c73605e-1ac8-4e36-b50f-9967ac001371",
+              "@type": "WorkflowStep",
+              "name": "Get specific Adversary Centric Intelligence ACI report",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Fortinet FortiRecon ACI",
+                "config": "''",
+                "params": [],
+                "version": "2.1.0",
+                "connector": "fortinet-fortirecon-aci",
+                "operation": "get_intel_report",
+                "operationTitle": "Get specific Adversary Centric Intelligence ACI report."
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "94527e43-7754-47fb-a793-cdde60d5c581",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get specific Adversary Centric Intelligence ACI report",
+              "sourceStep": "/api/3/workflow_steps/6d570872-6233-4e5a-ab48-69d407dc3c37",
+              "targetStep": "/api/3/workflow_steps/8c73605e-1ac8-4e36-b50f-9967ac001371"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "dd5b66dd-ce4f-4090-b1e7-6eb4a2e4131f",
+          "collection": "/api/3/workflow_collections/178e7627-82f7-4205-aac4-33ac732d0593",
+          "triggerLimit": null,
+          "description": "Retrieves a list of all Intel IOCs or specific IOCs published in ACI reporting for the given organization ID and other input parameters you have specified.",
+          "name": "Get Intel IOCs",
+          "tag": "#Fortinet FortiRecon ACI",
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortirecon-aci"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/2611615b-eb41-4d5e-9a66-6d8a88535d70",
+          "steps": [
+            {
+              "uuid": "2611615b-eb41-4d5e-9a66-6d8a88535d70",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "a183fa8e-82b0-40f9-8df9-02e0c4cdc938",
+                "title": "Fortinet FortiRecon ACI: Get Intel IOCs",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "bb573d53-b690-4d69-b4fc-180dbcdaa9d8",
+              "@type": "WorkflowStep",
+              "name": "Get Intel IOCs",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Fortinet FortiRecon ACI",
+                "config": "''",
+                "params": {
+                  "size": 10
+                },
+                "version": "2.1.0",
+                "connector": "fortinet-fortirecon-aci",
+                "operation": "get_intel_iocs",
+                "operationTitle": "Get Intel IOCs"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "1caba744-4e9c-4748-b45d-469af05ef5d4",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Intel IOCs",
+              "sourceStep": "/api/3/workflow_steps/2611615b-eb41-4d5e-9a66-6d8a88535d70",
+              "targetStep": "/api/3/workflow_steps/bb573d53-b690-4d69-b4fc-180dbcdaa9d8"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "d9d2351e-ecad-4e32-a10a-08b6a8d03ecd",
+          "collection": "/api/3/workflow_collections/178e7627-82f7-4205-aac4-33ac732d0593",
+          "triggerLimit": null,
+          "description": "Get specific Adversary Centric Intelligence (ACI) IOC's published by FortiRecon.",
+          "name": "Get specific Adversary Centric Intelligence ACI IOC",
+          "tag": "#Fortinet FortiRecon ACI",
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortirecon-aci"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/514c0d79-959e-42bb-9db7-a5afdae74bbb",
+          "steps": [
+            {
+              "uuid": "514c0d79-959e-42bb-9db7-a5afdae74bbb",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "6e0a79e2-d1d9-40b1-bb23-9690575866e9",
+                "title": "Fortinet FortiRecon ACI: Get specific Adversary Centric Intelligence ACI IOC",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "09607a8b-fb80-45f3-bfd1-a88464d1e8f0",
+              "@type": "WorkflowStep",
+              "name": "Get specific Adversary Centric Intelligence ACI IOC",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Fortinet FortiRecon ACI",
+                "config": "''",
+                "params": [],
+                "version": "2.1.0",
+                "connector": "fortinet-fortirecon-aci",
+                "operation": "get_intel_ioc",
+                "operationTitle": "Get specific Adversary Centric Intelligence ACI IOC"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "d817e142-411d-40c5-bd8a-727f16ce21cd",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get specific Adversary Centric Intelligence ACI IOC",
+              "sourceStep": "/api/3/workflow_steps/514c0d79-959e-42bb-9db7-a5afdae74bbb",
+              "targetStep": "/api/3/workflow_steps/09607a8b-fb80-45f3-bfd1-a88464d1e8f0"
+            }
+          ]
         }
       ]
     }
