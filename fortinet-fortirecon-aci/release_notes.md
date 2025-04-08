@@ -1,4 +1,4 @@
-#### What's New
+#### Following enhancements have been made to the Fortinet FortiRecon ACI Connector in version 2.0.0: 
 
  - Added following new actions and their playbooks:
     - Get Intel Reports
