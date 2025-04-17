@@ -3599,7 +3599,7 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Filter by report published date, default is today's date. Format: (YYYY-MM-DD, YYYY-MM-DDTHH:MM:SS).",
+          "tooltip": "Filter by report published date, default is today's date. Start date is required to use this filter. Format: (YYYY-MM-DD, YYYY-MM-DDTHH:MM:SS).",
           "description": "Specify the date till when you want to retrieve reports from Fortinet FortiRecon ACI. By default, this is set to Current Date. Format: (YYYY-MM-DD, YYYY-MM-DDTHH:MM:SS)."
         },
         {
@@ -3634,15 +3634,68 @@
               "title": "",
               "information_date": "",
               "published_ts": "",
-              "source": {},
-              "reliability_rating": {},
-              "geographies": [],
-              "industries": [],
-              "adversaries": [],
-              "category": {},
-              "threat_types": [],
+              "source": {
+                "name": "",
+                "id": ""
+              },
+              "reliability_rating": {
+                "information": {
+                  "name": "",
+                  "id": ""
+                },
+                "source": {
+                  "name": "",
+                  "id": ""
+                }
+              },
+              "geographies": [
+                {
+                  "id": "",
+                  "country": "",
+                  "country_code": "",
+                  "continent": "",
+                  "regions": [""]
+                }
+              ],
+              "industries": [
+                {
+                  "id": "",
+                  "name": ""
+                }
+              ],
+              "tags": [
+                {
+                    "id": "",
+                    "name": ""
+                  }
+              ],
+              "summary": {
+                "content_editor": "",
+                "content_text": ""
+              },
+              "adversaries": [
+                {
+                  "id": "",
+                  "name": ""
+                }
+              ],
+              "category": {
+                "id": "",
+                "name": ""
+              },
+              "threat_types": [
+                {
+                  "id": "",
+                  "name": ""
+                }
+              ],
               "iocs_count": "",
-              "motivations": [],
+              "motivations": [
+                {
+                  "id": "",
+                  "name": ""
+                }
+              ],
               "insight_relevance": "",
               "report_generator_source": ""
           }
@@ -3668,21 +3721,77 @@
           "title": "",
           "information_date": "",
           "published_ts": "",
-          "source": {},
-          "reliability_rating": {},
-          "geographies": [],
-          "industries": [],
-          "tags": [],
-          "adversaries": [],
-          "category": {},
+          "source": {
+            "id": "",
+            "name": ""
+          },
+          "reliability_rating": {
+            "information": {
+              "name": "",
+              "id": ""
+            },
+            "source": {
+              "name": "",
+              "id": ""
+            }
+          },
+          "geographies": [
+            {
+              "id": "",
+              "country": "",
+              "country_code": "",
+              "continent": "",
+              "regions": [""]
+            }
+          ],
+          "industries": [
+            {
+              "name": "",
+              "id": ""
+            }
+          ],
+          "tags": [
+            {
+              "name": "",
+              "id": ""
+            }
+          ],
+          "adversaries": [
+            {
+              "name": "",
+              "id": ""
+            }
+          ],
+          "category": {
+            "name": "",
+            "id": ""
+          },
           "iocs_count": "",
-          "motivations": [],
-          "summary": {},
+          "motivations": [
+            {
+              "name": "",
+              "id": ""
+            }
+          ],
+          "summary": {
+            "content_editor": "",
+            "content_text": ""
+          },
           "insight_relevance": "",
           "report_generator_source": "",
-          "insight": {},
-          "original_post": {},
-          "entities": [],
+          "insight": {
+            "content_text": ""
+          },
+          "original_post": {
+            "text_translated": ""
+          },
+          "entities": [
+            {
+              "type": "",
+              "is_exploited": "",
+              "value": ""
+            }
+          ],
           "tlp": ""
       },
       "parameters": [
@@ -3771,8 +3880,8 @@
           "visible": true,
           "required": false,
           "placeholder": "IOC Keyword",
-          "tooltip": "Filter by specific keyword. Provided keyword will be searched in these fields: type, name, report_ids, first_seen, last_seen.",
-          "description": "Specify the specific keyword. Provided keyword will be searched in these fields: type, name, report_ids, first_seen, last_seen."
+          "tooltip": "Filter by specific keyword. Provided keyword will be searched in these fields: name",
+          "description": "Specify the specific keyword. Provided keyword will be searched in these fields: name"
         },
         {
           "name": "sort",
