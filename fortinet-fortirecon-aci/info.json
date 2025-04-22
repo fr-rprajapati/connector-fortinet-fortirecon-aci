@@ -3609,7 +3609,7 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Navigate between pages. Defaults to 1.",
+          "tooltip": "Navigate between pages. Defaults to 1. Maximum allowed records: page*size<10000. Apply parameter filters for specific results.",
           "description": "Specify the page number from which to retrieve results."
         },
         {
@@ -3620,7 +3620,7 @@
           "visible": true,
           "value": 10,
           "required": false,
-          "placeholder": "Must be greater 0 and less than or equal to 500.",
+          "placeholder": "Must be greater 0 and less than or equal to 500. Maximum allowed records: page*size<10000. Apply parameter filters for specific results.",
           "tooltip": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page.",
           "description": "Specify the number of records to fetch per page. Default value is 10 and you can specify a maximum value of 500 per page. Must be greater 0 and less than or equal to 500."
         }
