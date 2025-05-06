@@ -3853,7 +3853,7 @@
         {
           "name": "first_seen",
           "title": "First seen",
-          "type": "text",
+          "type": "date",
           "editable": true,
           "visible": true,
           "required": false,
@@ -3864,7 +3864,7 @@
         {
           "name": "last_seen",
           "title": "Last seen",
-          "type": "text",
+          "type": "date",
           "editable": true,
           "visible": true,
           "required": false,
