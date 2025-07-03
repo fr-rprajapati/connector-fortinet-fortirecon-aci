@@ -2518,7 +2518,7 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Select the end date of the range containing the date when a stealers infection on sale was added. Default is the current date.",
+          "tooltip": "Select the end date of the range containing the date when a stealers infection on sale was added. Default is the current date and start_date is mandatory parameter if using end_date.",
           "description": "(Optional) Select the end date of the timeframe during which the leaked credentials appearing on marketplace was reported. Default is the current date."
         },
         {
