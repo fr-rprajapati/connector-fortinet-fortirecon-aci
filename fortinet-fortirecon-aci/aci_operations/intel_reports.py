@@ -32,10 +32,10 @@ def get_intel_iocs(config: Dict[str, any], params: Dict[str, any]) -> Dict[str, 
     MK = MakeRestApiCall(config=config)
     endpoint = "/aci/{org_id}/intel/iocs"
 
-    if params.get("start_date"):
-        params["start_date"] = MK.handle_date(params.get("start_date"))
-    if params.get("end_date"):
-        params["end_date"] = MK.handle_date(params.get("end_date"))
+    if params.get("first_seen"):
+        params["first_seen"] = MK.handle_date(params.get("first_seen"))
+    if params.get("last_seen"):
+        params["last_seen"] = MK.handle_date(params.get("last_seen"))
 
     response = MK.make_request(endpoint=endpoint, method="GET", params=params)
     return response
