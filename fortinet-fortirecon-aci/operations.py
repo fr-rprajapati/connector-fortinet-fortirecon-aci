@@ -5,12 +5,10 @@ Copyright (c) 2025 Fortinet Inc
 Copyright end
 """
 from .aci_operations.osint import get_widgets, get_osint_feeds
-from .aci_operations.iocs import get_iocs
 from .aci_operations.leaked_cards import get_leaked_cards
 from .aci_operations.stealers_leaked import (get_stealers_infections_leaked_count,
                                              get_leaked_stealers_infections,
                                              update_stealers_leaked_status)
-from .aci_operations.reports import get_reports, get_reports_with_iocs
 from .aci_operations.vulnerability_intelligence import (get_vulnerability_intelligence_cves,
                                                         get_vulnerability_intelligence_cves_by_id,
                                                         get_vulnerability_intelligence_vulnerable_products,
@@ -39,12 +37,9 @@ from .aci_operations.intel_reports import get_intel_reports, get_intel_report, g
 
 
 operations = {
-    "get_iocs": get_iocs,
     "get_leaked_cards": get_leaked_cards,
     "get_widgets": get_widgets,
     "get_osint_feeds": get_osint_feeds,
-    "get_reports": get_reports,
-    "get_reports_with_iocs": get_reports_with_iocs,
     "get_icl_saved_searches": get_icl_saved_searches,
     "get_icl_saved_searches_by_id": get_icl_saved_searches_by_id,
     "get_stealers_infections_leaked_count": get_stealers_infections_leaked_count,
