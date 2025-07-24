@@ -47,6 +47,8 @@ def get_intel_iocs(config: Dict[str, any], params: Dict[str, any]) -> Dict[str, 
             if not hits:
                 break
             iocs.extend(hits)
+            if len(iocs) >= 10000:
+                break
             params['page'] = params.get('page', 1) + 1
         response['hits'] = iocs
         response['total'] = len(iocs)
