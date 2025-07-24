@@ -15,4 +15,4 @@
 
 #### What's Fixed
 
- - Fixed the data ingestion issue which was failing due to deprecated actions. These actions have now been replaced with newer ones that use an updated schema. To enable the new data ingestion flow, reconfiguration is required. 
+ - Fixed the data ingestion issue that was failing due to deprecated actions. These actions have now been replaced with newer ones that use an updated schema. To enable the new data ingestion flow, reconfiguration is required. For more information, see the Data Ingestion Support section. 
