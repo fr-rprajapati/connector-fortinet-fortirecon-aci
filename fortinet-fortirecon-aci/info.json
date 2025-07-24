@@ -3345,7 +3345,7 @@
     },
     {
       "operation": "get_intel_report",
-      "title": "Get Specific Adversary Centric Intelligence ACI Report.",
+      "title": "Get Specific Adversary Centric Intelligence ACI Report",
       "annotation": "get_intel_report",
       "description": "Retrieves a specific ACI report for the organization ID specified in the configuration parameters published by Fortinet FortiRecon ACI, based on the provided ACI report ID.",
       "category": "investigation",

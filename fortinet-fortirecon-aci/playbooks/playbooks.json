@@ -3735,7 +3735,7 @@
             {
               "uuid": "6a0cbd5b-480c-4c25-993b-59267758df4b",
               "@type": "WorkflowStep",
-              "name": "Get Specific Adversary Centric Intelligence ACI Report.",
+              "name": "Get Specific Adversary Centric Intelligence ACI Report",
               "description": null,
               "status": null,
               "arguments": {
@@ -3747,7 +3747,7 @@
                 "version": "2.1.0",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_intel_report",
-                "operationTitle": "Get Specific Adversary Centric Intelligence ACI Report."
+                "operationTitle": "Get Specific Adversary Centric Intelligence ACI Report"
               },
               "left": "188",
               "top": "120",
@@ -3756,7 +3756,7 @@
           ],
           "triggerLimit": null,
           "description": "Get specific Adversary Centric Intelligence (ACI) report published by FortiRecon.",
-          "name": "Get Specific Adversary Centric Intelligence ACI Report.",
+          "name": "Get Specific Adversary Centric Intelligence ACI Report",
           "tag": "#Fortinet FortiRecon ACI",
           "recordTags": [
             "Fortinet",
@@ -3774,7 +3774,7 @@
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
-              "name": "Start-> Get Specific Adversary Centric Intelligence ACI Report.",
+              "name": "Start-> Get Specific Adversary Centric Intelligence ACI Report",
               "sourceStep": "/api/3/workflow_steps/7a8b6e63-3669-4b07-8436-e883d623ba49",
               "targetStep": "/api/3/workflow_steps/6a0cbd5b-480c-4c25-993b-59267758df4b"
             }
