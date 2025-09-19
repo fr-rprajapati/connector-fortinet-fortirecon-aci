@@ -6,17 +6,12 @@ Copyright end
 """
 
 from .make_rest_api_call import MakeRestApiCall
-from connectors.core.connector import get_logger
-
-logger = get_logger("fortinet-fortirecon-easm")
 
 
 def create_task(config, params):
     MK = MakeRestApiCall(config=config)
     endpoint = "/security-orchestration/{org_id}/tasks"
-    payload = MK.build_payload(params)
-
-    response = MK.make_request(endpoint=endpoint, method="POST", params=payload)
+    response = MK.make_request(endpoint=endpoint, method="POST", params=params)
     return response
 
 
