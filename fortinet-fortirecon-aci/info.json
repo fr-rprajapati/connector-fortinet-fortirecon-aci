@@ -19,7 +19,7 @@
       "threat_intel_reports"
     ]
   },
-  "help_online": "https://docs.fortinet.com/document/fortisoar/2.2.0/fortinet-fortirecon-aci/1752563843/fortinet-fortirecon-aci-v2-1-0",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/2.2.0/fortinet-fortirecon-aci/1752563843/fortinet-fortirecon-aci-v2-2-0",
   "configuration": {
     "fields": [
       {
