@@ -34,6 +34,7 @@ from .aci_operations.ransomware_intelligence import (get_ransomware_victims,
                                                      get_technical_indicators_for_given_ransomware_group,
                                                      get_ransomware_group_info)
 from .aci_operations.intel_reports import get_intel_reports, get_intel_report, get_intel_iocs, get_intel_ioc
+from .task import create_task, update_task
 
 
 operations = {
@@ -71,5 +72,7 @@ operations = {
     "get_intel_reports": get_intel_reports,
     "get_intel_report": get_intel_report,
     "get_intel_iocs": get_intel_iocs,
-    "get_intel_ioc": get_intel_ioc
+    "get_intel_ioc": get_intel_ioc,
+    "create_task": create_task,
+    "update_task": update_task
 }
