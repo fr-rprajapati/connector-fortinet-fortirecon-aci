@@ -49,5 +49,64 @@
     "default": true,
     "createUser": null,
     "modifyUser": null
+  },
+  {
+    "event_id": "New.Stealer.Bot.Infection",
+    "name": "New Stealer Bot Infection",
+    "description": "New stealer bot infection",
+    "type": [
+      "PUSH"
+    ],
+    "connector_name": "fortinet-fortirecon-aci",
+    "connector_label": "ACI",
+    "connector_version": "2.2.0",
+    "connector_action": "get_leaked_stealers_infections",
+    "connector_action_inputs": {},
+    "connector_icon": null,
+    "connector_mapping": {},
+    "trigger_condition": {
+      "logic": "AND",
+      "filters": []
+    },
+    "poll": null,
+    "sample_data": [
+      {
+        "ip": "",
+        "os": "",
+        "cpu": "",
+        "ram": "",
+        "url": "demo.democat.com",
+        "zip": "",
+        "status": "ACTIVE",
+        "country": "india",
+        "added_ts": "2025-10-10T22:24:03.727889",
+        "exe_path": "",
+        "location": "",
+        "cpu_cores": "",
+        "user_name": "demosample@demosample.net",
+        "user_type": "USER",
+        "other_urls": [],
+        "system_name": "",
+        "country_code": "",
+        "discovery_ts": "2025-10-01T06:04:32.523496",
+        "infection_ts": "",
+        "stealer_name": "Unknown",
+        "other_domains": [],
+        "matched_domain": "demobcat.com",
+        "system_username": "",
+        "display_password": "T*******0",
+        "infected_host_id": "",
+        "affiliated_domain": "demosample.democat.com",
+        "leaked_credentials": ""
+      }
+    ],
+    "schedule": null,
+    "batch_preference": 0,
+    "start_time": null,
+    "tag": null,
+    "installed_by": "SOLUTION_PACK",
+    "default": true,
+    "createUser": null,
+    "modifyUser": null
   }
 ]
