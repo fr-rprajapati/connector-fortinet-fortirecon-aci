@@ -9,7 +9,7 @@
     "connector_name": "fortinet-fortirecon-aci",
     "connector_label": "ACI",
     "connector_version": "2.2.0",
-    "connector_action": "get_leaked_stealers_infections",
+    "connector_action": "get_stealers_infections_on_sale",
     "connector_action_inputs": {},
     "connector_icon": null,
     "connector_mapping": {},
