@@ -1,0 +1,53 @@
+[
+  {
+    "event_id": "New.Stealer.Marketplace.Infection",
+    "name": "New Stealer Marketplace Infection",
+    "description": "New stealer markeplace infection",
+    "type": [
+      "PUSH"
+    ],
+    "connector_name": "fortinet-fortirecon-aci",
+    "connector_label": "ACI",
+    "connector_version": "2.2.0",
+    "connector_action": "get_leaked_stealers_infections",
+    "connector_action_inputs": {},
+    "connector_icon": null,
+    "connector_mapping": {},
+    "trigger_condition": {
+      "logic": "AND",
+      "filters": []
+    },
+    "poll": null,
+    "sample_data": [
+      {
+        "isp": "Emirates Integrated Telecommunications Company",
+        "price": 10,
+        "sites": [],
+        "state": "Dubai",
+        "status": "ACTIVE",
+        "vendor": "Mo####yf",
+        "currency": "USD",
+        "created_ts": "2025-10-13T08:00:39Z",
+        "updated_ts": "2024-07-26T00:00:00Z",
+        "marketplace": "Russian Market",
+        "country_code": "AE",
+        "country_name": "United Arab Emirates",
+        "discovery_ts": "2024-07-27T10:59:05Z",
+        "stealer_name": "stealc",
+        "matched_domains": [
+          "demo.demotrack.ae",
+          "demo.ae"
+        ],
+        "deprecated_domains": []
+      }
+    ],
+    "schedule": null,
+    "batch_preference": 0,
+    "start_time": null,
+    "tag": null,
+    "installed_by": "SOLUTION_PACK",
+    "default": true,
+    "createUser": null,
+    "modifyUser": null
+  }
+]
