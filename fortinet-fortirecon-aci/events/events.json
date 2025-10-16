@@ -1,8 +1,8 @@
 [
   {
-    "event_id": "New.Stealer.Marketplace.Infection",
-    "name": "New Stealer Marketplace Infection",
-    "description": "New stealer markeplace infection",
+    "event_id": "FR.ACI.SMI.Create",
+    "name": "ACI New Stealer Marketplace Infection",
+    "description": "New stealer marketplace infection in FortiRecon ACI",
     "type": [
       "PUSH"
     ],
@@ -51,9 +51,9 @@
     "modifyUser": null
   },
   {
-    "event_id": "New.Stealer.Bot.Infection",
-    "name": "New Stealer Bot Infection",
-    "description": "New stealer bot infection",
+    "event_id": "FR.ACI.SBI.Create",
+    "name": "ACI New Stealer Bot Infection",
+    "description": "New stealer bot infection in FortiRecon ACI.",
     "type": [
       "PUSH"
     ],
