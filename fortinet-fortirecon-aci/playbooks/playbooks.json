@@ -3,7 +3,7 @@
   "data": [
     {
       "@type": "WorkflowCollection",
-      "name": "Sample - Fortinet FortiRecon ACI - 2.2.1",
+      "name": "Sample - Fortinet FortiRecon ACI - 2.1.1",
       "description": "FortiRecon is a Digital Risk Protection Service (DRPS) product that provides an outside-the-network view to the risks posed to your enterprise.The Adversary Centric Intelligence (ACI) module leverages FortiGuard Threat Analysts to provide comprehensive coverage of dark web, open source, and technical threat intelligence, including threat actor insights. This information enables administrators to proactively assess risks, respond faster to incidents, better understand their attackers, and protect assets. This connector facilitates the automated operations related to ACI",
       "visible": true,
       "image": null,
@@ -325,7 +325,7 @@
                   "report_ids": "{{vars.input.params['report_details'].report_id}}",
                   "get_all_records": true
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_intel_iocs",
                 "operationTitle": "Get Intel IOCs",
@@ -715,7 +715,7 @@
                   "information_reliability": "",
                   "report_generator_source": ""
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_intel_reports",
                 "operationTitle": "Get Adversary Centric Intelligence ACI Reports",
@@ -756,7 +756,7 @@
                   "information_reliability": "",
                   "report_generator_source": ""
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "for_each": {
                   "item": "{{range(2,((vars.page_numbers | int)+1)) | list}}",
                   "parallel": false,
@@ -866,7 +866,7 @@
                   "information_reliability": "",
                   "report_generator_source": ""
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_intel_reports",
                 "operationTitle": "Get Adversary Centric Intelligence ACI Reports",
@@ -1392,7 +1392,7 @@
                   "page": "",
                   "size": 10
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_leaked_cards",
                 "operationTitle": "Get Leaked Cards"
@@ -1463,7 +1463,7 @@
                   "page": "",
                   "size": 10
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_widgets",
                 "operationTitle": "Get Widgets"
@@ -1536,7 +1536,7 @@
                   "page": "",
                   "size": 10
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_osint_feeds",
                 "operationTitle": "Get OSINT Feeds"
@@ -1612,7 +1612,7 @@
                   "page": "",
                   "size": 10
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_icl_saved_searches",
                 "operationTitle": "Get ICL Saved Searches"
@@ -1687,7 +1687,7 @@
                   "page": "",
                   "size": 10
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_icl_saved_searches_by_id",
                 "operationTitle": "Get ICL Saved Searches By ID"
@@ -1757,7 +1757,7 @@
                 "params": {
                   "based_on": ""
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_stealers_infections_leaked_count",
                 "operationTitle": "Get Stealers Infections Leaked Count"
@@ -1835,7 +1835,7 @@
                   "page": "",
                   "size": 10
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_leaked_stealers_infections",
                 "operationTitle": "Get Leaked Stealers Infections"
@@ -1906,7 +1906,7 @@
                   "type_of_info": "",
                   "id": ""
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_vendor_exposures_by_id",
                 "operationTitle": "Get Vendor Exposures By Vendor ID"
@@ -1981,7 +1981,7 @@
                   "page": "",
                   "size": 10
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_vendor_watchlist",
                 "operationTitle": "Get Vendor Watchlist"
@@ -2051,7 +2051,7 @@
                 "params": {
                   "id": ""
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_vendor_details_by_id",
                 "operationTitle": "Get Vendor Details By ID"
@@ -2137,7 +2137,7 @@
                   "page": "",
                   "size": 10
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_vulnerability_intelligence_cves",
                 "operationTitle": "Get Vulnerability Intelligence CVEs"
@@ -2207,7 +2207,7 @@
                 "params": {
                   "id": ""
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_vulnerability_intelligence_cves_by_id",
                 "operationTitle": "Get Vulnerability Intelligence CVEs By ID"
@@ -2280,7 +2280,7 @@
                   "page": "",
                   "size": 10
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_vulnerability_intelligence_vulnerable_products",
                 "operationTitle": "Get Vulnerability Intelligence vulnerable products"
@@ -2353,7 +2353,7 @@
                   "page": "",
                   "size": 10
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_vulnerability_intelligence_vulnerable_vendors",
                 "operationTitle": "Get Vulnerability Intelligence vulnerable vendors"
@@ -2426,7 +2426,7 @@
                   "page": "",
                   "size": 10
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_vulnerability_intelligence_hits_by_cve_id",
                 "operationTitle": "Get Vulnerability Intelligence hits By CVE ID"
@@ -2499,7 +2499,7 @@
                   "page": "",
                   "size": 10
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_vulnerability_intelligence_stats_for_cve_id",
                 "operationTitle": "Get Vulnerability Intelligence Stats For CVE ID"
@@ -2569,7 +2569,7 @@
                 "params": {
                   "based_on": ""
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_stealers_infections_on_sale_count",
                 "operationTitle": "Get Stealers Infections On Sale Count"
@@ -2650,7 +2650,7 @@
                   "page": "",
                   "size": 10
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_stealers_infections_on_sale",
                 "operationTitle": "Get Stealers Infections On Sale"
@@ -2727,7 +2727,7 @@
                   "page": "",
                   "size": 10
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_ransomware_victims",
                 "operationTitle": "Get Ransomware Victims"
@@ -2797,7 +2797,7 @@
                 "params": {
                   "id": ""
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_ransomware_victims_details_by_id",
                 "operationTitle": "Get Ransomware Victim Details By ID"
@@ -2868,7 +2868,7 @@
                   "page": "",
                   "size": 10
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_ransomware_intel_vendors_watchlist",
                 "operationTitle": "Get Ransomware Vendors Added For Ransomware Intelligence Monitoring"
@@ -2939,7 +2939,7 @@
                   "page": "",
                   "size": 10
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_ransomware_intel_vendors_watchlist_matched",
                 "operationTitle": "Get Ransomware Vendors Matched"
@@ -3012,7 +3012,7 @@
                   "start_date": "",
                   "end_date": ""
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_ransomware_intelligence_statistics",
                 "operationTitle": "Get Ransomware Intelligence Stats"
@@ -3083,7 +3083,7 @@
                   "page": "",
                   "size": 10
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_ransomware_threat_campaigns",
                 "operationTitle": "Get Ransomware Threat Campaign"
@@ -3159,7 +3159,7 @@
                   "page": "",
                   "size": 10
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_ransomware_potential_victims",
                 "operationTitle": "Get Potential Ransomware Victims"
@@ -3231,7 +3231,7 @@
                   "page": "",
                   "size": 10
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_ransomware_intel_org_watchlist",
                 "operationTitle": "Get Ransomware Intelligence Orgs Watchlist To Monitor"
@@ -3302,7 +3302,7 @@
                   "page": "",
                   "size": 10
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_ransomware_intel_org_watchlist_matched",
                 "operationTitle": "Get The Matched Organizations For Ransomware Intelligence Monitoring"
@@ -3374,7 +3374,7 @@
                   "page": "",
                   "size": 10
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_technical_indicators_for_given_ransomware_group",
                 "operationTitle": "Get The Technical Indicators For The Given Ransomware Group"
@@ -3444,7 +3444,7 @@
                 "params": {
                   "group_name": ""
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_ransomware_group_info",
                 "operationTitle": "Get Ransomware Group Information"
@@ -3515,7 +3515,7 @@
                   "stealers_leaked_id": "",
                   "status": ""
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "update_stealers_leaked_status",
                 "operationTitle": "Update Stealers Leaked Status"
@@ -3586,7 +3586,7 @@
                   "stealers_on_sale_id": "",
                   "status": ""
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "update_stealers_on_sale_status",
                 "operationTitle": "Update Stealers On Sale(Marketplaces) Status"
@@ -3674,7 +3674,7 @@
                   "page": "",
                   "size": 10
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_intel_reports",
                 "operationTitle": "Get Adversary Centric Intelligence ACI Reports"
@@ -3744,7 +3744,7 @@
                 "params": {
                   "report_id": ""
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_intel_report",
                 "operationTitle": "Get Specific Adversary Centric Intelligence ACI Report"
@@ -3823,7 +3823,7 @@
                   "size": 10,
                   "get_all_records": true
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_intel_iocs",
                 "operationTitle": "Get Intel IOCs"
@@ -3893,7 +3893,7 @@
                 "params": {
                   "ioc_id": ""
                 },
-                "version": "2.2.1",
+                "version": "2.1.1",
                 "connector": "fortinet-fortirecon-aci",
                 "operation": "get_intel_ioc",
                 "operationTitle": "Get Specific Adversary Centric Intelligence ACI IOCs"
