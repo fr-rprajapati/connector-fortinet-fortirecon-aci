@@ -8,7 +8,7 @@
     ],
     "connector_name": "fortinet-fortirecon-aci",
     "connector_label": "ACI",
-    "connector_version": "2.1.1",
+    "connector_version": "2.1.2",
     "connector_action": null,
     "connector_action_inputs": {},
     "connector_icon": null,
