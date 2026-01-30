@@ -1424,7 +1424,7 @@
             "recon_score": "",
             "recon_severity": "",
             "year": "",
-            "tags": "",
+            "tags": [],
             "description": "",
             "products": [],
             "vendors": [],
@@ -1480,7 +1480,7 @@
         "published_ts": "",
         "created_ts": "",
         "lookup_priority": "",
-        "nvd_metadata": ""
+        "nvd_metadata": {}
       }
     },
     {
@@ -1551,6 +1551,7 @@
             "recon_severity": {
               "low": "",
               "medium": "",
+              "high": "",
               "critical": ""
             },
             "nvd_severity": {
@@ -1634,6 +1635,7 @@
             "recon_severity": {
               "low": "",
               "medium": "",
+              "high": "",
               "critical": ""
             },
             "nvd_severity": {
@@ -2369,7 +2371,7 @@
         "victim_sectors": [],
         "victim_description": "",
         "victim_parent_org": "",
-        "victim_revenue_in_usd": [],
+        "victim_revenue_in_usd": "",
         "posted_ts": "",
         "updated_ts": "",
         "collection_ts": ""
@@ -2772,7 +2774,8 @@
             "revenue": "",
             "sectors": [],
             "source": "",
-            "updated_date": ""
+            "updated_date": "",
+            "collection_ts": ""
           }
         ],
         "page": "",
