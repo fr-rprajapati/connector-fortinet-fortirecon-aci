@@ -1,4 +1,5 @@
-#### The following enhancements have been made to the Fortinet FortiRecon ACI Connector in version 2.1.1:
+#### The following enhancements have been made to the Fortinet FortiRecon ACI Connector in version 2.1.2:
 
- - Update following actions playbooks:
-   - Get Leaked Stealers Infections: Added `show_plaintext_password` query param and `plaintext_password` in response schema.
+
+- Added the `Show Plaintext Password` query parameter for the `Get Leaked Stealers Infections` action.
+- Updated the output schema for the `Get Leaked Stealers Infections` action.
