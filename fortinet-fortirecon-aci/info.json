@@ -19,7 +19,7 @@
       "threat_intel_reports"
     ]
   },
-  "help_online": "",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/2.1.2/fortinet-fortirecon-aci/212/fortinet-fortirecon-aci-v2-1-2",
   "configuration": {
     "fields": [
       {
@@ -805,7 +805,7 @@
           "visible": true,
           "required": false,
           "tooltip": "Select true if plaintext password needs to show in response. Default is false.",
-          "description": "(Optional) Select true if plaintext password needs to show in response.",
+          "description": "(Optional) Select to show password in plaintext in the response.",
           "options": [
             "false",
             "true"
@@ -1424,7 +1424,13 @@
             "recon_score": "",
             "recon_severity": "",
             "year": "",
-            "tags": [],
+            "tags": [
+              {
+                "id": "",
+                "name": "",
+                "color_code": ""
+              }
+            ],
             "description": "",
             "products": [],
             "vendors": [],
@@ -1480,7 +1486,13 @@
         "published_ts": "",
         "created_ts": "",
         "lookup_priority": "",
-        "nvd_metadata": {}
+        "nvd_metadata": {
+          "assigner": "",
+          "references": "",
+          "cwe": "",
+          "impact": "",
+          "configuration_raw": ""
+        }
       }
     },
     {
@@ -3284,76 +3296,78 @@
       "output_schema": {
         "hits": [
           {
-              "report_id": "",
-              "report_type": "",
-              "version": "",
-              "title": "",
-              "information_date": "",
-              "published_ts": "",
-              "source": {
+            "report_id": "",
+            "report_type": "",
+            "version": "",
+            "title": "",
+            "information_date": "",
+            "published_ts": "",
+            "source": {
+              "name": "",
+              "id": ""
+            },
+            "reliability_rating": {
+              "information": {
                 "name": "",
                 "id": ""
               },
-              "reliability_rating": {
-                "information": {
-                  "name": "",
-                  "id": ""
-                },
-                "source": {
-                  "name": "",
-                  "id": ""
-                }
-              },
-              "geographies": [
-                {
-                  "id": "",
-                  "country": "",
-                  "country_code": "",
-                  "continent": "",
-                  "regions": [""]
-                }
-              ],
-              "industries": [
-                {
-                  "id": "",
-                  "name": ""
-                }
-              ],
-              "tags": [
-                {
-                    "id": "",
-                    "name": ""
-                  }
-              ],
-              "summary": {
-                "content_editor": "",
-                "content_text": ""
-              },
-              "adversaries": [
-                {
-                  "id": "",
-                  "name": ""
-                }
-              ],
-              "category": {
+              "source": {
+                "name": "",
+                "id": ""
+              }
+            },
+            "geographies": [
+              {
+                "id": "",
+                "country": "",
+                "country_code": "",
+                "continent": "",
+                "regions": [
+                  ""
+                ]
+              }
+            ],
+            "industries": [
+              {
                 "id": "",
                 "name": ""
-              },
-              "threat_types": [
-                {
-                  "id": "",
-                  "name": ""
-                }
-              ],
-              "iocs_count": "",
-              "motivations": [
-                {
-                  "id": "",
-                  "name": ""
-                }
-              ],
-              "insight_relevance": "",
-              "report_generator_source": ""
+              }
+            ],
+            "tags": [
+              {
+                "id": "",
+                "name": ""
+              }
+            ],
+            "summary": {
+              "content_editor": "",
+              "content_text": ""
+            },
+            "adversaries": [
+              {
+                "id": "",
+                "name": ""
+              }
+            ],
+            "category": {
+              "id": "",
+              "name": ""
+            },
+            "threat_types": [
+              {
+                "id": "",
+                "name": ""
+              }
+            ],
+            "iocs_count": "",
+            "motivations": [
+              {
+                "id": "",
+                "name": ""
+              }
+            ],
+            "insight_relevance": "",
+            "report_generator_source": ""
           }
         ],
         "page": "",
@@ -3371,84 +3385,86 @@
       "visible": true,
       "enabled": true,
       "output_schema": {
-          "report_id": "",
-          "report_type": "",
-          "version": "",
-          "title": "",
-          "information_date": "",
-          "published_ts": "",
-          "source": {
-            "id": "",
-            "name": ""
-          },
-          "reliability_rating": {
-            "information": {
-              "name": "",
-              "id": ""
-            },
-            "source": {
-              "name": "",
-              "id": ""
-            }
-          },
-          "geographies": [
-            {
-              "id": "",
-              "country": "",
-              "country_code": "",
-              "continent": "",
-              "regions": [""]
-            }
-          ],
-          "industries": [
-            {
-              "name": "",
-              "id": ""
-            }
-          ],
-          "tags": [
-            {
-              "name": "",
-              "id": ""
-            }
-          ],
-          "adversaries": [
-            {
-              "name": "",
-              "id": ""
-            }
-          ],
-          "category": {
+        "report_id": "",
+        "report_type": "",
+        "version": "",
+        "title": "",
+        "information_date": "",
+        "published_ts": "",
+        "source": {
+          "id": "",
+          "name": ""
+        },
+        "reliability_rating": {
+          "information": {
             "name": "",
             "id": ""
           },
-          "iocs_count": "",
-          "motivations": [
-            {
-              "name": "",
-              "id": ""
-            }
-          ],
-          "summary": {
-            "content_editor": "",
-            "content_text": ""
-          },
-          "insight_relevance": "",
-          "report_generator_source": "",
-          "insight": {
-            "content_text": ""
-          },
-          "original_post": {
-            "text_translated": ""
-          },
-          "entities": [
-            {
-              "type": "",
-              "is_exploited": "",
-              "value": ""
-            }
-          ],
-          "tlp": ""
+          "source": {
+            "name": "",
+            "id": ""
+          }
+        },
+        "geographies": [
+          {
+            "id": "",
+            "country": "",
+            "country_code": "",
+            "continent": "",
+            "regions": [
+              ""
+            ]
+          }
+        ],
+        "industries": [
+          {
+            "name": "",
+            "id": ""
+          }
+        ],
+        "tags": [
+          {
+            "name": "",
+            "id": ""
+          }
+        ],
+        "adversaries": [
+          {
+            "name": "",
+            "id": ""
+          }
+        ],
+        "category": {
+          "name": "",
+          "id": ""
+        },
+        "iocs_count": "",
+        "motivations": [
+          {
+            "name": "",
+            "id": ""
+          }
+        ],
+        "summary": {
+          "content_editor": "",
+          "content_text": ""
+        },
+        "insight_relevance": "",
+        "report_generator_source": "",
+        "insight": {
+          "content_text": ""
+        },
+        "original_post": {
+          "text_translated": ""
+        },
+        "entities": [
+          {
+            "type": "",
+            "is_exploited": "",
+            "value": ""
+          }
+        ],
+        "tlp": ""
       },
       "parameters": [
         {
@@ -3610,12 +3626,12 @@
       "visible": true,
       "enabled": true,
       "output_schema": {
-          "ioc_id": "",
-          "name": "",
-          "report_ids": [],
-          "type": "",
-          "first_seen": "",
-          "last_seen": ""
+        "ioc_id": "",
+        "name": "",
+        "report_ids": [],
+        "type": "",
+        "first_seen": "",
+        "last_seen": ""
       },
       "parameters": [
         {
