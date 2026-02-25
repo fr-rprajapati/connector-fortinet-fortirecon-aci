@@ -881,7 +881,10 @@
             "username": "",
             "user_type": "",
             "affiliated_domain": "",
-            "plaintext_password": ""
+            "plaintext_password": "",
+            "exe_path": "",
+            "system_name": "",
+            "system_username": ""
           }
         ],
         "page": "",
