@@ -1441,7 +1441,9 @@
             "easm_affected_hosts": [],
             "last_refreshed_ts": "",
             "created_ts": "",
-            "published_ts": ""
+            "published_ts": "",
+            "lookup_priority": "",
+            "nvd_metadata": {}
           }
         ],
         "page": "",
